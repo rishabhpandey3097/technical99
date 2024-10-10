@@ -1,3 +1,226 @@
-<div class="h-10rem">
-  <p>Home Works!</p>
+<!-- Sec 1  -->
+<div class="main-banner bg-no-repeat">
+    <div class="container grid">
+        <div class="col-12 md:col-7 lg:col-5">
+            <h2 class="text-white font-semibold">A trusted partner for technical education</h2>
+            <p-inputGroup>
+                <input type="text" pInputText placeholder="Text Search" />
+                <button type="button" pButton icon="pi pi-search" class="p-button-warning"></button>
+            </p-inputGroup>
+            <br>
+            <button class="sec1btn">Create Account</button>
+        </div>
+    </div>
+</div>
+
+<!-- sec2  -->
+<div class="container grid sec2 flex-nowrap">
+    <div *ngFor="let i of [1,2,3,4]" class="col-12 md:col-6 lg:col-3 card">
+        <p-card header="Work With Us">
+            <div class="flex">
+                <p>Writer</p>
+                <p>Instructer</p>
+                <p>Partner</p>
+            </div>
+        </p-card>
+    </div>
+</div>
+
+<!-- sec3  -->
+<div class="container card sec3">
+    <p-tabView>
+        <p-tabPanel header="Tutorial">
+            <div>
+                <h1 class="text-center">Tutorial</h1>
+                <div class="grid flex">
+                    <div *ngFor="let i of [1,2,3,4]" class="col-12 lg:col-6 card">
+                        <p-card>
+                            <div class="flex justify-content-between align-items-center">
+                                <h2>Language</h2>
+                                <p>View all</p>
+                            </div>
+                            <div class="flex justify-content-between overflow-x-scroll md:overflow-x-hidden">
+                                <div *ngFor="let i of [1,2,3,4,5]" class="col-4 md:col-2 text-center">
+                                    <img src="../../../assets/images/language/java.svg" alt="">
+                                    <p>Java</p>
+                                </div>
+                            </div>
+                        </p-card>
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="MCQ">
+            <ng-template pTemplate="content"> Complex Content to Lazy Load </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="Interview">
+            <ng-template pTemplate="content"> Complex Content to Lazy Load </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="Coding">
+            <ng-template pTemplate="content"> Complex Content to Lazy Load </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="Quiz">
+            <ng-template pTemplate="content"> Complex Content to Lazy Load </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="Blog">
+            <ng-template pTemplate="content"> Complex Content to Lazy Load </ng-template>
+        </p-tabPanel>
+        <p-tabPanel header="Project">
+            <ng-template pTemplate="content"> Complex Content to Lazy Load </ng-template>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+
+<!-- sec4 -->
+<div class="sec4 py-5 mb-6 md:mb-8">
+    <div class="container">
+        <h1 class="text-center">Practice Test</h1>
+        <div class="grid align-items-center">
+            <div class="col-12 lg:col-6 md:pr-7">
+                <h3 class="font-medium line-height-3">Technical99 provides technical and aptitude based Assessment Test to check your skills for next level. It is designed to assess your problem solving skills, thinking process and knowledge base.</h3>
+                <ul class=" line-height-4 pt-2 pb-6">
+                    <li>Large improvised question bank</li>
+                    <li>6 Variant types of questions</li>
+                    <li>Detailed results with comparisons reports</li>
+                    <li>Answers with detailed explanation</li>
+                </ul>
+                <p-button label="Practice Test" />
+            </div>
+            <div class="col-12 lg:col-6 card">
+                <p-galleria [(value)]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true" [showThumbnails]="false" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }">
+                    <ng-template pTemplate="item" let-item>
+                        <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+                    </ng-template>
+                </p-galleria>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- sec5  -->
+<div class="sec5 pt-5 pb-6">
+    <div class="container">
+        <h1 class="text-center mb-5">Interview Questions</h1>
+        <div>
+            <h1 class="font-medium"><i class="pi pi-code" style="font-size: 1.5rem"></i> Technologies</h1>
+            <div class="grid flex-nowrap lg:flex-wrap overflow-x-scroll lg:overflow-x-hidden">
+                <div *ngFor="let i of [1,2,3,4,5,6,7,8]" class="col-4 md:col-3 lg:col-2">
+                    <div class="card bg-white text-center p-2 lg:p-4 border-round-lg">
+                        <img src="../../../assets/images/language/java.svg" alt="">
+                        <h3 class="text-color m-0">Java</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- sec6  -->
+<div class="sec6 container pt-5 pb-7">
+    <h1 class="text-center">Our Solutions</h1>
+    <div class="grid my-7">
+        <div *ngFor="let i of [1,2,3,4,5,6,7,8]" class="col-12 md:col-6 lg:col-3">
+            <div class="card text-center px-2 py-5 border-round-sm">
+                <div class="w-4rem h-4rem m-auto">
+                    <img src="https://technical99.com/assets/images/common/tutorial.svg" alt="" class="w-full">
+                </div>
+                <h2 class="text-white font-semibold mb-2">Tutorial</h2>
+                <p class="text-white">Easy, In-depth and competitive tutorials which improves your performance in class and interviews.</p>
+            </div>
+        </div>
+    </div>
+    <h1 class="font-semibold">You may be Interested</h1>
+    <div class="text-center">
+        <button class="sec6btn">Browse All Course</button>
+    </div>
+</div>
+
+<!-- sec7  -->
+<div class="sec7 py-5">
+    <div class="container grid align-items-center">
+        <div class="col-12 lg:col-6">
+            <img src="../../../assets/images/common/code-sample.png" alt="" class="w-full">
+        </div>
+        <div class="col-12 lg:col-6 text-center">
+            <h1 class="text-white mt-0">Large FREE Online Source Code <br> Library</h1>
+            <h2 class="font-medium text-white">Fully solved coding problems with detailed explanations</h2>
+            <button class="mt-7">Coding Solutions</button>
+        </div>
+    </div>
+</div>
+
+<!-- sec8  -->
+<div class="sec8 container py-8">
+    <h1 class="text-center">Trending Blogs</h1>
+    <div class="mt-7 mb-5">
+        <p-carousel [value]="products" [numVisible]="4" [numScroll]="4" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
+            <ng-template let-product pTemplate="item">
+                <div class="border-1 surface-border border-round m-2">
+                    <div class="mb-1">
+                        <div class="relative mx-auto">
+                            <img src="../../../assets/images/{{ product.image }}" [alt]="product.name" class="w-full border-round border-noround-bottom" />
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <div class="mb-3 font-medium">
+                            {{ product.name }}
+                        </div>
+                        <div class="mb-3 text-sm text-color-secondary">
+                            {{ product.description }}
+                        </div>
+                        <div class="flex text-sm text-color-secondary">
+                            <p>Anita Gupta | Dec 2, 2022</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+    <div class="text-center">
+        <button class="sec8btn">More Blogs</button>
+    </div>
+</div>
+
+<!-- sec9  -->
+<div class="sec9">
+    <div class="container grid">
+        <div class="hidden lg:block lg:col-6">
+            <div class="customer-service">
+                <img src="../../../assets/images/team/customer-service.png" alt="">
+            </div>
+        </div>
+        <div class="col-12 lg:col-6">
+            <h1 class="mt-0 text-white">Are you looking for Expert's Advice?</h1>
+            <h3 class="font-medium text-white mb-5">Don't hesitate to ask your questions, sometime good suggestions may be turning point for your successful career</h3>
+            <p-button label="Call to Experts" />
+        </div>
+    </div>
+</div>
+
+<!-- sec10  -->
+<div class="sec10 container pt-7 pb-6">
+    <h1 class="text-center">Reviews</h1>
+    <p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+        <ng-template let-product pTemplate="item">
+            <div class="grid">
+                <div class="col-11 card my-7 shadow-1 p-4 m-2">
+                    <div class="flex align-items-center">
+                        <img class="profile-pic" src="../../../assets/images/team/ajaj.jpg" alt="">
+                        <div>
+                            <h3 class="m-0 font-medium text-color-secondary">Ajaj Ahmed</h3>
+                            <p class="my-1 text-color-secondary">Java Developer, Global Logic</p>
+                            <img src="../../../assets/images/icons/linkedin.png" alt="" class="linked-in">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-color-secondary line-height-3 mb-6">I attempted few Java MCQs and truly its nice experience. Nice work and thanks to team of technical99.com, Please keep up good work.</p>
+                    </div>
+                    <p-rating [(ngModel)]="value" [cancel]="false" />
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+    <div class="text-center sec10btn">
+        <button>More Reviews</button>
+    </div>
 </div>
