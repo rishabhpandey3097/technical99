@@ -9,6 +9,7 @@
         .p-submenu-icon {
             color: #fff;
             font-weight: 500;
+            font-size: 0.875rem;
         }
         .p-menuitem-content:hover,
         .p-menuitem-content:active,
@@ -18,6 +19,9 @@
         .p-menubar-button {
             color: #fff;
             border-radius: 0%;
+        }
+        .p-menuitem-link {
+            padding: 10px 12px;
         }
     }
     .p-submenu-list {
@@ -37,5 +41,3 @@
         }
     }
 }
-
-// .p-menubar .p-menuitem.p-highlight>.p-menuitem-content
