@@ -51,6 +51,12 @@
     .sec3 {
         .p-card {
             background: #f6fcff;
+            .p-card-body {
+                padding: 0.25rem 1.25rem;
+            }
+            .p-card-content {
+                padding: 0%;
+            }
         }
     }
     .sec4 {
