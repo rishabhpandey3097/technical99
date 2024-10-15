@@ -17,57 +17,71 @@ import { RatingModule } from 'primeng/rating';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule, CardModule, CarouselModule, TabViewModule, GalleriaModule, TagModule, RatingModule],
+  imports: [
+    FormsModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    InputTextModule,
+    ButtonModule,
+    CardModule,
+    CarouselModule,
+    TabViewModule,
+    GalleriaModule,
+    TagModule,
+    RatingModule,
+  ],
   providers: [PhotoService, ProductService],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-
   images: any[] | undefined;
   products: Product[] | undefined;
   responsiveOptions: any[] | undefined;
   value!: number;
 
-  constructor(private photoService: PhotoService, private productService: ProductService) { }
+  constructor(
+    private photoService: PhotoService,
+    private productService: ProductService
+  ) {}
 
   ngOnInit() {
     this.images = this.photoService.getImages();
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
-        numVisible: 5
+        numVisible: 5,
       },
       {
         breakpoint: '768px',
-        numVisible: 3
+        numVisible: 3,
       },
       {
         breakpoint: '560px',
-        numVisible: 1
-      }
+        numVisible: 1,
+      },
     ];
 
     // Blogs
     this.products = this.productService.getProductsSmall();
 
-    this.responsiveOptions = [
-      {
-        breakpoint: '1199px',
-        numVisible: 1,
-        numScroll: 1
-      },
-      {
-        breakpoint: '991px',
-        numVisible: 2,
-        numScroll: 1
-      },
-      {
-        breakpoint: '767px',
-        numVisible: 1,
-        numScroll: 1
-      }
-    ];
+    // this.responsiveOptions = [
+    //   {
+    //     breakpoint: '1199px',
+    //     numVisible: 1,
+    //     numScroll: 1,
+    //   },
+    //   {
+    //     breakpoint: '991px',
+    //     numVisible: 2,
+    //     numScroll: 1,
+    //   },
+    //   {
+    //     breakpoint: '767px',
+    //     numVisible: 1,
+    //     numScroll: 1,
+    //   },
+    // ];
   }
 
   getSeverity(status: string): string {
@@ -82,4 +96,3 @@ export class HomeComponent implements OnInit {
     }
   }
 }
-
