@@ -54,25 +54,25 @@ export class GeneralEffects {
     )
   );
 
-  // getTechnologies$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(generalActions.getTechnologies),
-  //     switchMap((p) => {
-  //       return this.homeService
-  //         .getTechnologies()
-  //         .pipe(
-  //           map((res) => {
-  //             if (res && +res?.status === 200) {
-  //               return generalActions.getModulesComplete({ modules: res?.data });
-  //             } else {
-  //               return generalActions.getModulesComplete({ modules: null });
-  //             }
-  //           }),
-  //           catchError((error) => {
-  //             return of(generalActions.getModulesComplete({ modules: null }));
-  //           })
-  //         );
-  //     })
-  //   )
-  // );
+  getInterviewQuestions$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(generalActions.getInterviewQuestions),
+      switchMap((p) => {
+        return this.homeService
+          .getInterviewQuestions(p.moduleId)
+          .pipe(
+            map((res) => {
+              if (res && +res?.status === 200) {
+                return generalActions.getInterviewQuestionsComplete({ interviewQuestions: res?.data });
+              } else {
+                return generalActions.getInterviewQuestionsComplete({ interviewQuestions: null });
+              }
+            }),
+            catchError((error) => {
+              return of(generalActions.getInterviewQuestionsComplete({ interviewQuestions: null }));
+            })
+          );
+      })
+    )
+  );
 }

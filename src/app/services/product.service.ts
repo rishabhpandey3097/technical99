@@ -57,6 +57,58 @@ export class ProductService {
         inventoryStatus: 'INSTOCK',
         rating: 5,
       },
+      {
+        id: '1000',
+        code: 'f230fh0g3',
+        name: 'Lets Understand the handling process of String and...',
+        description:
+          'Interesting question, Actually I was also thinking the same, like other...',
+        image: 'blog-2.png',
+        price: 65,
+        category: 'Accessories',
+        quantity: 24,
+        inventoryStatus: 'INSTOCK',
+        rating: 5,
+      },
+      {
+        id: '1000',
+        code: 'f230fh0g3',
+        name: 'Lets Understand the handling process of String and...',
+        description:
+          'Interesting question, Actually I was also thinking the same, like other...',
+        image: 'blog-2.png',
+        price: 65,
+        category: 'Accessories',
+        quantity: 24,
+        inventoryStatus: 'INSTOCK',
+        rating: 5,
+      },
+      {
+        id: '1000',
+        code: 'f230fh0g3',
+        name: 'Lets Understand the handling process of String and...',
+        description:
+          'Interesting question, Actually I was also thinking the same, like other...',
+        image: 'blog-2.png',
+        price: 65,
+        category: 'Accessories',
+        quantity: 24,
+        inventoryStatus: 'INSTOCK',
+        rating: 5,
+      },
+      {
+        id: '1000',
+        code: 'f230fh0g3',
+        name: 'Lets Understand the handling process of String and...',
+        description:
+          'Interesting question, Actually I was also thinking the same, like other...',
+        image: 'blog-2.png',
+        price: 65,
+        category: 'Accessories',
+        quantity: 24,
+        inventoryStatus: 'INSTOCK',
+        rating: 5,
+      },
     ];
   }
 }

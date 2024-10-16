@@ -5,7 +5,7 @@ export interface IRootState {
   isLoggedIn: boolean;
   categories: Array<any>;
   modules: Array<any>;
-  interviewQuestioins: Array<any>;
+  interviewTechnologies: Array<any>;
   moduleMenu: Array<any>;
   technologies: Array<any>;
 }
@@ -14,7 +14,7 @@ export const initialState: IRootState = {
   isLoggedIn: false,
   categories: null,
   modules: null,
-  interviewQuestioins: null,
+  interviewTechnologies: null,
   moduleMenu: null,
   technologies: null
 };
@@ -55,10 +55,10 @@ const _userSettingReducer = createReducer(
       moduleMenu,
     };
   }),
-  on(generalActions.getTechnologiesComplete, (state, { technologies }) => {
+  on(generalActions.getInterviewQuestionsComplete, (state, { interviewQuestions }) => {
     return {
       ...state,
-      technologies,
+      interviewTechnologies: interviewQuestions,
     };
   }),
 );

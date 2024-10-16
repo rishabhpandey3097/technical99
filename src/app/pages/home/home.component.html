@@ -22,12 +22,10 @@
 
 <!-- sec2  -->
 <div class="container grid sec2 flex-nowrap">
-  <div *ngFor="let i of [1, 2, 3, 4]" class="col-12 md:col-6 lg:col-3 card">
-    <p-card header="Work With Us">
+  <div *ngFor="let content of staticCardContent" class="col-12 md:col-6 lg:col-3 card">
+    <p-card styleClass="border-noround shadow-1" [header]="content?.name">
       <div class="flex">
-        <p>Writer</p>
-        <p>Instructer</p>
-        <p>Partner</p>
+        <p class="text-xs cursor-pointer" *ngFor="let link of content?.links">{{link?.link}}</p>
       </div>
     </p-card>
   </div>
@@ -36,25 +34,26 @@
 <!-- sec3  -->
 <ng-container *ngIf="modules$ | async as modules" >
   <div class="container card sec3">
-    <!-- <p-tabView (onChange)="getModuleInfo($event)">
+    <p-tabView (onChange)="getModuleInfo($event)">
       <p-tabPanel *ngFor="let tab of modules" [header]="tab?.name">
         <h2 class="text-center font-normal">{{ tab?.name }}</h2>
         <ng-template pTemplate="content">
           <div class="grid flex">
-            <div class="col-12 lg:col-6 card">
-              <p-card>
+            <div *ngFor="let tab of (tabContent$ | async)" class="col-12 lg:col-6 card">
+              <p-card [styleClass]="'shadow-none'">
                 <div class="flex justify-content-between align-items-center">
-                  <h2>Language</h2>
+                  <h2 class="text-base font-semibold">{{tab?.name}}</h2>
                   <p>View all</p>
                 </div>
                 <div
-                  class="flex justify-content-between overflow-x-scroll md:overflow-x-hidden"
+                  class="flex overflow-x-scroll md:overflow-x-hidden"
                 >
                   <div
+                  *ngFor="let lang of tab?.languages"
                     class="col-4 md:col-2 text-center"
                   >
-                    <img src="../../../assets/images/language/java.svg" alt="" />
-                    <p>Java</p>
+                    <img width="40" height="40" src="assets/images/language/{{lang?.icon}}.svg" [alt]="lang?.icon" />
+                    <p class="white-space-nowrap text-sm">{{lang?.name}}</p>
                   </div>
                 </div>
               </p-card>
@@ -62,7 +61,7 @@
           </div>
         </ng-template>
       </p-tabPanel>
-    </p-tabView> -->
+    </p-tabView>
   </div>
 </ng-container>
 
@@ -119,12 +118,12 @@
         class="grid flex-nowrap lg:flex-wrap overflow-x-scroll lg:overflow-x-hidden"
       >
         <div
-          *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]"
+          *ngFor="let tech of (interviewSection$ | async)"
           class="col-4 md:col-3 lg:col-2"
         >
           <div class="card bg-white text-center p-2 lg:p-4 border-round-lg">
             <img src="../../../assets/images/language/java.svg" alt="" />
-            <h3 class="text-color m-0">Java</h3>
+            <h3 class="text-color m-0">{{tech?.name}}</h3>
           </div>
         </div>
       </div>
@@ -137,21 +136,20 @@
   <h1 class="text-center">Our Solutions</h1>
   <div class="grid my-7">
     <div
-      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]"
+      *ngFor="let solution of solutions"
       class="col-12 md:col-6 lg:col-3"
     >
       <div class="card text-center px-2 py-5 border-round-sm">
         <div class="w-4rem h-4rem m-auto">
           <img
-            src="https://technical99.com/assets/images/common/tutorial.svg"
+            src="assets/images/common/{{solution?.icon}}.svg"
             alt=""
             class="w-full"
           />
         </div>
-        <h2 class="text-white font-semibold mb-2">Tutorial</h2>
+        <h2 class="text-white font-semibold mb-2">{{solution?.name}}</h2>
         <p class="text-white">
-          Easy, In-depth and competitive tutorials which improves your
-          performance in class and interviews.
+          {{solution?.desc}}
         </p>
       </div>
     </div>
@@ -191,11 +189,10 @@
   <div class="mt-7 mb-5">
     <div class="card">
       <p-carousel
-        [value]="products"
+        [value]="products?.length ? products : []"
         [numVisible]="4"
         [numScroll]="4"
-        [circular]="true"
-        [responsiveOptions]="responsiveOptions"
+        [circular]="false"
       >
         <ng-template let-product pTemplate="item">
           <div class="border-1 surface-border border-round m-2">
@@ -256,7 +253,6 @@
     [numVisible]="3"
     [numScroll]="3"
     [circular]="false"
-    [responsiveOptions]="responsiveOptions"
   >
     <ng-template let-product pTemplate="item">
       <div class="grid">

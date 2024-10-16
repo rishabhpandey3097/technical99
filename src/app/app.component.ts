@@ -23,6 +23,7 @@ export class AppComponent extends BaseComponent {
   public ngOnInit(): void {
     this.store.dispatch(generalActions.getCategories());
     this.store.dispatch(generalActions.getModules());
+    this.store.dispatch(generalActions.getInterviewQuestions({moduleId: 3}))
   }
 
   public override ngOnDestroy(): void {

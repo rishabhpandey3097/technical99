@@ -18,3 +18,14 @@ export const selectModules = createSelector(
   selectRootState,
   state => state.modules
 )
+
+export const selectInterview = createSelector(
+  selectRootState,
+  state => state.interviewTechnologies
+)
+
+export const selectTechnologies = createSelector(
+  selectRootState,
+  state => state.modules
+)
+

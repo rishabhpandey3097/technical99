@@ -17,12 +17,13 @@ import { Store, select } from '@ngrx/store';
 import { IAppState } from '../../store/reducers/app.state';
 import { Observable, distinctUntilChanged, take, takeUntil } from 'rxjs';
 import { BaseComponent } from '../../base-component/base.component';
-import { selectCategories, selectModules } from '../../store/selectors';
+import { selectCategories, selectInterview, selectModules } from '../../store/selectors';
 import { isEqual } from 'lodash-es';
 import { generalActions } from '../../store/actions';
 import { HomeService } from '@app/services/home.service';
 import { HomeComponentStore } from './home.component.store';
 import { MenuItem } from 'primeng/api';
+import { PRODUCT_SOLUTIONS, STATIC_CARD_CONTENT } from '@app/constants/solutions.constant';
 
 @Component({
   selector: 'app-home',
@@ -49,11 +50,14 @@ export class HomeComponent extends BaseComponent implements OnInit {
   products: Product[] | undefined;
   responsiveOptions: any[] | undefined;
   value!: number;
+  public solutions = PRODUCT_SOLUTIONS;
+  public staticCardContent = STATIC_CARD_CONTENT;
 
   // Observables
+  public tabContent$: Observable<any> = this.componentStore.moduleTabContent$;
   public categories$: Observable<Array<any>>;
   public modules$: Observable<Array<any>>;
-  public moduleInfo$: Observable<any>;
+  public interviewSection$: Observable<Array<any>>
 
   constructor(
     private photoService: PhotoService,
@@ -72,17 +76,22 @@ export class HomeComponent extends BaseComponent implements OnInit {
       distinctUntilChanged(isEqual),
       takeUntil(this.destroy$)
     )
+    this.interviewSection$ = this.store.pipe(
+      select(selectInterview),
+      distinctUntilChanged(isEqual),
+      takeUntil(this.destroy$)
+    )
   }
 
   ngOnInit() {
     this.images = this.photoService.getImages();
     this.products = this.productService.getProductsSmall();
-    this.componentStore.getModuleInfo({id: 1})
+    this.componentStore.getTabContent({id: 1})
     
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
-        numVisible: 5,
+        numVisible: 4,
       },
       {
         breakpoint: '768px',
@@ -108,8 +117,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   public getModuleInfo(event): void {
-    console.log(event)
-    // this.componentStore.getModuleInfo(id)
+    this.componentStore.getTabContent({id: event?.index+1})
   }
 
   public override ngOnDestroy(): void {

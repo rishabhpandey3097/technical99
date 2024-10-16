@@ -6,12 +6,12 @@ import { catchError, switchMap } from 'rxjs/operators';
 
 export interface IHomeIntialState {
   inProcess: boolean;
-  moduleInfo: any;
+  moduleTabContent: any;
 }
 
 const DEFAULT_STATE: IHomeIntialState = {
   inProcess: false,
-  moduleInfo: null,
+  moduleTabContent: null,
 };
 
 @Injectable()
@@ -21,13 +21,14 @@ export class HomeComponentStore extends ComponentStore<IHomeIntialState> {
     (state) => state.inProcess
   );
 
-  public readonly moduleInfo$: Observable<any> = this.select(state => state.moduleInfo)
+  public readonly moduleTabContent$: Observable<any> = this.select(state => state.moduleTabContent)
 
   constructor(private homeService: HomeService) {
     super(DEFAULT_STATE);
   }
 
-  readonly getModuleInfo = this.effect(
+  // Effects
+  readonly getTabContent = this.effect(
     (data: Observable<{id: number}>) => {
       return data.pipe(
         switchMap((req: {id: number}) => {
@@ -42,7 +43,7 @@ export class HomeComponentStore extends ComponentStore<IHomeIntialState> {
                     return {
                       ..._state,
                       inProcess: false,
-                      moduleInfo: res?.data,
+                      moduleTabContent: res?.data,
                     };
                   });
                 } else {
@@ -50,7 +51,7 @@ export class HomeComponentStore extends ComponentStore<IHomeIntialState> {
                     return {
                       ..._state,
                       inProcess: false,
-                      moduleInfo: null,
+                      moduleTabContent: null,
                     };
                   });
                 }
