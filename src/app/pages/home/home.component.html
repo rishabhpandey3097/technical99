@@ -34,66 +34,37 @@
 </div>
 
 <!-- sec3  -->
-<div class="container card sec3">
-  <p-tabView>
-    <p-tabPanel header="Tutorial">
-      <div>
-        <h1 class="text-center">Tutorial</h1>
-        <div class="grid flex">
-          <div *ngFor="let i of [1, 2, 3, 4]" class="col-12 lg:col-6 card">
-            <p-card>
-              <div class="flex justify-content-between align-items-center">
-                <h2>Language</h2>
-                <p>View all</p>
-              </div>
-              <div
-                class="flex justify-content-between overflow-x-scroll md:overflow-x-hidden"
-              >
-                <div
-                  *ngFor="let i of [1, 2, 3, 4, 5]"
-                  class="col-4 md:col-2 text-center"
-                >
-                  <img src="../../../assets/images/language/java.svg" alt="" />
-                  <p>Java</p>
+<ng-container *ngIf="modules$ | async as modules" >
+  <div class="container card sec3">
+    <!-- <p-tabView (onChange)="getModuleInfo($event)">
+      <p-tabPanel *ngFor="let tab of modules" [header]="tab?.name">
+        <h2 class="text-center font-normal">{{ tab?.name }}</h2>
+        <ng-template pTemplate="content">
+          <div class="grid flex">
+            <div class="col-12 lg:col-6 card">
+              <p-card>
+                <div class="flex justify-content-between align-items-center">
+                  <h2>Language</h2>
+                  <p>View all</p>
                 </div>
-              </div>
-            </p-card>
+                <div
+                  class="flex justify-content-between overflow-x-scroll md:overflow-x-hidden"
+                >
+                  <div
+                    class="col-4 md:col-2 text-center"
+                  >
+                    <img src="../../../assets/images/language/java.svg" alt="" />
+                    <p>Java</p>
+                  </div>
+                </div>
+              </p-card>
+            </div>
           </div>
-        </div>
-      </div>
-    </p-tabPanel>
-    <p-tabPanel header="MCQ">
-      <ng-template pTemplate="content">
-        Complex Content to Lazy Load
-      </ng-template>
-    </p-tabPanel>
-    <p-tabPanel header="Interview">
-      <ng-template pTemplate="content">
-        Complex Content to Lazy Load
-      </ng-template>
-    </p-tabPanel>
-    <p-tabPanel header="Coding">
-      <ng-template pTemplate="content">
-        Complex Content to Lazy Load
-      </ng-template>
-    </p-tabPanel>
-    <p-tabPanel header="Quiz">
-      <ng-template pTemplate="content">
-        Complex Content to Lazy Load
-      </ng-template>
-    </p-tabPanel>
-    <p-tabPanel header="Blog">
-      <ng-template pTemplate="content">
-        Complex Content to Lazy Load
-      </ng-template>
-    </p-tabPanel>
-    <p-tabPanel header="Project">
-      <ng-template pTemplate="content">
-        Complex Content to Lazy Load
-      </ng-template>
-    </p-tabPanel>
-  </p-tabView>
-</div>
+        </ng-template>
+      </p-tabPanel>
+    </p-tabView> -->
+  </div>
+</ng-container>
 
 <!-- sec4 -->
 <div class="sec4 py-5 mb-6 md:mb-8">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -13,6 +13,16 @@ import { TagModule } from 'primeng/tag';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { RatingModule } from 'primeng/rating';
+import { Store, select } from '@ngrx/store';
+import { IAppState } from '../../store/reducers/app.state';
+import { Observable, distinctUntilChanged, take, takeUntil } from 'rxjs';
+import { BaseComponent } from '../../base-component/base.component';
+import { selectCategories, selectModules } from '../../store/selectors';
+import { isEqual } from 'lodash-es';
+import { generalActions } from '../../store/actions';
+import { HomeService } from '@app/services/home.service';
+import { HomeComponentStore } from './home.component.store';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-home',
@@ -30,23 +40,45 @@ import { RatingModule } from 'primeng/rating';
     TagModule,
     RatingModule,
   ],
-  providers: [PhotoService, ProductService],
+  providers: [PhotoService, ProductService, HomeComponentStore],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends BaseComponent implements OnInit {
   images: any[] | undefined;
   products: Product[] | undefined;
   responsiveOptions: any[] | undefined;
   value!: number;
 
+  // Observables
+  public categories$: Observable<Array<any>>;
+  public modules$: Observable<Array<any>>;
+  public moduleInfo$: Observable<any>;
+
   constructor(
     private photoService: PhotoService,
-    private productService: ProductService
-  ) {}
+    private productService: ProductService,
+    private componentStore: HomeComponentStore,
+    private store: Store<IAppState>
+  ) {
+    super()
+    this.categories$ = this.store.pipe(
+      select(selectCategories),
+      distinctUntilChanged(isEqual),
+      takeUntil(this.destroy$)
+    )
+    this.modules$ = this.store.pipe(
+      select(selectModules),
+      distinctUntilChanged(isEqual),
+      takeUntil(this.destroy$)
+    )
+  }
 
   ngOnInit() {
     this.images = this.photoService.getImages();
+    this.products = this.productService.getProductsSmall();
+    this.componentStore.getModuleInfo({id: 1})
+    
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -61,27 +93,6 @@ export class HomeComponent implements OnInit {
         numVisible: 1,
       },
     ];
-
-    // Blogs
-    this.products = this.productService.getProductsSmall();
-
-    // this.responsiveOptions = [
-    //   {
-    //     breakpoint: '1199px',
-    //     numVisible: 1,
-    //     numScroll: 1,
-    //   },
-    //   {
-    //     breakpoint: '991px',
-    //     numVisible: 2,
-    //     numScroll: 1,
-    //   },
-    //   {
-    //     breakpoint: '767px',
-    //     numVisible: 1,
-    //     numScroll: 1,
-    //   },
-    // ];
   }
 
   getSeverity(status: string): string {
@@ -94,5 +105,14 @@ export class HomeComponent implements OnInit {
     } else {
       return 'info'; // Default case, or handle error as needed
     }
+  }
+
+  public getModuleInfo(event): void {
+    console.log(event)
+    // this.componentStore.getModuleInfo(id)
+  }
+
+  public override ngOnDestroy(): void {
+      super.ngOnDestroy()
   }
 }
