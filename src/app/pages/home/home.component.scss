@@ -1,10 +1,11 @@
 @mixin btn-properties {
-    padding: 14px 40px;
+    padding: 11px 35px;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 4px;
     border: none;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
+    font-family: "Poppins", sans-serif, arial;
 }
 
 .main-banner {
@@ -22,24 +23,41 @@
 }
 
 :host ::ng-deep {
+    body,
+    .p-component {
+        font-family: "Poppins", sans-serif, arial;
+    }
+    .main-banner {
+        .p-inputtext {
+            font-size: 14px;
+            padding: 10px;
+            border: 1px solid #db823c;
+        }
+        .sec1btn {
+            @include btn-properties;
+            background-color: #eb7c34;
+            margin-top: 50px;
+        }
+    }
     .sec2 {
-        margin: -5.2rem auto 1.5rem;
+        margin-top: -60px;
         overflow-x: auto;
         .p-card {
-            box-shadow: 0 2px 1px 0px hsl(216.72deg 46.03% 50.59% / 21%), 0 1px 1px 0 hsl(216.72deg 46.03% 50.59% / 13%), 0 1px 3px 0 hsl(216.72deg 46.03% 50.59% / 18%);
+            box-shadow: 0 0px 1px 0px hsl(216.72deg 46.03% 50.59% / 21%), 0 1px 1px 0 hsl(216.72deg 46.03% 50.59% / 13%), 0 1px 3px 0 hsl(216.72deg 46.03% 50.59% / 18%);
+            border-radius: 0%;
             .p-card-content {
-                padding: 0.75rem 0;
+                padding: 0;
             }
             .p-card-title {
-                font-size: 1.1rem;
+                font-size: 1rem;
                 font-weight: 500;
                 color: #000;
             }
         }
         p {
             border-right: 2px solid #4774bb;
-            padding-right: 10px;
-            margin: 0px 10px 0px 0px;
+            padding-right: 8px;
+            margin: 0px 8px 0px 0px;
             color: #4774bb;
         }
         p:last-child {
@@ -49,8 +67,17 @@
         }
     }
     .sec3 {
+        h3 {
+            margin: 24px 0px;
+        }
+        h6 {
+            margin: 16px 10px;
+            font-weight: 600;
+        }
         .p-card {
             background: #f6fcff;
+            box-shadow: none;
+            border: 1px solid #0282cf12;
             .p-card-body {
                 padding: 0.25rem 1.25rem;
             }
@@ -59,11 +86,16 @@
             }
         }
         .p-tabview {
+            .p-tabview-nav {
+                border-width: 0 0 1px 0;
+            }
             .p-tabview-nav-link {
                 color: #0d6efd;
                 font-weight: 500;
                 border-width: 1px;
-                padding: 0.75rem 1rem;
+                border-radius: 0px;
+                padding: 0.6rem 1rem;
+                margin: 0 0 -0.2px 0;
             }
             .p-highlight {
                 .p-tabview-nav-link {
@@ -77,21 +109,47 @@
         background: #0282cf;
         color: #fff;
         h3 {
-            font-size: 20px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            font-weight: 400;
         }
         .p-button {
-            padding: 15px 42px;
-            font-size: 20px;
+            padding: 11px 35px;
+            font-size: 16px;
+            background-color: #1365df;
             border: 1px solid #fff;
+            .p-button-label {
+                font-weight: 400;
+            }
+        }
+        .p-galleria .p-galleria-item-nav {
+            width: 1rem;
+            height: 2rem;
         }
     }
     .sec5 {
         background: #4673b5;
-        color: #fff;
+        .card {
+            padding: 10px;
+        }
+        h6 {
+            color: #000;
+        }
     }
     .sec6 {
         .card {
-            background: #122e46;
+            background-color: #122e46;
+            height: calc(100% - 20px);
+            margin: 10px 0px;
+            padding: 30px 10px 10px;
+            color: #fff;
+            border-radius: 2px;
+        }
+        .image-div img {
+            width: 60px;
+            height: 44px;
+            object-fit: contain;
+            object-position: center;
         }
     }
     .sec7 {
@@ -120,11 +178,21 @@
         img {
             position: absolute;
             bottom: 0px;
-            width: 285px;
+            width: 235px;
             left: 12%;
         }
         .p-button {
-            border: 1px solid #fff;
+            padding: 8px 30px;
+            border-radius: 4px;
+            color: #FFF;
+            font-size: 16px;
+            font-weight: 400;
+            background-color: #0267da;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 10px;
+            .p-button-label {
+                font-weight: 400;
+            }
         }
     }
     .sec10 {
@@ -139,8 +207,54 @@
             height: 20px;
         }
     }
+    @media only screen and (max-width: 1000px) {
+        .sec4 {
+            .p-galleria .p-galleria-item-nav {
+                margin: 0px -2px;
+                .p-icon-wrapper .p-icon {
+                    width: 1rem;
+                    height: 1rem;
+                }
+            }
+        }
+        .main-banner {
+            .p-button.p-button-icon-only {
+                width: 2rem;
+                padding: 0.25rem 0;
+            }
+            .p-button-warning {
+                color: #ffffff;
+                background: #f97316;
+                border: 1px solid #f97316;
+            }
+        }
+    }
 }
 
-.sample {
-    color: red;
+.review-para {
+    height: 150px;
+    line-height: 26px;
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .review-para {
+        line-height: 18px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .main-banner {
+        padding: 12px 0px 62px;
+        background-position: bottom;
+        h4 {
+            font-size: 18px;
+            margin: 0px;
+        }
+        .sec1btn {
+            margin-top: 0px;
+            padding: 9px 15px;
+            font-size: 12px;
+        }
+    }
 }

@@ -1,0 +1,36 @@
+:host ::ng-deep {
+    .p-menubar {
+        padding: 0 0.5rem;
+        background: #0282CF;
+        color: #fff;
+        border: none;
+        border-radius: 0px;
+        .p-menuitem-text {
+            color: #fff;
+        }
+        .p-menuitem-content {
+            border-radius: 0px;
+        }
+        .p-menuitem-content:hover {
+            background: #de7e11;
+        }
+    }
+    .p-menuitem-link {
+        font-size: 14px;
+        font-weight: 400;
+        padding: 10px 12px;
+    }
+    @media only screen and (max-width: 960px) {
+        .p-menubar {
+            .p-menubar-button {
+                color: #fff;
+            }
+            .p-menubar-button:hover {
+                color: #000;
+            }
+            .p-menubar-root-list {
+                background: #d8712b;
+            }
+        }
+    }
+}

@@ -10,6 +10,8 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { GeneralEffects } from './store/effects/general.effects';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
+import { provideAnimations } from '@angular/platform-browser/animations'; 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
@@ -21,6 +23,7 @@ export const appConfig: ApplicationConfig = {
       maxAge: 25,
       logOnly: !isDevMode(),
       connectInZone: true
-    })
+    }),
+    provideAnimations(),
   ]
 };

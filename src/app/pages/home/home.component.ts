@@ -39,7 +39,7 @@ import { PRODUCT_SOLUTIONS, STATIC_CARD_CONTENT } from '@app/constants/solutions
     TabViewModule,
     GalleriaModule,
     TagModule,
-    RatingModule,
+    RatingModule
   ],
   providers: [PhotoService, ProductService, HomeComponentStore],
   templateUrl: './home.component.html',
