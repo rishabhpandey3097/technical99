@@ -24,6 +24,7 @@ import { HomeService } from '@app/services/home.service';
 import { HomeComponentStore } from './home.component.store';
 import { MenuItem } from 'primeng/api';
 import { PRODUCT_SOLUTIONS, STATIC_CARD_CONTENT } from '@app/constants/solutions.constant';
+import { SwitchTechnologyComponent } from '@app/@shared/switch-technology/switch-technology.component';
 
 @Component({
   selector: 'app-home',
@@ -39,7 +40,8 @@ import { PRODUCT_SOLUTIONS, STATIC_CARD_CONTENT } from '@app/constants/solutions
     TabViewModule,
     GalleriaModule,
     TagModule,
-    RatingModule
+    RatingModule,
+    SwitchTechnologyComponent
   ],
   providers: [PhotoService, ProductService, HomeComponentStore],
   templateUrl: './home.component.html',

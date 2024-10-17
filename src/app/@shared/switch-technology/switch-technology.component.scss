@@ -1,0 +1,20 @@
+:host::ng-deep {
+    .p-card {
+        .p-card-body, .p-card-content {
+            padding: 0;
+        }
+    }
+}
+
+.container-size {
+    width: 900px;
+    height: 353px;
+
+    @media (max-width: 426px) {
+        width: 400px;
+    }
+
+    @media ((min-width: 426px) and (max-width: 769px)) {
+        width: 700px;
+    }
+}

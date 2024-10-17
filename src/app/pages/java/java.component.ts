@@ -9,11 +9,12 @@ import { TabViewModule } from 'primeng/tabview';
 import { AccordionModule } from 'primeng/accordion';
 import { CommonModule } from '@angular/common';
 import { CardModule } from 'primeng/card';
+import { SwitchTechnologyComponent } from '@app/@shared/switch-technology/switch-technology.component';
 
 @Component({
   selector: 'app-java',
   standalone: true,
-  imports: [LanguageSubTopNavComponent, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule, AccordionModule, TabViewModule, CommonModule, CardModule],
+  imports: [LanguageSubTopNavComponent, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule, AccordionModule, TabViewModule, CommonModule, CardModule, SwitchTechnologyComponent],
   templateUrl: './java.component.html',
   styleUrl: './java.component.scss'
 })
