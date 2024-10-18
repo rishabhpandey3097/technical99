@@ -17,12 +17,10 @@
 
 <!-- sec2  -->
 <div class="container grid sec2 flex-nowrap no-scrollbar">
-    <div *ngFor="let i of [1, 2, 3, 4]" class="col-12 md:col-4 lg:col-3 card">
-        <p-card header="Work With Us">
+    <div *ngFor="let c of staticCardContent" class="col-12 md:col-4 lg:col-3 card">
+        <p-card [header]="c?.name">
             <div class="flex">
-                <p>Writer</p>
-                <p>Instructer</p>
-                <p>Partner</p>
+                <p *ngFor="let link of c?.links">{{link?.link}}</p>
             </div>
         </p-card>
     </div>
@@ -30,56 +28,28 @@
 
 <!-- sec3  -->
 <div class="container card sec3 tab-view">
-    <p-tabView class="tab-view">
-        <p-tabPanel header="Tutorial">
-            <div>
-                <h3 class="text-center">Tutorial</h3>
-                <div class="grid flex">
-                    <div *ngFor="let i of [1, 2, 3, 4]" class="col-12 lg:col-6 card">
-                        <p-card>
-                            <div class="flex justify-content-between align-items-center">
-                                <h6>Language</h6>
-                                <p>View all</p>
-                            </div>
-                            <div class="flex justify-content-between overflow-x-scroll lg:overflow-x-hidden no-scrollbar">
-                                <div *ngFor="let i of [1, 2, 3, 4, 5]" class="col-4 md:col-2 text-center">
-                                    <img src="../../../assets/images/language/java.svg" alt="" />
-                                    <p>Java</p>
+    <p-tabView (onChange)="getModuleInfo($event)" class="tab-view">
+        <p-tabPanel *ngFor="let module of (modules$ | async)" [header]="module?.name">
+            <ng-template pTemplate="content">
+                <div>
+                    <h3 class="text-center">{{module?.name}}</h3>
+                    <div class="grid flex">
+                        <div *ngFor="let tab of (tabContent$ | async)" class="col-12 lg:col-6 card">
+                            <p-card>
+                                <div class="flex justify-content-between align-items-center">
+                                    <h6>{{tab?.name}}</h6>
+                                    <p>View all</p>
                                 </div>
-                            </div>
-                        </p-card>
+                                <div class="flex overflow-x-scroll lg:overflow-x-hidden no-scrollbar">
+                                    <div *ngFor="let lang of tab?.languages" class="col-4 md:col-2 text-center">
+                                        <img width="40" height="40" src="assets/images/language/{{lang?.icon}}.svg" [alt]="lang?.icon" />
+                                        <p class="white-space-nowrap">{{lang?.name}}</p>
+                                    </div>
+                                </div>
+                            </p-card>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </p-tabPanel>
-        <p-tabPanel header="MCQ">
-            <ng-template pTemplate="content">
-                Complex Content to Lazy Load
-            </ng-template>
-        </p-tabPanel>
-        <p-tabPanel header="Interview">
-            <ng-template pTemplate="content">
-                Complex Content to Lazy Load
-            </ng-template>
-        </p-tabPanel>
-        <p-tabPanel header="Coding">
-            <ng-template pTemplate="content">
-                Complex Content to Lazy Load
-            </ng-template>
-        </p-tabPanel>
-        <p-tabPanel header="Quiz">
-            <ng-template pTemplate="content">
-                Complex Content to Lazy Load
-            </ng-template>
-        </p-tabPanel>
-        <p-tabPanel header="Blog">
-            <ng-template pTemplate="content">
-                Complex Content to Lazy Load
-            </ng-template>
-        </p-tabPanel>
-        <p-tabPanel header="Project">
-            <ng-template pTemplate="content">
-                Complex Content to Lazy Load
             </ng-template>
         </p-tabPanel>
     </p-tabView>
@@ -100,7 +70,7 @@
                     <li>Detailed results with comparisons reports</li>
                     <li>Answers with detailed explanation</li>
                 </ul>
-                <p-button label="Practice Test" />
+                <p-button class="hidden md:block" label="Practice Test" />
             </div>
             <div class="col-12 lg:col-6 card">
                 <p-galleria [(value)]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true" [showThumbnails]="false" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }">
@@ -108,6 +78,9 @@
                         <img [src]="item.itemImageSrc" style="width: 100%; display: block" />
                     </ng-template>
                 </p-galleria>
+            </div>
+            <div class="col-12 flex justify-content-center md:hidden">
+                <p-button label="Practice Test" />
             </div>
         </div>
     </div>
@@ -121,11 +94,11 @@
             <h4 class="font-medium text-white flex align-items-center">
                 <i class="pi pi-code pr-2 font-semibold" style="font-size: 2rem"></i> Technologies
             </h4>
-            <div class="grid flex-nowrap lg:flex-wrap overflow-x-scroll lg:overflow-x-hidden">
-                <div *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]" class="col-4 md:col-3 lg:col-2">
+            <div class="grid flex-nowrapoverflow-x-auto lg:flex-wrap lg:overflow-x-hidden">
+                <div *ngFor="let i of (interviewSection$ | async)" class="col-4 md:col-3 lg:col-2">
                     <div class="card bg-white text-center border-round-sm">
-                        <img src="../../../assets/images/language/java.svg" alt="" width="50" />
-                        <h6 class="my-2">Java</h6>
+                        <img src="../../../assets/images/language/{{i?.icon}}.svg" [alt]="i?.name" width="50" />
+                        <h6 class="my-2">{{i?.name}}</h6>
                     </div>
                 </div>
             </div>
@@ -137,14 +110,14 @@
 <div class="sec6 container pt-5 pb-7">
     <h1 class="text-center">Our Solutions</h1>
     <div class="grid my-5">
-        <div *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]" class="col-6 md:col-3 lg:col-3">
+        <div *ngFor="let sol of solutions" class="col-6 md:col-3 lg:col-3">
             <div class="card text-center">
                 <div class="pb-3 m-auto image-div">
-                    <img src="https://technical99.com/assets/images/common/tutorial.svg" alt="" />
+                    <img src="assets/images/common/{{sol?.icon}}.svg" [alt]="sol?.icon" />
                 </div>
-                <h6 class="text-white m-0">Tutorial</h6>
+                <h6 class="text-white m-0">{{sol?.solution}}</h6>
                 <p class="text-white line-height-3">
-                    Easy, In-depth and competitive tutorials which improves your performance in class and interviews.
+                    {{sol?.desc}}
                 </p>
             </div>
         </div>
@@ -178,7 +151,7 @@
     <h1 class="text-center">Trending Blogs</h1>
     <div class="mt-4 md:mt-6 mb-5">
         <div class="card">
-            <p-carousel [value]="products" [numVisible]="4" [numScroll]="4" [circular]="true" [responsiveOptions]="responsiveOptions">
+            <p-carousel [value]="products" [numVisible]="4" [numScroll]="4" [circular]="true">
                 <ng-template let-product pTemplate="item">
                     <div class="border-1 surface-border border-round m-2">
                         <div class="mb-1">
@@ -228,7 +201,7 @@
 <!-- sec10  -->
 <div class="sec10 container pt-5 pb-6">
     <h1 class="text-center text-black">Reviews</h1>
-    <p-carousel [value]="[1, 2, 3]" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+    <p-carousel [value]="[1, 2, 3]" [numVisible]="3" [numScroll]="3" [circular]="false">
         <ng-template let-product pTemplate="item">
             <div class="grid">
                 <div class="col-11 card my-4 shadow-1 p-4 m-2">
