@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { PanelMenuModule } from 'primeng/panelmenu';
@@ -5,7 +6,7 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 @Component({
     selector: 'app-tutorial-sidebar',
     standalone: true,
-    imports: [PanelMenuModule],
+    imports: [CommonModule, PanelMenuModule],
     templateUrl: './tutorial-sidebar.component.html',
     styleUrl: './tutorial-sidebar.component.scss'
 })
