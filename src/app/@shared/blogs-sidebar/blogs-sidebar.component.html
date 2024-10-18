@@ -1,0 +1,19 @@
+<div class="card">
+    <p-dataView #dv [value]="products" [rows]="5" [paginator]="true" [pageLinks]="2" [showPageLinks]="false" [paginatorStyleClass]="'bg-gray-50 border-noround'">
+        <ng-template pTemplate="list" let-products>
+            <div class="grid grid-nogutter">
+                <div class="col-12 bg-gray-200 px-3 py-2">
+                    Blogs
+                </div>
+                <div class="col-12 bg-gray-50">
+                    <div *ngFor="let i of [1, 2, 3, 4]" class="flex gap-2 blog-container my-2 px-3">
+                        <img width="70" height="45" class="blog-image-container" src="assets/images/common/blog-1.png" class="border-round-sm" alt="blog">
+                        <p class="m-0 text-sm text-blue-400">
+                            Why main() method syntax is longer in Java ?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

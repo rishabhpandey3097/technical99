@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardModule } from 'primeng/card';
 
 @Component({
@@ -10,6 +10,7 @@ import { CardModule } from 'primeng/card';
   styleUrl: './switch-technology.component.scss'
 })
 export class SwitchTechnologyComponent {
+  @Input() containerType: boolean = false;
   public selectedIndex: number = 0;
   public menus = [
     {
