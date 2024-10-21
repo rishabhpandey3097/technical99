@@ -10,7 +10,7 @@ import { CardModule } from 'primeng/card';
   styleUrl: './switch-technology.component.scss'
 })
 export class SwitchTechnologyComponent {
-  @Input() containerType: boolean = false;
+  @Input() containerType: boolean = true;
   public selectedIndex: number = 0;
   public menus = [
     {

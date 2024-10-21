@@ -1,6 +1,7 @@
 :host::ng-deep {
     .p-card {
-        .p-card-body, .p-card-content {
+        .p-card-body,
+        .p-card-content {
             padding: 0;
         }
     }
@@ -9,12 +10,26 @@
 .container-size {
     width: 900px;
     height: 353px;
-
     @media (max-width: 426px) {
         width: 400px;
     }
-
     @media ((min-width: 426px) and (max-width: 769px)) {
         width: 700px;
     }
+}
+
+h2 {
+    font-size: 26px;
+}
+
+.left-nav {
+    height: 353px;
+}
+
+.left-nav-menu {
+    padding: 10px 20px;
+}
+
+.switch-technology {
+    background-color: #e1ebf6;
 }

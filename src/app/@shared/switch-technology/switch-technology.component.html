@@ -1,30 +1,34 @@
-<div *ngIf="containerType; else otherTech" class="col-9 grid container-size">
-    <!-- Left Section:: START -->
-    <div class="col-5 md:col-3 p-0 grid flex flex-column blue-dark">
-        <div (mouseover)="changeMenuItems(index)" *ngFor="let menu of menus; let index = index" class="col-12 font-semibold cursor-pointer py-3 hover:blue-light hover:text-gray-900" [ngClass]="{'blue-light text-gray-900': selectedIndex === index, 'text-white': selectedIndex !== index}">
-            {{menu?.name}}
-        </div>
-    </div>
-    <!-- Left Section:: End -->
+<div *ngIf="containerType; else otherTech" class="switch-technology pb-5">
+    <div class="container">
+        <h2 class="mt-5 mb-4 text-center">Switch Technology</h2>
+        <div class="grid col-12 lg:col-10 m-auto">
+            <!-- Left Section:: START -->
+            <div class="col-5 md:col-3 p-0 blue-dark left-nav">
+                <div (mouseover)="changeMenuItems(index)" *ngFor="let menu of menus; let index = index" class="col-12 cursor-pointer hover:blue-light hover:text-gray-900 left-nav-menu" [ngClass]="{'blue-light text-gray-900': selectedIndex === index, 'text-white': selectedIndex !== index}">
+                    {{menu?.name}}
+                </div>
+            </div>
+            <!-- Left Section:: End -->
 
-    <!-- Right Section:: START -->
-    <div class="col-7 md:col-9 grid flex flex-wrap align-content-start blue-light p-2">
-        <div *ngFor="let i of currentMenu?.menuItems" class="col-6 md:col-4">
-            <p-card [styleClass]="'shadow-0 cursor-pointer p-0'">
-                <ng-template pTemplate="content">
-                    <div class="flex p-2 align-items-center flex-column md:flex-row">
-                        <div class="mr-1 flex align-items-center justify-content-center">
-                            <img width="50" height="50" src="assets/images/language/c.svg" alt="language">
-                        </div>
-                        <p class="text-xs text-center md:text-sm m-0">{{i}}</p>
-                    </div>
-                </ng-template>
-            </p-card>
+            <!-- Right Section:: START -->
+            <div class="col-7 md:col-9 grid align-content-start blue-light p-2 m-0">
+                <div *ngFor="let i of currentMenu?.menuItems" class="col-6 md:col-4">
+                    <p-card [styleClass]="'shadow-none cursor-pointer border-round-sm'">
+                        <ng-template pTemplate="content">
+                            <div class="flex p-2 align-items-center flex-column md:flex-row">
+                                <div class="md:mr-2 mb-2 md:mb-0 flex align-items-center justify-content-center">
+                                    <img width="43" height="43" src="assets/images/language/c.svg" alt="language">
+                                </div>
+                                <p class="text-xs text-center lg:text-base m-0">{{i}}</p>
+                            </div>
+                        </ng-template>
+                    </p-card>
+                </div>
+            </div>
+            <!-- Right Section:: END -->
         </div>
     </div>
-    <!-- Right Section:: END -->
 </div>
-
 
 <ng-template #otherTech>
     <div class="flex flex-column">

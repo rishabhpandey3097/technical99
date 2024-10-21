@@ -1,8 +1,9 @@
-<div class="grid grid-nogutter my-2">
+<!-- sec1  -->
+<div class="sec1 grid m-0 pt-2 pb-6">
     <div class="col-12 md:col-2">
-        <app-tutorial-sidebar></app-tutorial-sidebar>
+        <!-- add left Navbar here  -->
     </div>
-    <div class="col-12 md:col-8 m-auto px-2">
+    <div class="col-12 md:col-7 m-auto">
         <div class="course-search">
             <p-inputGroup>
                 <input type="text" pInputText placeholder="Search" />
@@ -19,9 +20,10 @@
             </div>
         </div>
     </div>
-    <div class="col-12 md:col-2 flex flex-column gap-2">
-        <app-switch-technology [containerType]="false"></app-switch-technology>
-        <app-blogs-sidebar></app-blogs-sidebar>
+    <div class="col-12 md:col-2">
+        <!-- add Blog component here  -->
     </div>
 </div>
-<app-switch-technology [containerType]="true"></app-switch-technology>
+
+<!-- switch technology sec  -->
+<app-switch-technology></app-switch-technology>
