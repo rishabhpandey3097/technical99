@@ -10,6 +10,12 @@ export const getCategoriesComplete = createAction('[Home] Get Categories Complet
     categories: Array<any>
 }>())
 
+export const getCategoriesByLanguage = createAction('[Home] Get Categories', props<{lang: string}>());
+
+export const getCategoriesByLanguageComplete = createAction('[Home] Get Categories Complete', props<{
+    categories: Array<any>
+}>())
+
 export const getModules = createAction('[Home] Get Modules');
 
 export const getModulesComplete = createAction('[Home] Get Modules Complete', props<{
@@ -34,4 +40,5 @@ export const getTechnologies = createAction('[Home] Get Technologies', props<{mo
 export const getTechnologiesComplete = createAction('[Home] Get Technologies Complete', props<{
     technologies: Array<any>
 }>())
+
 

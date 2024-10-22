@@ -32,6 +32,29 @@ export class GeneralEffects {
     )
   );
 
+  getCategoriesByLanguage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(generalActions.getCategoriesByLanguage),
+      switchMap((p) => {
+        return this.homeService
+          .getCategoriesByLanguage(p?.lang)
+          .pipe(
+            map((res) => {
+              if (res && +res?.status === 200) {
+                let data = [{name: 'Home', route: 'home', id: 0}, ...res?.data]
+                return generalActions.getCategoriesComplete({ categories: data });
+              } else {
+                return generalActions.getCategoriesComplete({ categories: null });
+              }
+            }),
+            catchError((error) => {
+              return of(generalActions.getCategoriesComplete({ categories: null }));
+            })
+          );
+      })
+    )
+  );
+
   getModules$ = createEffect(() =>
     this.actions$.pipe(
       ofType(generalActions.getModules),

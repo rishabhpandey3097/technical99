@@ -8,6 +8,7 @@ import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { Observable, distinctUntilChanged, takeUntil } from 'rxjs';
 import { isEqual } from 'lodash-es';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sub-top-nav',
@@ -20,7 +21,7 @@ export class SubTopNavComponent extends BaseComponent implements OnInit {
   public subMenuItems: MenuItem[] | undefined;
   public categories$: Observable<Array<any>>;
 
-  constructor(private store: Store<IAppState>){
+  constructor(private store: Store<IAppState>, private router: Router){
     super()
 
     this.categories$ = this.store.pipe(
@@ -36,7 +37,15 @@ export class SubTopNavComponent extends BaseComponent implements OnInit {
         this.subMenuItems = res?.map(c => {
           return {
             label: c?.name,
-            items: c?.languages?.map(l => ({label: l?.name}))
+            items: c?.languages?.map(lang => {
+              return {
+                label: lang?.name,
+                command: () => {
+                  let route = lang?.name?.toLowerCase()?.replace(' ', '-')
+                  return this.router.navigateByUrl(`/${route}`)
+                }
+              }
+            })
           }
         })
       }

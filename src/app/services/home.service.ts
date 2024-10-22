@@ -18,6 +18,14 @@ export class HomeService {
     });
   }
 
+  public getCategoriesByLanguage(lang: string): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/${HOME_URLS.getCategoriesByLanguage}`.replace(':lang', lang), {
+      headers: {
+        'X-Secret-Key':'Oct2024'
+      }
+    });
+  }
+
   public getModules(): Observable<any> {
     return this.http.get<any>(`${environment.baseUrl}/${HOME_URLS.getModules}`, {
       headers: {

@@ -22,56 +22,23 @@
         <h1 class="text-center mb-6">Inside the Java</h1>
         <div>
             <p-tabView>
-                <p-tabPanel header="Tutorial">
-                    <div class="grid flex-nowrap lg:flex-wrap overflow-x-scroll lg:overflow-x-hidden no-scrollbar">
-                        <div *ngFor="let i of [1, 2, 3, 4, 5, 6]" class="col-6 md:col-3 lg:col-2">
-                            <div class="card-course text-center">
-                                <span class="tech-count">
-                                    223
-                                </span>
-                                <div class="img-div">
-                                    <img src="../../../assets/images/tech/java.svg" alt="" class="w-full">
+                <ng-container *ngFor="let cat of (categories$ | async); let first = isFirst">
+                    <p-tabPanel *ngIf="!isFirst" [header]="cat?.name">
+                        <div class="grid flex-nowrap lg:flex-wrap overflow-x-scroll lg:overflow-x-hidden no-scrollbar">
+                            <div *ngFor="let i of [1, 2, 3, 4, 5, 6]" class="col-6 md:col-3 lg:col-2">
+                                <div class="card-course text-center">
+                                    <span class="tech-count">
+                                        223
+                                    </span>
+                                    <div class="img-div">
+                                        <img src="../../../assets/images/tech/java.svg" alt="" class="w-full">
+                                    </div>
+                                    <h6 class="mt-2 mb-0">Core Java</h6>
                                 </div>
-                                <h6 class="mt-2 mb-0">Core Java</h6>
                             </div>
                         </div>
-                    </div>
-                </p-tabPanel>
-                <p-tabPanel header="MCQ">
-                    <p>
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                    </p>
-                </p-tabPanel>
-                <p-tabPanel header="Interview">
-                    <p>
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos
-                    </p>
-                </p-tabPanel>
-                <p-tabPanel header="MCQ">
-                    <p>
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                    </p>
-                </p-tabPanel>
-                <p-tabPanel header="Interview">
-                    <p>
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos
-                    </p>
-                </p-tabPanel>
-                <p-tabPanel header="Coding">
-                    <p>
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                    </p>
-                </p-tabPanel>
-                <p-tabPanel header="Quiz">
-                    <p>
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos
-                    </p>
-                </p-tabPanel>
-                <p-tabPanel header="Blog">
-                    <p>
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos
-                    </p>
-                </p-tabPanel>
+                    </p-tabPanel>
+                </ng-container>
             </p-tabView>
         </div>
         <p class="tutorial-data text-base">Java is general purpose computer programming language. It is high level, object oriented, secure, robust and platform independent language. It is intentionally designed that developers can Write Once, Run Anywhere, means compiled code can run
