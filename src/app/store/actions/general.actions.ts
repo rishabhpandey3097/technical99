@@ -41,4 +41,6 @@ export const getTechnologiesComplete = createAction('[Home] Get Technologies Com
     technologies: Array<any>
 }>())
 
+export const isHomePage = createAction('[App] Is Home Page', props<{isHomePage: boolean}>());
+
 

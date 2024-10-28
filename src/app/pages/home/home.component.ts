@@ -89,6 +89,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
     this.images = this.photoService.getImages();
     this.products = this.productService.getProductsSmall();
     this.componentStore.getTabContent({id: 1})
+    this.store.dispatch(generalActions.getCategories());
     
     this.responsiveOptions = [
       {

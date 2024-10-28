@@ -40,8 +40,14 @@ export class JavaComponent extends BaseComponent {
 
   public ngOnInit(): void {
     this.route.params.subscribe(res => {
-      this.store.dispatch(generalActions.getCategoriesByLanguage({lang: res?.['lang']}))
+      if(res?.['lang']) {
+        this.store.dispatch(generalActions.getCategoriesByLanguage({lang: res?.['lang']}))
+      }
     })
+  }
+
+  public tabChange(event: any): void {
+    console.log("event ==>", event);
   }
 
   public override ngOnDestroy(): void {

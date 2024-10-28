@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { TopNavComponent } from './header/top-nav/top-nav.component';
 import { SubTopNavComponent } from './header/sub-top-nav/sub-top-nav.component';
 import { FooterComponent } from './footer/footer/footer.component';
@@ -7,6 +7,7 @@ import { BaseComponent } from './base-component/base.component';
 import { Store } from '@ngrx/store';
 import { IAppState } from './store/reducers/app.state';
 import { generalActions } from './store/actions';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,15 @@ import { generalActions } from './store/actions';
   styleUrl: './app.component.scss',
 })
 export class AppComponent extends BaseComponent {
-  constructor(private store: Store<IAppState>){
+  constructor(private store: Store<IAppState>, private router: Router){
     super()
+
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const currentRoute = event.url || '';
+        this.store.dispatch(generalActions.isHomePage({isHomePage: currentRoute === '/' ? true: false}))
+      }
+    });
   }
 
   public ngOnInit(): void {

@@ -21,8 +21,8 @@
     <div class="col-12 lg:col-10 m-auto">
         <h1 class="text-center mb-6">Inside the Java</h1>
         <div>
-            <p-tabView>
-                <ng-container *ngFor="let cat of (categories$ | async); let first = isFirst">
+            <p-tabView (onChange)="tabChange($event)">
+                <ng-container *ngFor="let cat of (categories$ | async); let isFirst = first">
                     <p-tabPanel *ngIf="!isFirst" [header]="cat?.name">
                         <div class="grid flex-nowrap lg:flex-wrap overflow-x-scroll lg:overflow-x-hidden no-scrollbar">
                             <div *ngFor="let i of [1, 2, 3, 4, 5, 6]" class="col-6 md:col-3 lg:col-2">

@@ -40,15 +40,15 @@ export class GeneralEffects {
           .getCategoriesByLanguage(p?.lang)
           .pipe(
             map((res) => {
-              if (res && +res?.status === 200) {
+              if (res && +res?.status === 200 && res?.data?.length) {
                 let data = [{name: 'Home', route: 'home', id: 0}, ...res?.data]
-                return generalActions.getCategoriesComplete({ categories: data });
+                return generalActions.getCategoriesByLanguageComplete({ categories: data });
               } else {
-                return generalActions.getCategoriesComplete({ categories: null });
+                return generalActions.getCategoriesByLanguageComplete({ categories: null });
               }
             }),
             catchError((error) => {
-              return of(generalActions.getCategoriesComplete({ categories: null }));
+              return of(generalActions.getCategoriesByLanguageComplete({ categories: null }));
             })
           );
       })

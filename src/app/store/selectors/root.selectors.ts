@@ -14,6 +14,11 @@ export const selectCategories = createSelector(
   state => state.categories
 )
 
+export const selectCategoriesByRoute = createSelector(
+  selectRootState,
+  state => state.categoriesByLanguage
+)
+
 export const selectModules = createSelector(
   selectRootState,
   state => state.modules
@@ -27,5 +32,10 @@ export const selectInterview = createSelector(
 export const selectTechnologies = createSelector(
   selectRootState,
   state => state.modules
+)
+
+export const selectIsHomePage = createSelector(
+  selectRootState,
+  state => state.isHomePage
 )
 

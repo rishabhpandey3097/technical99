@@ -4,19 +4,23 @@ import { generalActions } from '../actions';
 export interface IRootState {
   isLoggedIn: boolean;
   categories: Array<any>;
+  categoriesByLanguage: Array<any>;
   modules: Array<any>;
   interviewTechnologies: Array<any>;
   moduleMenu: Array<any>;
   technologies: Array<any>;
+  isHomePage: boolean;
 }
 
 export const initialState: IRootState = {
   isLoggedIn: false,
   categories: null,
+  categoriesByLanguage: null,
   modules: null,
   interviewTechnologies: null,
   moduleMenu: null,
-  technologies: null
+  technologies: null,
+  isHomePage: false
 };
 
 export function userSettingReducer(state: IRootState, action: Action) {
@@ -35,6 +39,12 @@ const _userSettingReducer = createReducer(
     return {
       ...state,
       categories,
+    };
+  }),
+  on(generalActions.getCategoriesComplete, (state, { categories }) => {
+    return {
+      ...state,
+      categoriesByLanguage: categories,
     };
   }),
   on(generalActions.getModulesComplete, (state, { modules }) => {
@@ -59,6 +69,12 @@ const _userSettingReducer = createReducer(
     return {
       ...state,
       interviewTechnologies: interviewQuestions,
+    };
+  }),
+  on(generalActions.isHomePage, (state, { isHomePage }) => {
+    return {
+      ...state,
+      isHomePage,
     };
   }),
 );

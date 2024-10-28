@@ -1,8 +1,4 @@
 <div class="w-full">
-    <!-- <p-menubar  > -->
-        <p-menubar [model]="subMenuItems" styleClass="border-none font-semibold border-noround">
-            <ng-template pTemplate="menuicon">
-                <img src="" alt="">
-            </ng-template>
-        </p-menubar>
+    <p-menubar *ngIf="isHomePage$ | async" [model]="subMenuItems" styleClass="border-none font-semibold border-noround" />
+    <p-menubar *ngIf="!(isHomePage$ | async)" [model]="subCategoriesItems" styleClass="border-none font-semibold border-noround" />
 </div>
