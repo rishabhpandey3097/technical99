@@ -7,8 +7,8 @@ import { HomeService } from '../../services/home.service';
 
 @Injectable()
 export class GeneralEffects {
- private actions$ = inject(Actions);
- private homeService = inject(HomeService)
+  private actions$ = inject(Actions);
+  private homeService = inject(HomeService)
 
   getCategories$ = createEffect(() =>
     this.actions$.pipe(
@@ -41,14 +41,14 @@ export class GeneralEffects {
           .pipe(
             map((res) => {
               if (res && +res?.status === 200 && res?.data?.length) {
-                let data = [{name: 'Home', route: 'home', id: 0}, ...res?.data]
-                return generalActions.getCategoriesByLanguageComplete({ categories: data });
+                let data = [{ name: 'Home', route: 'home', id: 0 }, ...res?.data]
+                return generalActions.getCategoriesByLanguageComplete({ subCategories: data });
               } else {
-                return generalActions.getCategoriesByLanguageComplete({ categories: null });
+                return generalActions.getCategoriesByLanguageComplete({ subCategories: null });
               }
             }),
             catchError((error) => {
-              return of(generalActions.getCategoriesByLanguageComplete({ categories: null }));
+              return of(generalActions.getCategoriesByLanguageComplete({ subCategories: null }));
             })
           );
       })

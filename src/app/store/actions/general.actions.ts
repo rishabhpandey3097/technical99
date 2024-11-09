@@ -10,10 +10,10 @@ export const getCategoriesComplete = createAction('[Home] Get Categories Complet
     categories: Array<any>
 }>())
 
-export const getCategoriesByLanguage = createAction('[Home] Get Categories', props<{lang: string}>());
+export const getCategoriesByLanguage = createAction('[Home] Get Categories', props<{ lang: string }>());
 
 export const getCategoriesByLanguageComplete = createAction('[Home] Get Categories Complete', props<{
-    categories: Array<any>
+    subCategories: Array<any>
 }>())
 
 export const getModules = createAction('[Home] Get Modules');
@@ -22,7 +22,7 @@ export const getModulesComplete = createAction('[Home] Get Modules Complete', pr
     modules: Array<any>
 }>())
 
-export const getInterviewQuestions = createAction('[Home] Get Interview Questions', props<{moduleId: number}>());
+export const getInterviewQuestions = createAction('[Home] Get Interview Questions', props<{ moduleId: number }>());
 
 export const getInterviewQuestionsComplete = createAction('[Home] Get Interview Questions Complete', props<{
     interviewQuestions: Array<any>
@@ -35,12 +35,12 @@ export const getModuleMenuComplete = createAction('[Home] Get Module Menu Comple
     moduleMenu: Array<any>
 }>())
 
-export const getTechnologies = createAction('[Home] Get Technologies', props<{moduleId: number}>());
+export const getTechnologies = createAction('[Home] Get Technologies', props<{ moduleId: number }>());
 
 export const getTechnologiesComplete = createAction('[Home] Get Technologies Complete', props<{
     technologies: Array<any>
 }>())
 
-export const isHomePage = createAction('[App] Is Home Page', props<{isHomePage: boolean}>());
+export const isHomePage = createAction('[App] Is Home Page', props<{ isHomePage: boolean }>());
 
 

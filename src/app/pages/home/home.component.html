@@ -33,7 +33,7 @@
             <ng-template pTemplate="content">
                 <div>
                     <h3 class="text-center">{{module?.name}}</h3>
-                    <div class="grid flex">
+                    <div class="flex">
                         <div *ngFor="let tab of (tabContent$ | async)" class="col-12 lg:col-6 card">
                             <p-card>
                                 <div class="flex justify-content-between align-items-center">
@@ -42,7 +42,8 @@
                                 </div>
                                 <div class="flex overflow-x-scroll lg:overflow-x-hidden no-scrollbar">
                                     <div *ngFor="let lang of tab?.languages" class="col-4 md:col-2 text-center">
-                                        <img width="40" height="40" src="assets/images/language/{{lang?.icon}}.svg" [alt]="lang?.icon" />
+                                        <img width="40" height="40" src="assets/images/language/{{lang?.icon}}.svg"
+                                            [alt]="lang?.icon" />
                                         <p class="white-space-nowrap">{{lang?.name}}</p>
                                     </div>
                                 </div>
@@ -62,7 +63,8 @@
         <div class="grid align-items-center">
             <div class="col-12 lg:col-6 lg:pr-8">
                 <h3 class="font-medium line-height-3 text-white">
-                    Technical99 provides technical and aptitude based Assessment Test to check your skills for next level. It is designed to assess your problem solving skills, thinking process and knowledge base.
+                    Technical99 provides technical and aptitude based Assessment Test to check your skills for next
+                    level. It is designed to assess your problem solving skills, thinking process and knowledge base.
                 </h3>
                 <ul class="line-height-4 pt-2 lg:pb-6">
                     <li>Large improvised question bank</li>
@@ -73,7 +75,9 @@
                 <p-button class="hidden md:block" label="Practice Test" />
             </div>
             <div class="col-12 lg:col-6 card">
-                <p-galleria [(value)]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true" [showThumbnails]="false" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }">
+                <p-galleria [(value)]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true"
+                    [showThumbnails]="false" [responsiveOptions]="responsiveOptions"
+                    [containerStyle]="{ 'max-width': '640px' }">
                     <ng-template pTemplate="item" let-item>
                         <img [src]="item.itemImageSrc" style="width: 100%; display: block" />
                     </ng-template>
@@ -156,7 +160,8 @@
                     <div class="border-1 surface-border border-round m-2">
                         <div class="mb-1">
                             <div class="relative mx-auto">
-                                <img src="../../../assets/images/{{ product.image }}" [alt]="product.name" class="w-full border-round border-noround-bottom" />
+                                <img src="../../../assets/images/{{ product.image }}" [alt]="product.name"
+                                    class="w-full border-round border-noround-bottom" />
                             </div>
                         </div>
                         <div class="p-3">
@@ -191,7 +196,8 @@
         <div class="col-12 lg:col-6">
             <h3 class="m-0 pb-3 text-white">Are you looking for Expert's Advice?</h3>
             <h6 class="text-white m-0 mb-4">
-                Don't hesitate to ask your questions, sometime good suggestions may be turning point for your successful career
+                Don't hesitate to ask your questions, sometime good suggestions may be turning point for your successful
+                career
             </h6>
             <p-button label="Call to Experts" />
         </div>
@@ -217,7 +223,8 @@
                     </div>
                     <div>
                         <p class="review-para text-color-secondary mb-6">
-                            I attempted few Java MCQs and truly its nice experience. Nice work and thanks to team of technical99.com, Please keep up good work.
+                            I attempted few Java MCQs and truly its nice experience. Nice work and thanks to team of
+                            technical99.com, Please keep up good work.
                         </p>
                     </div>
                     <p-rating [(ngModel)]="value" [cancel]="false" />

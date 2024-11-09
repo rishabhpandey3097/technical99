@@ -1,6 +1,6 @@
 <div class="flex align-items-center justify-content-between w-100 top-nav">
     <div class="lg:flex hidden justify-content-between">
-        <img class="cursor-pointer" width="180" src="assets/images/logo.png" alt="" />
+        <img [routerLink]="'/'" class="cursor-pointer" width="180" src="assets/images/logo.png" alt="" />
     </div>
     <div class="flex lg:hidden justify-content-between">
         <img class="cursor-pointer w-2rem" src="assets/images/tech99.png" alt="" />
@@ -9,7 +9,8 @@
     <div class="lg:flex gap-3 hidden">
         <p-button styleClass="border-1 border-gray-300 border-round-sm" label="Enquiry" [text]="true"></p-button>
 
-        <div [routerLink]="[action?.route]" *ngFor="let action of navActions" class="flex flex-column align-items-center justify-content-center gap-2 cursor-pointer nav-tabs">
+        <div [routerLink]="[action?.route]" *ngFor="let action of navActions"
+            class="flex flex-column align-items-center justify-content-center gap-2 cursor-pointer nav-tabs">
             <i [class]="action?.icon"></i>
             <p class="m-0 p-0 text-xs">{{ action?.name }}</p>
         </div>

@@ -41,10 +41,10 @@ const _userSettingReducer = createReducer(
       categories,
     };
   }),
-  on(generalActions.getCategoriesComplete, (state, { categories }) => {
+  on(generalActions.getCategoriesByLanguageComplete, (state, { subCategories }) => {
     return {
       ...state,
-      categoriesByLanguage: categories,
+      categoriesByLanguage: subCategories,
     };
   }),
   on(generalActions.getModulesComplete, (state, { modules }) => {

@@ -11,7 +11,11 @@ export class TutorialService {
 
   constructor(private http: HttpClient) { }
 
-  public getLanguageTopics(lang: string, module:string): Observable<any> {
-    return this.http.get(`${environment.baseUrl}/${TUTORIAL_URLS.getLanguageTopics}`.replace(':lang', lang).replace(':module', module));
+  public getLanguageTopics(lang: string, module: string): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/${TUTORIAL_URLS.getLanguageTopics}`.replace(':lang', lang).replace(':module', module), {
+      headers: {
+        'X-Secret-Key': 'Oct2024'
+      }
+    });
   }
 }

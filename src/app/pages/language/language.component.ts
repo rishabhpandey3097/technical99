@@ -16,23 +16,34 @@ import { IAppState } from '@app/store/reducers/app.state';
 import { generalActions } from '@app/store/actions';
 import { Observable, distinctUntilChanged, takeUntil } from 'rxjs';
 import { BaseComponent } from '@app/base-component/base.component';
-import { selectCategories } from '@app/store/selectors';
-import {isEqual} from 'lodash-es';
+import { selectCategories, selectCategoriesByRoute } from '@app/store/selectors';
+import { isEqual } from 'lodash-es';
+import { LanguageComponentStore } from './language.component.store';
 
 @Component({
-  selector: 'app-java',
+  selector: 'app-language',
   standalone: true,
   imports: [LanguageSubTopNavComponent, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule, AccordionModule, TabViewModule, CommonModule, CardModule, SwitchTechnologyComponent],
-  templateUrl: './java.component.html',
-  styleUrl: './java.component.scss'
+  templateUrl: './language.component.html',
+  styleUrl: './language.component.scss',
+  providers: [LanguageComponentStore]
 })
-export class JavaComponent extends BaseComponent {
+export class LanguageComponent extends BaseComponent {
   public categories$: Observable<any>;
-  constructor(private store: Store<IAppState>, private route: ActivatedRoute){
+  public tabContent$ = this.componentStore.moduleTabContent$;
+  private currentLang: string;
+  public selectedModule: any;
+  public countMap = {
+    'tutorial': 'tutCount',
+    'mcq': 'mcqCount',
+    'interview': 'iqCount',
+    'coding': 'csCount',
+    'blog': 'blogCount'
+  }
+  constructor(private store: Store<IAppState>, private route: ActivatedRoute, private componentStore: LanguageComponentStore) {
     super()
-
     this.categories$ = this.store.pipe(
-      select(selectCategories),
+      select(selectCategoriesByRoute),
       distinctUntilChanged(isEqual),
       takeUntil(this.destroy$)
     )
@@ -40,17 +51,29 @@ export class JavaComponent extends BaseComponent {
 
   public ngOnInit(): void {
     this.route.params.subscribe(res => {
-      if(res?.['lang']) {
-        this.store.dispatch(generalActions.getCategoriesByLanguage({lang: res?.['lang']}))
+      if (res?.['lang']) {
+        this.currentLang = res?.['lang']
+        this.componentStore.getTabContent({ lang: this.currentLang, module: 'tutorial' })
+        this.store.dispatch(generalActions.getCategoriesByLanguage({ lang: res?.['lang'] }))
+      }
+    })
+    this.categories$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      if (res?.length) {
+        this.selectedModule = this.categories$[1];
       }
     })
   }
 
   public tabChange(event: any): void {
-    console.log("event ==>", event);
+    let categories = this.getValueFromObservable(this.categories$)?.filter(cat => cat?.id !== 0);
+    this.selectedModule = categories.find(item => item?.id === (event?.index + 1));
+    this.componentStore.getTabContent({
+      lang: this.currentLang,
+      module: this.selectedModule?.route
+    })
   }
 
   public override ngOnDestroy(): void {
-      super.ngOnDestroy()
+    super.ngOnDestroy()
   }
 }

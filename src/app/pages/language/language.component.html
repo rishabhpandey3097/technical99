@@ -21,19 +21,19 @@
     <div class="col-12 lg:col-10 m-auto">
         <h1 class="text-center mb-6">Inside the Java</h1>
         <div>
-            <p-tabView (onChange)="tabChange($event)">
+            <p-tabView [tabindex]="0" (onChange)="tabChange($event)">
                 <ng-container *ngFor="let cat of (categories$ | async); let isFirst = first">
                     <p-tabPanel *ngIf="!isFirst" [header]="cat?.name">
                         <div class="grid flex-nowrap lg:flex-wrap overflow-x-scroll lg:overflow-x-hidden no-scrollbar">
-                            <div *ngFor="let i of [1, 2, 3, 4, 5, 6]" class="col-6 md:col-3 lg:col-2">
+                            <div *ngFor="let tab of (tabContent$ | async)" class="col-6 md:col-3 lg:col-2">
                                 <div class="card-course text-center">
                                     <span class="tech-count">
-                                        223
+                                        {{tab?.[countMap[selectedModule?.route]] || tab?.tutCount}}
                                     </span>
                                     <div class="img-div">
                                         <img src="../../../assets/images/tech/java.svg" alt="" class="w-full">
                                     </div>
-                                    <h6 class="mt-2 mb-0">Core Java</h6>
+                                    <h6 class="mt-2 mb-0">{{tab?.name}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -41,21 +41,29 @@
                 </ng-container>
             </p-tabView>
         </div>
-        <p class="tutorial-data text-base">Java is general purpose computer programming language. It is high level, object oriented, secure, robust and platform independent language. It is intentionally designed that developers can Write Once, Run Anywhere, means compiled code can run
-            on all platform without recompilation. Java compilers generate *.class file that contains byte code and can run on any Java Virtual Machine.</p>
+        <p class="tutorial-data text-base">Java is general purpose computer programming language. It is high level,
+            object oriented, secure, robust and platform independent language. It is intentionally designed that
+            developers can Write Once, Run Anywhere, means compiled code can run
+            on all platform without recompilation. Java compilers generate *.class file that contains byte code and can
+            run on any Java Virtual Machine.</p>
         <div>
             <h4 class="mt-6 mb-4">Frequently Asked Questions</h4>
             <div class="card flex justify-content-center">
                 <p-accordion [activeIndex]="0">
                     <p-accordionTab header="What is Java Language? ">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum.
                         </p>
                     </p-accordionTab>
                     <p-accordionTab header="Why need to learn Java ?">
                         <p>
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                            laudantium
                         </p>
                     </p-accordionTab>
                     <p-accordionTab header="Why Java is so popular among all programming languages ?">

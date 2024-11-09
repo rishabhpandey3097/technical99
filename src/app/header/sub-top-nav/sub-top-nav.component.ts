@@ -24,7 +24,7 @@ export class SubTopNavComponent extends BaseComponent implements OnInit {
   public categoriesByRoute$: Observable<Array<any>>;
   public isHomePage$: Observable<boolean>;
 
-  constructor(private store: Store<IAppState>, private router: Router){
+  constructor(private store: Store<IAppState>, private router: Router) {
     super()
     this.categories$ = this.store.pipe(
       select(selectCategories),
@@ -45,7 +45,7 @@ export class SubTopNavComponent extends BaseComponent implements OnInit {
 
   public ngOnInit(): void {
     this.categories$.pipe(takeUntil(this.destroy$)).subscribe(res => {
-      if(res?.length) {
+      if (res?.length) {
         this.subMenuItems = res?.map(c => {
           return {
             label: c?.name,
@@ -63,21 +63,23 @@ export class SubTopNavComponent extends BaseComponent implements OnInit {
       }
     })
     this.categoriesByRoute$.pipe(takeUntil(this.destroy$)).subscribe(res => {
-      if(res?.length) {
+      if (res?.length) {
         this.subCategoriesItems = res?.map(c => {
           return {
             label: c?.name,
             command: () => {
               let route = c?.name?.toLowerCase()?.replace(' ', '-')
-              return this.router.navigateByUrl(`tutorial`)
+              return this.router.navigateByUrl(`/module/${route}`)
             }
           }
         })
+      } else {
+        this.subCategoriesItems = [];
       }
     })
   }
 
   public override ngOnDestroy(): void {
-      super.ngOnDestroy();
+    super.ngOnDestroy();
   }
 }
