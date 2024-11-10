@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { BaseComponent } from '@app/base-component/base.component';
+import { IAppState } from '@app/store/reducers/app.state';
+import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { Observable, distinctUntilChanged, takeUntil } from 'rxjs';
+import { isEqual } from 'lodash-es';
 
 @Component({
     selector: 'app-tutorial-sidebar',
@@ -10,87 +15,74 @@ import { PanelMenuModule } from 'primeng/panelmenu';
     templateUrl: './tutorial-sidebar.component.html',
     styleUrl: './tutorial-sidebar.component.scss'
 })
-export class TutorialSidebarComponent implements OnInit {
-    items: MenuItem[];
+export class TutorialSidebarComponent extends BaseComponent implements OnInit {
+    @Input() sideBarContent: Array<any>;
+    @Input() subTopics: Array<any>;
+    @Input() selectedLanguage: string;
+    @Output() selectedTopicEmitter = new EventEmitter<any>();
+    @Output() selectedTitleEmitter = new EventEmitter<string>();
 
-    ngOnInit() {
-        this.items = [
-            {
-                label: 'Core Java',
-                icon: 'pi pi-plus',
-                items: [
-                    {
-                        label: 'Documents',
-                        icon: 'pi pi-file',
-                        items: [
-                            {
-                                label: 'Invoices',
-                                icon: 'pi pi-file-pdf',
-                                items: [
-                                    {
-                                        label: 'Pending',
-                                        icon: 'pi pi-stop'
-                                    },
-                                    {
-                                        label: 'Paid',
-                                        icon: 'pi pi-check-circle'
-                                    }
-                                ]
-                            },
-                            {
-                                label: 'Clients',
-                                icon: 'pi pi-users'
-                            }
-                        ]
-                    },
-                    {
-                        label: 'Images',
-                        icon: 'pi pi-image',
-                        items: [
-                            {
-                                label: 'Logos',
-                                icon: 'pi pi-image'
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                label: 'JDBC',
-                icon: 'pi pi-plus',
-                items: [
-                    {
-                        label: 'Upload',
-                        icon: 'pi pi-cloud-upload'
-                    },
-                    {
-                        label: 'Download',
-                        icon: 'pi pi-cloud-download'
-                    },
-                    {
-                        label: 'Sync',
-                        icon: 'pi pi-refresh'
-                    }
-                ]
-            },
-            {
-                label: 'Serverlet',
-                icon: 'pi pi-plus',
-                items: [
-                    {
-                        label: 'Phone',
-                        icon: 'pi pi-mobile'
-                    },
-                    {
-                        label: 'Desktop',
-                        icon: 'pi pi-desktop'
-                    },
-                    {
-                        label: 'Tablet',
-                        icon: 'pi pi-tablet'
-                    }
-                ]
-            }
-        ]
+    public selectedTopicId: number;
+    public selectedSubTopicId: number;
+    public items: MenuItem[];
+
+    constructor(private cdr: ChangeDetectorRef, private store: Store<IAppState>) {
+        super()
     }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if ('sideBarContent' in changes) {
+            this.items = changes?.['sideBarContent'].currentValue?.map(content => {
+                return {
+                    id: content?.id,
+                    label: content?.name,
+                    icon: 'pi pi-plus',
+                    items: content?.topics?.map(t => {
+                        return {
+                            id: t?.id,
+                            label: t?.name,
+                            icon: 'pi pi-plus',
+                            command: () => {
+                                this.selectedTopicId = content?.id;
+                                this.selectedSubTopicId = t?.id;
+                                this.selectedTopicEmitter.emit({ topic: content?.name, subTopic: t?.name })
+                            },
+                            items: []
+                        }
+                    })
+                }
+            })
+        }
+
+        if ('subTopics' in changes) {
+            const subTopics = changes['subTopics']?.currentValue;
+            const topic = this.items?.find(item => +item?.id == +this.selectedTopicId);
+            const topicIndex = this.items?.findIndex(item => +item?.id == this.selectedTopicId);
+            let subTopic = topic?.items?.find(sub => +sub?.id === this.selectedSubTopicId);
+            const subTopicIndex = topic?.items?.findIndex(s => +s?.id === this.selectedSubTopicId)
+            subTopic = {
+                ...subTopic,
+                expanded: true,
+                command: () => { },
+                items: subTopics?.map(t => {
+                    return {
+                        label: t?.shortTitle?.replace('-', ' '),
+                        icon: 'pi pi-file',
+                        command: () => this.selectedTitleEmitter.emit(t?.shortTitle)
+                    }
+                })
+            };
+            topic?.items?.splice(subTopicIndex, 1, subTopic);
+            // this.items?.splice(topicIndex, 1, topic);
+            setTimeout(() => {
+                this.cdr.detectChanges();
+            }, 100)
+        }
+    };
+
+    public ngOnInit(): void { };
+
+    public override ngOnDestroy(): void {
+        super.ngOnDestroy()
+    };
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HomeService } from '@app/services/home.service';
 import { TutorialService } from '@app/services/tutorial.service';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 

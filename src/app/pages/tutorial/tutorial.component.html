@@ -1,6 +1,9 @@
 <div class="grid grid-nogutter my-2">
     <div class="col-12 md:col-2">
-        <app-tutorial-sidebar></app-tutorial-sidebar>
+        <app-tutorial-sidebar [sideBarContent]="sideBarContent$ | async"
+            (selectedTopicEmitter)="selectedSubTopic($event)" [subTopics]="topicTitles$ | async"
+            (selectedTitleEmitter)="selectedTitle($event)" [selectedLanguage]="selectedLanguage">
+        </app-tutorial-sidebar>
     </div>
     <div class="col-12 md:col-8 m-auto px-2">
         <div class="course-search">

@@ -43,4 +43,6 @@ export const getTechnologiesComplete = createAction('[Home] Get Technologies Com
 
 export const isHomePage = createAction('[App] Is Home Page', props<{ isHomePage: boolean }>());
 
+export const setSelectedLanguage = createAction('[App] Set Selected Language', props<{ language: string }>());
+
 

@@ -18,4 +18,18 @@ export class TutorialService {
       }
     });
   }
+  public getSubTopicTitles(lang: string, subTopic: string): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/${TUTORIAL_URLS.getSubTopicsTitles}`.replace(':lang', lang).replace(':topic', subTopic), {
+      headers: {
+        'X-Secret-Key': 'Oct2024'
+      }
+    });
+  }
+  public getTopicContent(title: string): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/${TUTORIAL_URLS.getSubTopicContent}`.replace(':title', title), {
+      headers: {
+        'X-Secret-Key': 'Oct2024'
+      }
+    });
+  }
 }

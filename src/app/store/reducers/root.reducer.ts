@@ -10,6 +10,7 @@ export interface IRootState {
   moduleMenu: Array<any>;
   technologies: Array<any>;
   isHomePage: boolean;
+  selectedLanguage: string;
 }
 
 export const initialState: IRootState = {
@@ -20,7 +21,8 @@ export const initialState: IRootState = {
   interviewTechnologies: null,
   moduleMenu: null,
   technologies: null,
-  isHomePage: false
+  isHomePage: false,
+  selectedLanguage: null
 };
 
 export function userSettingReducer(state: IRootState, action: Action) {
@@ -75,6 +77,12 @@ const _userSettingReducer = createReducer(
     return {
       ...state,
       isHomePage,
+    };
+  }),
+  on(generalActions.setSelectedLanguage, (state, { language }) => {
+    return {
+      ...state,
+      selectedLanguage: language
     };
   }),
 );

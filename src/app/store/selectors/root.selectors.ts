@@ -39,3 +39,8 @@ export const selectIsHomePage = createSelector(
   state => state.isHomePage
 )
 
+export const selectedLanguage = createSelector(
+  selectRootState,
+  state => state.selectedLanguage
+)
+
