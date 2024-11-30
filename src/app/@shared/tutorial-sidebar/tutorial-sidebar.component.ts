@@ -19,6 +19,7 @@ export class TutorialSidebarComponent extends BaseComponent implements OnInit {
     @Input() sideBarContent: Array<any>;
     @Input() subTopics: Array<any>;
     @Input() selectedLanguage: string;
+    @Input() selectedTopicContent: any;
     @Output() selectedTopicEmitter = new EventEmitter<any>();
     @Output() selectedTitleEmitter = new EventEmitter<string>();
 
@@ -67,13 +68,11 @@ export class TutorialSidebarComponent extends BaseComponent implements OnInit {
                 items: subTopics?.map(t => {
                     return {
                         label: t?.shortTitle?.replace('-', ' '),
-                        icon: 'pi pi-file',
                         command: () => this.selectedTitleEmitter.emit(t?.shortTitle)
                     }
                 })
             };
             topic?.items?.splice(subTopicIndex, 1, subTopic);
-            // this.items?.splice(topicIndex, 1, topic);
             setTimeout(() => {
                 this.cdr.detectChanges();
             }, 100)

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { BaseComponent } from '@app/base-component/base.component';
-import { selectCategories } from '@app/store/selectors';
+import { selectCategories, selectedLanguage } from '@app/store/selectors';
 import { Store, select } from '@ngrx/store';
 import { CardModule } from 'primeng/card';
 import { Observable, distinctUntilChanged, takeUntil } from 'rxjs';
@@ -15,14 +15,21 @@ import { isEqual } from "lodash-es";
 })
 export class SwitchTechnologyComponent extends BaseComponent {
   @Input() containerType: boolean = true;
+  @Input() switchBoxlanguages: any
   public selectedIndex: number = 0;
   public menus;
   public currentMenu;
   public categories$: Observable<any>;
+  public selectedLanguage$: Observable<string>;
   constructor(private store: Store) {
     super()
     this.categories$ = this.store.pipe(
       select(selectCategories),
+      distinctUntilChanged(isEqual),
+      takeUntil(this.destroy$)
+    )
+    this.selectedLanguage$ = this.store.pipe(
+      select(selectedLanguage),
       distinctUntilChanged(isEqual),
       takeUntil(this.destroy$)
     )

@@ -2,10 +2,11 @@
     <div class="col-12 md:col-2">
         <app-tutorial-sidebar [sideBarContent]="sideBarContent$ | async"
             (selectedTopicEmitter)="selectedSubTopic($event)" [subTopics]="topicTitles$ | async"
-            (selectedTitleEmitter)="selectedTitle($event)" [selectedLanguage]="selectedLanguage">
+            (selectedTitleEmitter)="selectedTitle($event)" [selectedLanguage]="selectedLanguage"
+            [selectedTopicContent]="topicContent$ | async">
         </app-tutorial-sidebar>
     </div>
-    <div class="col-12 md:col-8 m-auto px-2">
+    <div class="col-12 md:col-8 px-2">
         <div class="course-search">
             <p-inputGroup>
                 <input type="text" pInputText placeholder="Search" />
@@ -13,18 +14,21 @@
             </p-inputGroup>
         </div>
         <div class="course-list">
-            <h2 class="md:pl-4">Java</h2>
-            <div class="grid m-0 tech-grid">
-                <div *ngFor="let i of [1, 2, 3, 4, 5, 6]" class="tech-img text-center">
-                    <img src="../../../assets/images/tech/java.svg" alt="">
-                    <p class="text-sm my-2">Core Java</p>
+            <h2 class="md:pl-4">{{selectedLanguage?.replace('-', ' ') | titlecase}}</h2>
+            <div class="flex gap-4 flex-wrap">
+                <div *ngFor="let topic of sideBarContent$ | async" class="tech-img text-center">
+                    <img src="../../../assets/images/tech/{{topic?.name?.replace(' ', '') | lowercase}}.svg" alt="">
+                    <p class="text-sm my-2">{{topic?.name}}</p>
                 </div>
             </div>
         </div>
+        <app-template-generator [languageDetails]="(topicContent$ | async)?.contents"
+            [videoId]="(topicContent$ | async)?.videoId"></app-template-generator>
     </div>
     <div class="col-12 md:col-2 flex flex-column gap-2">
-        <app-switch-technology [containerType]="false"></app-switch-technology>
-        <app-blogs-sidebar></app-blogs-sidebar>
+        <app-switch-technology [containerType]="false"
+            [switchBoxlanguages]="languages$ | async"></app-switch-technology>
+        <app-blogs-sidebar [blogs]="blogsByLanguage$ | async"></app-blogs-sidebar>
     </div>
 </div>
 <app-switch-technology [containerType]="true"></app-switch-technology>

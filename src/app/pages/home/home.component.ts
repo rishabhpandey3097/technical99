@@ -59,7 +59,9 @@ export class HomeComponent extends BaseComponent implements OnInit {
   public tabContent$: Observable<any> = this.componentStore.moduleTabContent$;
   public categories$: Observable<Array<any>>;
   public modules$: Observable<Array<any>>;
-  public interviewSection$: Observable<Array<any>>
+  public interviewSection$: Observable<Array<any>>;
+  public reviews$: Observable<any> = this.componentStore.reviews$;
+  public blogs$: Observable<any> = this.componentStore.trendingBlogs$;
 
   constructor(
     private photoService: PhotoService,
@@ -88,9 +90,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.images = this.photoService.getImages();
     this.products = this.productService.getProductsSmall();
-    this.componentStore.getTabContent({id: 1})
+    this.componentStore.getTabContent({ id: 1 })
     this.store.dispatch(generalActions.getCategories());
-    
+    this.componentStore.getTrendingBlogs();
+    this.componentStore.getReviews();
+
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -120,10 +124,10 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   public getModuleInfo(event): void {
-    this.componentStore.getTabContent({id: event?.index+1})
+    this.componentStore.getTabContent({ id: event?.index + 1 })
   }
 
   public override ngOnDestroy(): void {
-      super.ngOnDestroy()
+    super.ngOnDestroy()
   }
 }

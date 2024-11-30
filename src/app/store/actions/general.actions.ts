@@ -10,9 +10,9 @@ export const getCategoriesComplete = createAction('[Home] Get Categories Complet
     categories: Array<any>
 }>())
 
-export const getCategoriesByLanguage = createAction('[Home] Get Categories', props<{ lang: string }>());
+export const getCategoriesByLanguage = createAction('[Home] Get Categories By Language', props<{ lang: string }>());
 
-export const getCategoriesByLanguageComplete = createAction('[Home] Get Categories Complete', props<{
+export const getCategoriesByLanguageComplete = createAction('[Home] Get Categories By Language Complete', props<{
     subCategories: Array<any>
 }>())
 

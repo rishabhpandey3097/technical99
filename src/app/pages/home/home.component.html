@@ -155,24 +155,24 @@
     <h1 class="text-center">Trending Blogs</h1>
     <div class="mt-4 md:mt-6 mb-5">
         <div class="card">
-            <p-carousel [value]="products" [numVisible]="4" [numScroll]="4" [circular]="true">
-                <ng-template let-product pTemplate="item">
+            <p-carousel [value]="blogs$ | async" [numVisible]="4" [numScroll]="4" [circular]="true">
+                <ng-template let-blog pTemplate="item">
                     <div class="border-1 surface-border border-round m-2">
                         <div class="mb-1">
                             <div class="relative mx-auto">
-                                <img src="../../../assets/images/{{ product.image }}" [alt]="product.name"
+                                <img src="../../../assets/images/{{ blog?.image }}" [alt]="blog?.name"
                                     class="w-full border-round border-noround-bottom" />
                             </div>
                         </div>
                         <div class="p-3">
                             <div class="mb-3 font-medium">
-                                {{ product.name }}
+                                {{ blog?.title }}
                             </div>
                             <div class="mb-3 text-sm text-color-secondary">
-                                {{ product.description }}
+                                {{ blog?.summary }}
                             </div>
                             <div class="flex text-sm text-color-secondary">
-                                <p>Anita Gupta | Dec 2, 2022</p>
+                                <p>{{blog?.createdBy}} | {{blog?.updatedDate | date : 'short'}}</p>
                             </div>
                         </div>
                     </div>
@@ -207,24 +207,23 @@
 <!-- sec10  -->
 <div class="sec10 container pt-5 pb-6">
     <h1 class="text-center text-black">Reviews</h1>
-    <p-carousel [value]="[1, 2, 3]" [numVisible]="3" [numScroll]="3" [circular]="false">
-        <ng-template let-product pTemplate="item">
+    <p-carousel [value]="reviews$ | async" [numVisible]="3" [numScroll]="3" [circular]="false">
+        <ng-template let-review pTemplate="item">
             <div class="grid">
                 <div class="col-11 card my-4 shadow-1 p-4 m-2">
                     <div class="flex align-items-center">
                         <img class="profile-pic" src="../../../assets/images/team/ajaj.jpg" alt="" />
                         <div>
-                            <h6 class="m-0">Ajaj Ahmed</h6>
+                            <h6 class="m-0">{{review?.userInfo?.firstName}} {{review?.userInfo?.lastName}}</h6>
                             <p class="my-1 text-color-secondary">
-                                Java Developer, Global Logic
+                                {{review?.userInfo?.username}}
                             </p>
-                            <img src="../../../assets/images/icons/linkedin.png" alt="" class="linked-in" />
+                            <!-- <img src="../../../assets/images/icons/linkedin.png" alt="" class="linked-in" /> -->
                         </div>
                     </div>
                     <div>
                         <p class="review-para text-color-secondary mb-6">
-                            I attempted few Java MCQs and truly its nice experience. Nice work and thanks to team of
-                            technical99.com, Please keep up good work.
+                            {{review?.review}}
                         </p>
                     </div>
                     <p-rating [(ngModel)]="value" [cancel]="false" />

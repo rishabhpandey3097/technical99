@@ -32,4 +32,11 @@ export class TutorialService {
       }
     });
   }
+  public getSwitchLanguage(lang: string): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/${TUTORIAL_URLS.getSwitchLanguage}`.replace(':lang', lang), {
+      headers: {
+        'X-Secret-Key': 'Oct2024'
+      }
+    });
+  }
 }

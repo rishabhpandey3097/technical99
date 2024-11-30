@@ -1,0 +1,133 @@
+.attention{
+    background-color: #ffe0e0;
+    border-radius: 3px;
+    padding: 15px;
+    border-left: 5px solid #db0707;
+}
+.note{
+    background-color: #e2f3ff;
+    border-radius: 3px;
+    padding: 15px;
+    border-left: 5px solid #126CA4;
+}
+.txt-note{
+    font-size: .9rem;
+    font-style: italic;
+    font-weight: 500;
+    color: #126CA4;
+    padding: 0px 15px;
+}
+.txt-dwn{
+  font-size: .9rem;
+  font-style: italic;
+}
+.txt-attention{
+    font-size: .9rem;
+    font-style: italic;
+    font-weight: 500;
+    color: #d00e0e;
+    padding: 0px 15px;
+}
+.txt-link{
+  font-size: .9rem;
+  font-weight: 500;
+  padding: 0px 10px;
+}
+//  ---------------------  CSS for Table component ------------------- 
+
+.table-outer {
+    overflow: auto;
+    border-radius: 3px;
+    margin:20px 0px;
+}
+
+  table.json-table {
+    width: 100%;
+    background: #fff;
+    border-spacing: 0;
+    table-layout: auto;
+    white-space: nowrap;
+  }
+  table.json-table thead {
+    background: inherit;
+  }
+  table.json-table thead tr {
+    height: auto;
+  }
+  table.json-table th {
+    padding: 8px 15px;
+    text-align: left;
+    border: 1px solid #e3e3e3;
+    background-color:#bebebe;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: .6px;
+  }
+  table.code-table th {
+    padding: 8px 15px;
+    text-align: left;
+    border: 1px solid #e3e3e3;
+    background-color:#bebebe;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: .6px;
+  }
+  table.json-table tbody tr td {
+    padding: 7px 15px;
+    border: 1px solid #e3e3e3;
+    text-align: left;
+    font-size: 14px;
+    vertical-align: text-top;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    scrollbar-width: thin; 
+  }
+  table.code-table tbody tr td {
+    border: 1px solid #e3e3e3;
+    text-align: left;
+    font-size: 14px;
+    vertical-align: text-top;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    scrollbar-width: thin; 
+  }
+  table.json-table tbody tr:last-child td{
+    border-bottom: 1px solid #e3e3e3;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(153, 34, 34) !important;
+  }
+  .small-scroller::-webkit-scrollbar {
+    width: 0px !important;
+    height: 0px !important;
+  }
+  .g10{
+    height: 10px;
+  }
+  .g15{
+    height: 15px;
+  }
+  .g20{
+    height: 20px;
+  }
+  .g25{
+    height: 25px;
+  }
+  .g30{
+    height: 30px;
+  }
+  .g35{
+    height: 35px;
+  }
+  .g40{
+    height: 40px;
+  }
+
+  @media (max-width: 450px) {
+  .table-outer {
+    margin:20px -7px;
+  }
+  .code-data{
+    padding: 0px -7px;
+  }
+}

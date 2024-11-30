@@ -16,14 +16,15 @@ import { IAppState } from '@app/store/reducers/app.state';
 import { generalActions } from '@app/store/actions';
 import { Observable, distinctUntilChanged, takeUntil } from 'rxjs';
 import { BaseComponent } from '@app/base-component/base.component';
-import { selectCategories, selectCategoriesByRoute } from '@app/store/selectors';
+import { selectCategoriesByRoute } from '@app/store/selectors';
 import { isEqual } from 'lodash-es';
 import { LanguageComponentStore } from './language.component.store';
+import { TemplateGeneratorComponent } from '@app/template-generator/template-generator.component';
 
 @Component({
   selector: 'app-language',
   standalone: true,
-  imports: [LanguageSubTopNavComponent, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule, AccordionModule, TabViewModule, CommonModule, CardModule, SwitchTechnologyComponent],
+  imports: [LanguageSubTopNavComponent, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule, AccordionModule, TabViewModule, CommonModule, CardModule, SwitchTechnologyComponent, TemplateGeneratorComponent],
   templateUrl: './language.component.html',
   styleUrl: './language.component.scss',
   providers: [LanguageComponentStore]
@@ -31,7 +32,10 @@ import { LanguageComponentStore } from './language.component.store';
 export class LanguageComponent extends BaseComponent {
   public categories$: Observable<any>;
   public tabContent$ = this.componentStore.moduleTabContent$;
-  private currentLang: string;
+  public faqs$ = this.componentStore.faqs$;
+  public faqContent$ = this.componentStore.faqContent$;
+  public languageBasedBlogs$ = this.componentStore.languageBasedBlogs$;
+  public currentLang: string;
   public selectedModule: any;
   public countMap = {
     'tutorial': 'tutCount',
@@ -53,8 +57,10 @@ export class LanguageComponent extends BaseComponent {
     this.route.params.subscribe(res => {
       if (res?.['lang']) {
         this.currentLang = res?.['lang']
-        this.componentStore.getTabContent({ lang: this.currentLang, module: 'tutorial' })
-        this.store.dispatch(generalActions.getCategoriesByLanguage({ lang: res?.['lang'] }))
+        this.componentStore.getTabContent({ lang: this.currentLang, module: 'tutorial' });
+        this.componentStore.getFaqs({ lang: this.currentLang });
+        this.componentStore.getLanguageBasedBlogs({ lang: this.currentLang, size: 4 });
+        this.store.dispatch(generalActions.getCategoriesByLanguage({ lang: res?.['lang'] }));
       }
     })
     this.categories$.pipe(takeUntil(this.destroy$)).subscribe(res => {

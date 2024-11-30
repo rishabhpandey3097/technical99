@@ -1,14 +1,29 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { generalActions } from '../actions';
-import { catchError, EMPTY, exhaustMap, map, switchMap } from 'rxjs';
+import { catchError, concatMap, distinctUntilChanged, EMPTY, exhaustMap, filter, map, mergeMap, Observable, switchMap, takeUntil } from 'rxjs';
 import { of } from 'rxjs';
 import { HomeService } from '../../services/home.service';
+import { BaseComponent } from '@app/base-component/base.component';
+import { Store, select } from '@ngrx/store';
+import { IAppState } from '../reducers/app.state';
+import { selectCategoriesByRoute } from '../selectors';
+import { isEqual } from 'lodash-es';
 
 @Injectable()
-export class GeneralEffects {
+export class GeneralEffects extends BaseComponent {
   private actions$ = inject(Actions);
-  private homeService = inject(HomeService)
+  private homeService = inject(HomeService);
+  private categoriesByRoute$: Observable<any>;
+
+  constructor(private store: Store<IAppState>) {
+    super()
+    this.categoriesByRoute$ = this.store.pipe(
+      select(selectCategoriesByRoute),
+      distinctUntilChanged(isEqual),
+      takeUntil(this.destroy$)
+    )
+  }
 
   getCategories$ = createEffect(() =>
     this.actions$.pipe(
@@ -35,7 +50,7 @@ export class GeneralEffects {
   getCategoriesByLanguage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(generalActions.getCategoriesByLanguage),
-      switchMap((p) => {
+      concatMap((p) => {
         return this.homeService
           .getCategoriesByLanguage(p?.lang)
           .pipe(
@@ -44,11 +59,11 @@ export class GeneralEffects {
                 let data = [{ name: 'Home', route: 'home', id: 0 }, ...res?.data]
                 return generalActions.getCategoriesByLanguageComplete({ subCategories: data });
               } else {
-                return generalActions.getCategoriesByLanguageComplete({ subCategories: null });
+                return generalActions.getCategoriesByLanguageComplete({ subCategories: this.getValueFromObservable(this.categoriesByRoute$) });
               }
             }),
             catchError((error) => {
-              return of(generalActions.getCategoriesByLanguageComplete({ subCategories: null }));
+              return of(generalActions.getCategoriesByLanguageComplete({ subCategories: this.getValueFromObservable(this.categoriesByRoute$) }));
             })
           );
       })

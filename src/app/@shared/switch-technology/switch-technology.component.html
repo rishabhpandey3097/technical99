@@ -37,10 +37,10 @@
     <div class="flex flex-column">
         <div class="px-3 py-2 bg-gray-200">Switch</div>
         <div class="grid grid-nogutter">
-            <span *ngFor="let i of [1, 2, 3, 4]"
+            <span *ngFor="let lang of switchBoxlanguages"
                 class="col-3 py-2 flex flex-column justify-content-center align-items-center gap-2 bg-gray-50">
-                <img width="30" height="30" src="assets/images/language/python.svg" alt="python">
-                <span class="text-xs">Python</span>
+                <img width="30" height="30" src="assets/images/language/{{lang?.icon}}.svg" alt="python">
+                <span class="text-xs">{{lang?.name}}</span>
             </span>
         </div>
     </div>

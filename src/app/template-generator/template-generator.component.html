@@ -1,0 +1,187 @@
+<ng-container *ngFor="let para of languageDetails">
+    <div *ngIf="para.pva">
+        <div class="row"
+            [ngClass]="para.align ? para.align === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
+            <p class="tutorial-para tutorial-data mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}"
+                [innerHTML]="para.pva"></p>
+            <div *ngIf="videoId; else gads"
+                class="h-100 mb-2 pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
+                <div class="videoWrapper">
+                    <iframe style="width: 100%; height: 110%" [src]="videoId.hindi | video" allowfullscreen
+                        frameborder="0"></iframe>
+                </div>
+            </div>
+            <ng-template #gads>
+                <div class="h-100 mb-2 pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
+                    <!-- <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584"
+                        data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense> -->
+                </div>
+            </ng-template>
+        </div>
+    </div>
+
+    <div *ngIf="para.pimg">
+        <div class="row"
+            [ngClass]="para.align ? para.align === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
+            <p class="tutorial-para tutorial-data mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}"
+                [innerHTML]="para.pimg"></p>
+            <div class="h-100 mb-3 pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
+                <img [style.width]="'100%'" height="auto" [src]="articleUrl + para.img" alt="">
+            </div>
+        </div>
+    </div>
+    <div *ngIf="para.para">
+        <div class="row"
+            [ngClass]="para.align ? para.align === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
+            <p *ngIf="para.para"
+                class="tutorial-para tutorial-data mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}"
+                [innerHTML]="para.para"></p>
+        </div>
+    </div>
+
+    <div *ngIf="para.img && !para.align" [class]="'py-4 text-'+ para.position">
+        <img [style.width]="para.dw ? para.dw+'%' : '100%'" height="auto" [src]="articleUrl+para?.img" alt="">
+    </div>
+
+    <div *ngIf="para.imgad && !para.align">
+        <div class="row"
+            [ngClass]="para.position ? para.position === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
+            <img [style.width]="para.dw ? para.dw+'%' : '100%'" height="auto" [src]="articleUrl+para?.imgad" alt="">
+            <div class="pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
+                <!-- <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584"
+                    data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- <div user.isAds===" " || user.defaultAds === "No"> -->
+    <div *ngIf="para.ad">
+        <!-- <ng-adsense class="adsbygoogle my-3" style="display:block; text-align:center;" data-ad-layout="in-article"
+            data-ad-format="fluid" data-ad-client="ca-pub-8535817066678874" data-ad-slot="8718996060"></ng-adsense> -->
+        <!-- </div> -->
+    </div>
+    <div *ngIf="para.sad">
+        <!-- <ng-adsense class="adsbygoogle my-3" style="display:block;" data-ad-layout-key="-gw-3+1f-3d+2z"
+            data-ad-format="fluid" data-ad-client="ca-pub-8535817066678874" data-ad-slot="9951033137"></ng-adsense> -->
+    </div>
+
+    <div *ngIf="para.pad">
+        <div class="row"
+            [ngClass]="para.align ? para.align === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
+            <p class="tutorial-para tutorial-data mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}"
+                [innerHTML]="para.pad"></p>
+            <div class="h-100 mb-2 pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
+                <!-- <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584"
+                    data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense> -->
+            </div>
+        </div>
+    </div>
+
+    <ol *ngIf="para.list && para.order === 'number'" class="py-2">
+        <li class="tutorial-para tutorial-data" *ngFor="let item of para.list" [innerHTML]="item"></li>
+    </ol>
+
+    <ul *ngIf="para.list && !(para.order)" class="py-2">
+        <li class="tutorial-para tutorial-data" *ngFor="let item of para.list" [innerHTML]="item"></li>
+    </ul>
+
+    <ul *ngIf="para.listad && !(para.order)" class="py-2">
+        <div class="row"
+            [ngClass]="para.align ? para.align === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
+            <div class="col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}">
+                <li class="tutorial-para tutorial-data" *ngFor="let item of para.listad" [innerHTML]="item"></li>
+            </div>
+            <div class="pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
+                <!-- <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584"
+                    data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense> -->
+            </div>
+        </div>
+    </ul>
+
+
+    <!-- <div *ngIf="para.spara" class="py-2">
+      <div style="padding-left:20px;" class="tutorial-spara" [innerHtml]="para.spara"></div>
+    </div>
+    <div *ngIf="para.code" class="pt-2 pb-4 code-data">
+      <div [innerHtml]="para.code | highlightCodeLang: 'java'"></div>
+    </div>
+    <div *ngIf="para.sql" class="py-2">
+      <div [innerHtml]="para.sql | highlightCodeLang: 'sql'"></div>
+    </div>
+    <div *ngIf="para.java" class="py-2">
+      <div [innerHtml]="para.java | highlightCodeLang: 'java'"></div>
+    </div>
+    <div *ngIf="para.xml" class="py-2">
+      <div [innerHtml]="para.xml | highlightCodeLang: 'xml'"></div>
+    </div>
+    <div *ngIf="para.html" class="py-2">
+      <div [innerHtml]="para.html | highlightCodeLang: 'html'"></div>
+    </div> -->
+
+    <h6 *ngIf="para.h6" class="py-2 h6-para">{{para.h6}}</h6>
+    <h5 *ngIf="para.h5" class="mt-2" class="py-2 h5-para">{{para.h5}}</h5>
+    <h4 *ngIf="para.h4" class="mt-2" class="py-3 h4-para">{{para.h4}}</h4>
+    <h3 *ngIf="para.h3" class="mt-2" class="py-3 h3-para">{{para.h3}}</h3>
+    <h2 *ngIf="para.h2" class="mt-2" class="py-3 h2-para">{{para.h2}}</h2>
+    <h1 *ngIf="para.h1" class="mt-2" class="py-3 h1-para">{{para.h1}}</h1>
+
+    <div *ngIf="para.gap == 'g10'" class="g10"></div>
+    <div *ngIf="para.gap == 'g20'" class="g20"></div>
+    <div *ngIf="para.gap == 'g30'" class="g30"></div>
+    <div *ngIf="para.gap == 'g40'" class="g40"></div>
+
+
+    <!-- -------------------------------   Note block  ---------------------------------- -->
+    <div *ngIf="para.note" class="note flex align-items-start py-2 my-4">
+        <img style="width: 30px; padding-top: 5px;" src="../assets/icons/note.png" alt="">
+        <p class="m-0 txt-note tutorial-data" [innerHTML]="para.note"></p>
+    </div>
+    <!-- -------------------------------   Attention block  ---------------------------------- -->
+    <div *ngIf="para.attention" class="attention flex align-items-start py-2 my-4">
+        <img style="width: 30px; padding-top: 5px;" src="../assets/icons/attention.png" alt="">
+        <!-- <p class="m-0 tutorial-para tutorial-data px-2" style="white-space: nowrap;">Attention:</p> -->
+        <p class="m-0 txt-attention tutorial-data" [innerHTML]="para.attention"></p>
+    </div>
+    <!-- -------------------------------   Link block  ---------------------------------- -->
+    <div *ngIf="para.link" class="flex align-items-start my-3">
+        <img style="width: 25px; margin-top: -3px;" src="../assets/icons/link.png" alt="">
+        <p class="m-0 txt-link link-data" [innerHTML]="para.link"></p>
+    </div>
+    <!-- -------------------------------   Download block  ---------------------------------- -->
+    <div *ngIf="para.download" class="flex align-items-start py-2 my-2">
+        <img style="width: 30px; margin-right: 10px; margin-top:-2px;" src="../assets/icons/download.png" alt="">
+        <p class="m-0 txt-dwn tutorial-data" [innerHTML]="para.download"></p>
+    </div>
+
+    <div *ngIf="para.type == 'table'" class="table-outer {{para.class}} mt-0">
+        <table class="json-table" [style.width]="para.dw ? para.dw ? para.dw+'%' : '100%' : '100%'">
+            <thead>
+                <tr>
+                    <th *ngFor="let th of para.th" [innerHtml]="th"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tr of para.td let i = index;">
+                    <td [ngStyle]="{'background-color': ((i+1)%2 == 0)? '#F9F9F9' : '#fff'}" *ngFor="let td of tr"
+                        [innerHtml]="td"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Table to show code  -->
+    <div *ngIf="para.type == 'codetable'" class="table-outer {{para.class}} mt-0">
+        <table class="code-table" style="background-color: #F3F3F3;"
+            [style.width]="para.dw ? para.dw ? para.dw+'%' : '100%' : '100%'">
+            <thead>
+                <tr>
+                    <th *ngFor="let th of para.th" [innerHtml]="th"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tr of para.td">
+                    <td *ngFor="let td of tr" [innerHtml]="td | highlightCodeLang: 'java'"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-container>

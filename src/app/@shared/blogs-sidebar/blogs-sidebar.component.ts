@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { BaseComponent } from '@app/base-component/base.component';
 import { ButtonModule } from 'primeng/button';
 import { DataViewModule } from 'primeng/dataview';
 import { TagModule } from 'primeng/tag';
@@ -11,19 +12,18 @@ import { TagModule } from 'primeng/tag';
   templateUrl: './blogs-sidebar.component.html',
   styleUrl: './blogs-sidebar.component.scss'
 })
-export class BlogsSidebarComponent {
-  public products: Array<any> = [
-    {
-      id: '1000',
-      code: 'f230fh0g3',
-      name: 'Bamboo Watch',
-      description: 'Product Description',
-      image: 'bamboo-watch.jpg',
-      price: 65,
-      category: 'Accessories',
-      quantity: 24,
-      inventoryStatus: 'INSTOCK',
-      rating: 5
-  },
-  ]
+export class BlogsSidebarComponent extends BaseComponent {
+  @Input() blogs: any;
+
+  constructor() {
+    super()
+  }
+
+  public onPageChange(event): void {
+    console.log(event);
+  }
+
+  public override ngOnDestroy(): void {
+    super.ngOnDestroy()
+  }
 }
