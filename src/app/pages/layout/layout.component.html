@@ -1,0 +1,18 @@
+<div class="grid grid-nogutter my-2">
+    <div class="col-12 md:col-2">
+        <app-tutorial-sidebar [sideBarContent]="sideBarContent$ | async"
+            (selectedTopicEmitter)="selectedSubTopic($event)" [subTopics]="topicTitles$ | async"
+            (selectedTitleEmitter)="selectedTitle($event)" [selectedLanguage]="selectedLanguage"
+            [selectedTopicContent]="topicContent$ | async">
+        </app-tutorial-sidebar>
+    </div>
+    <div class="col-12 md:col-8 px-2">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="col-12 md:col-2 flex flex-column gap-2">
+        <app-switch-technology [containerType]="false"
+            [switchBoxlanguages]="languages$ | async"></app-switch-technology>
+        <app-blogs-sidebar [blogs]="blogsByLanguage$ | async"></app-blogs-sidebar>
+    </div>
+</div>
+<app-switch-technology [containerType]="true"></app-switch-technology>

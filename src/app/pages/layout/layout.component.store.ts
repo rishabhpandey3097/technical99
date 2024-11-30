@@ -20,7 +20,7 @@ const DEFAULT_STATE: ITutorialInitialState = {
 };
 
 @Injectable()
-export class TutorialComponentStore extends ComponentStore<ITutorialInitialState> {
+export class LayoutComponentStore extends ComponentStore<ITutorialInitialState> {
     // selectors
     public readonly inProcess$: Observable<boolean> = this.select(
         (state) => state.inProcess

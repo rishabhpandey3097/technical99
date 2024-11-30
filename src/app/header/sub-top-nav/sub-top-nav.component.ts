@@ -78,7 +78,7 @@ export class SubTopNavComponent extends BaseComponent implements OnInit {
             command: () => {
               let route = c?.name?.toLowerCase()?.replace(' ', '-')
               const selectedLanguage = this.getValueFromObservable(this.selectedLanguage$);
-              return route === 'home' ? this.router.navigateByUrl(`/language/${selectedLanguage}`) : this.router.navigateByUrl(`/module/${route}/${selectedLanguage}`);
+              return route === 'home' ? this.router.navigateByUrl(`/language/${selectedLanguage}`) : this.router.navigateByUrl(`/layout/${route}/${selectedLanguage}`);
             }
           }
         })

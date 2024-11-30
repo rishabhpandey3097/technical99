@@ -1,0 +1,49 @@
+.course-search {
+    border: 1px solid #dfdfdf63;
+    padding: 12% 15%;
+    margin-bottom: 15px;
+}
+
+.course-list {
+    border: 1px solid #dfdfdf63;
+    padding: 30px 10px 20px;
+}
+
+.tech-img {
+    padding: 18px 0 0 0;
+    width: 18%;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.tech-img:hover {
+    background-color: #edededad;
+}
+
+.tech-grid {
+    gap: 8px;
+    justify-content: space-between;
+}
+
+.tech-img img {
+    width: 40px;
+    height: 40px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .tech-img {
+        width: 30%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .course-search {
+        padding: 20px 0px 0px 0px;
+        border: 0px;
+    }
+    .tech-img {
+        padding: 5px 0 0px 0;
+        border: 1px solid rgba(217, 217, 217, 0.5);
+        border-radius: 4px;
+    }
+}
