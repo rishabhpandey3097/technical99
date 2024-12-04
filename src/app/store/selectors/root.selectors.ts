@@ -44,3 +44,13 @@ export const selectedLanguage = createSelector(
   state => state.selectedLanguage
 )
 
+export const selectCurrentPageNumber = createSelector(
+  selectRootState,
+  state => state.currentPageNumber
+)
+
+export const selectChangePageNumber = createSelector(
+  selectRootState,
+  state => state.changePageNumber
+)
+

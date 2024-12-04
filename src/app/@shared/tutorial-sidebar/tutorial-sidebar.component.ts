@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { BaseComponent } from '@app/base-component/base.component';
+import { generalActions } from '@app/store/actions';
 import { IAppState } from '@app/store/reducers/app.state';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { Observable, distinctUntilChanged, takeUntil } from 'rxjs';
 import { isEqual } from 'lodash-es';
+import { selectChangePageNumber } from '@app/store/selectors';
 
 @Component({
     selector: 'app-tutorial-sidebar',
@@ -27,8 +29,16 @@ export class TutorialSidebarComponent extends BaseComponent implements OnInit {
     public selectedSubTopicId: number;
     public items: MenuItem[];
 
+    private changeNumber$: Observable<number>;
+
     constructor(private cdr: ChangeDetectorRef, private store: Store<IAppState>) {
         super()
+
+        this.changeNumber$ = this.store.pipe(
+            select(selectChangePageNumber),
+            distinctUntilChanged(isEqual),
+            takeUntil(this.destroy$)
+        )
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
@@ -65,10 +75,10 @@ export class TutorialSidebarComponent extends BaseComponent implements OnInit {
                 ...subTopic,
                 expanded: true,
                 command: () => { },
-                items: subTopics?.map(t => {
+                items: subTopics?.map((t, index) => {
                     return {
                         label: t?.shortTitle?.replace('-', ' '),
-                        command: () => this.selectedTitleEmitter.emit(t?.shortTitle)
+                        command: () => this.changePageContent(t?.shortTitle, index)
                     }
                 })
             };
@@ -79,7 +89,21 @@ export class TutorialSidebarComponent extends BaseComponent implements OnInit {
         }
     };
 
-    public ngOnInit(): void { };
+    public ngOnInit(): void {
+        this.changeNumber$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+            if (res >= 0) {
+                const topic = this.subTopics.at(res);
+                this.changePageContent(topic?.shortTitle, res);
+            }
+        })
+    };
+
+    private changePageContent(title: string, index: number) {
+        this.store.dispatch(generalActions.setCurrentPage({
+            currentPage: index
+        }))
+        this.selectedTitleEmitter.emit(title)
+    }
 
     public override ngOnDestroy(): void {
         super.ngOnDestroy()

@@ -45,4 +45,8 @@ export const isHomePage = createAction('[App] Is Home Page', props<{ isHomePage:
 
 export const setSelectedLanguage = createAction('[App] Set Selected Language', props<{ language: string }>());
 
+export const setCurrentPage = createAction('[Sidebar] Set Current Page Number', props<{ currentPage: number }>());
+
+export const setChangePageNumber = createAction('[Sidebar] Set New Page Number', props<{ pageNumber: number }>());
+
 

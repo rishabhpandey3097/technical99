@@ -11,10 +11,10 @@
         <p class="font-semibold text-lg m-0">Tutorial</p>
     </div>
     <div class="flex justify-content-center">
-        <p-button styleClass="mr-2 p-2" label="Prev" icon="pi pi-angle-left" iconPos="left" [outlined]="true"
-            severity="secondary" />
-        <p-button label="Next" styleClass="p-2" icon="pi pi-angle-right" [outlined]="true" iconPos="right"
-            severity="secondary" />
+        <p-button (click)="changePage(-1)" styleClass="mr-2 p-2" label="Prev" icon="pi pi-angle-left" iconPos="left"
+            [outlined]="true" severity="secondary" />
+        <p-button (click)="changePage(1)" label="Next" styleClass="p-2" icon="pi pi-angle-right" [outlined]="true"
+            iconPos="right" severity="secondary" />
     </div>
 </div>
 
@@ -29,9 +29,9 @@
         <p-button label="No" styleClass="p-2" [outlined]="true" iconPos="right" severity="danger" />
     </div>
     <div class="flex justify-content-center">
-        <p-button styleClass="mr-2 p-2" label="Prev" icon="pi pi-angle-left" iconPos="left" [outlined]="true"
-            severity="secondary" />
-        <p-button label="Next" styleClass="p-2" icon="pi pi-angle-right" [outlined]="true" iconPos="right"
-            severity="secondary" />
+        <p-button (click)="changePage(-1)" styleClass="mr-2 p-2" label="Prev" icon="pi pi-angle-left" iconPos="left"
+            [outlined]="true" severity="secondary" />
+        <p-button (click)="changePage(1)" label="Next" styleClass="p-2" icon="pi pi-angle-right" [outlined]="true"
+            iconPos="right" severity="secondary" />
     </div>
 </div>

@@ -11,6 +11,8 @@ export interface IRootState {
   technologies: Array<any>;
   isHomePage: boolean;
   selectedLanguage: string;
+  currentPageNumber: number;
+  changePageNumber: number
 }
 
 export const initialState: IRootState = {
@@ -22,7 +24,9 @@ export const initialState: IRootState = {
   moduleMenu: null,
   technologies: null,
   isHomePage: false,
-  selectedLanguage: null
+  selectedLanguage: null,
+  currentPageNumber: 0,
+  changePageNumber: 0
 };
 
 export function userSettingReducer(state: IRootState, action: Action) {
@@ -83,6 +87,18 @@ const _userSettingReducer = createReducer(
     return {
       ...state,
       selectedLanguage: language
+    };
+  }),
+  on(generalActions.setCurrentPage, (state, { currentPage }) => {
+    return {
+      ...state,
+      currentPageNumber: currentPage
+    };
+  }),
+  on(generalActions.setChangePageNumber, (state, { pageNumber }) => {
+    return {
+      ...state,
+      changePageNumber: pageNumber
     };
   }),
 );
