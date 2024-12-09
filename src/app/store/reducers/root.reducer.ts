@@ -12,7 +12,13 @@ export interface IRootState {
   isHomePage: boolean;
   selectedLanguage: string;
   currentPageNumber: number;
-  changePageNumber: number
+  changePageNumber: number;
+  openPreSignupModal: boolean;
+  openSignupModal: boolean;
+  openSigninModal: boolean;
+  preSignupEmail: string;
+  preSignupSecretCode: string;
+  signupSuccess: boolean;
 }
 
 export const initialState: IRootState = {
@@ -26,7 +32,13 @@ export const initialState: IRootState = {
   isHomePage: false,
   selectedLanguage: null,
   currentPageNumber: 0,
-  changePageNumber: 0
+  changePageNumber: 0,
+  openPreSignupModal: false,
+  openSignupModal: false,
+  openSigninModal: false,
+  preSignupEmail: null,
+  preSignupSecretCode: null,
+  signupSuccess: false
 };
 
 export function userSettingReducer(state: IRootState, action: Action) {
@@ -99,6 +111,42 @@ const _userSettingReducer = createReducer(
     return {
       ...state,
       changePageNumber: pageNumber
+    };
+  }),
+  on(generalActions.togglePreSignupModalState, (state, { open }) => {
+    return {
+      ...state,
+      openPreSignupModal: open
+    };
+  }),
+  on(generalActions.toggleSignupModalState, (state, { open }) => {
+    return {
+      ...state,
+      openSignupModal: open
+    };
+  }),
+  on(generalActions.toggleSigninModalState, (state, { open }) => {
+    return {
+      ...state,
+      openSigninModal: open
+    };
+  }),
+  on(generalActions.preSignupAction, (state, { email }) => {
+    return {
+      ...state,
+      preSignupEmail: email
+    };
+  }),
+  on(generalActions.preSignupSecretCodeAction, (state, { secret }) => {
+    return {
+      ...state,
+      preSignupSecretCode: secret
+    };
+  }),
+  on(generalActions.signupActionComplete, (state, { success }) => {
+    return {
+      ...state,
+      signupSuccess: success
     };
   }),
 );

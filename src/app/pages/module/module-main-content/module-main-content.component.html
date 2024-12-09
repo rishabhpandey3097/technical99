@@ -25,8 +25,10 @@
 <div class="flex align-items-center justify-content-between my-3">
     <div class="flex align-items-center justify-content-center">
         <p class="text-lg m-0 mr-2">Article helpful?</p>
-        <p-button styleClass="mr-2 p-2" label="Yes" iconPos="left" [outlined]="true" severity="success" />
-        <p-button label="No" styleClass="p-2" [outlined]="true" iconPos="right" severity="danger" />
+        <p-button (click)="likeArticle()" styleClass="mr-2 p-2" label="Yes" iconPos="left" [outlined]="true"
+            severity="success" />
+        <p-button (click)="likeArticle()" label="No" styleClass="p-2" [outlined]="true" iconPos="right"
+            severity="danger" />
     </div>
     <div class="flex justify-content-center">
         <p-button (click)="changePage(-1)" styleClass="mr-2 p-2" label="Prev" icon="pi pi-angle-left" iconPos="left"

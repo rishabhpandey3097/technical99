@@ -1,5 +1,3 @@
-import { getCategories } from "@app/store/actions/general.actions";
-
 export const HOME_URLS = {
     getCategories: 'master/commons/categories',
     getCategoriesByLanguage: 'master/commons/modules?lang=:lang',

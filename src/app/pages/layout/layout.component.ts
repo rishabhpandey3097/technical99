@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BaseComponent } from '@app/base-component/base.component';
 import { LayoutComponentStore } from './layout.component.store';
 import { LanguageComponentStore } from '../language/language.component.store';
@@ -29,6 +29,12 @@ export class LayoutComponent extends BaseComponent {
   }
 
   public ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    });
+
     this.activatedRoute.params.subscribe(res => {
       this.moduleName = res?.['moduleName'];
       if (res?.['lang']?.trim()?.length) {

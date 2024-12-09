@@ -1,0 +1,57 @@
+<p-dialog [(visible)]="visible" [closable]="true" [modal]="true" [style]="{ width: '450px' }" [draggable]="false"
+    (onHide)="onHideModal($event)">
+    <ng-template pTemplate="header">
+        <div class="flex align-items-center justify-content-center gap-2">
+            <span class="font-bold text-lg white-space-nowrap">
+                Signin
+            </span>
+        </div>
+    </ng-template>
+    <div class="p-fluid">
+        <!-- Input Field -->
+        <div class="my-1 mb-3 flex">
+            <div [formGroup]="signinForm" class="grid">
+                <div class="col-12">
+                    <input formControlName="email" pInputText id="email" type="text" placeholder="Enter email id" />
+                    <ng-container *ngIf="signinForm.get('email')?.touched && signinForm.get('email')?.invalid">
+                        <small *ngIf="signinForm.get('email')?.errors?.required" class="text-red-500">Email is
+                            required!</small>
+                        <small *ngIf="signinForm.get('email')?.errors?.email" class="text-red-500">Please enter valid
+                            email Id!</small>
+                    </ng-container>
+                </div>
+                <div class="col-12">
+                    <input formControlName="password" autocomplete="off" pInputText id="password" type="text"
+                        placeholder="Enter password" />
+                    <ng-container *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.invalid">
+                        <small *ngIf="signinForm.get('password')?.errors?.required" class="text-red-500">password is
+                            required!</small>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <!-- Continue Button -->
+        <button [disabled]="signinForm?.invalid" (click)="onLogin()" pButton label="Continue" class="w-full mb-3"
+            [style]="{ 'background-color': '#f47b20', color: 'white' }"></button>
+
+        <!-- Social Login Buttons -->
+        <div class="flex justify-content-between mb-3">
+            <button pButton icon="pi pi-google" class="p-button-rounded text-xs p-button-text" label="Google"></button>
+            <button pButton icon="pi pi-facebook" class="p-button-rounded text-xs p-button-text"
+                label="Facebook"></button>
+            <button pButton icon="pi pi-github" class="p-button-rounded text-xs p-button-text" label="GitHub"></button>
+        </div>
+
+        <!-- Signup Link -->
+        <p class="text-center">
+            Don’t have an account? <a class="cursor-pointer text-blue-500" (click)="openSignupModal()">Signup</a>
+        </p>
+
+        <!-- Terms and Conditions -->
+        <p class="text-xs text-center">
+            By continuing and signing in, you agree to our
+            <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>.
+        </p>
+    </div>
+</p-dialog>

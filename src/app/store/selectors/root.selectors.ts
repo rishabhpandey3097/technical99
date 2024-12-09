@@ -53,4 +53,28 @@ export const selectChangePageNumber = createSelector(
   selectRootState,
   state => state.changePageNumber
 )
+export const selectPreSignupModalState = createSelector(
+  selectRootState,
+  state => state.openPreSignupModal
+)
+export const selectSignupModalState = createSelector(
+  selectRootState,
+  state => state.openSignupModal
+)
+export const selectSigninModalState = createSelector(
+  selectRootState,
+  state => state.openSigninModal
+)
+export const selectPreSignupEmail = createSelector(
+  selectRootState,
+  state => state.preSignupEmail
+)
+export const selectPreSignupSecretCode = createSelector(
+  selectRootState,
+  state => state.preSignupSecretCode
+)
+export const selectSignupSuccess = createSelector(
+  selectRootState,
+  state => state.signupSuccess
+)
 

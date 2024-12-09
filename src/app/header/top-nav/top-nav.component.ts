@@ -1,6 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { BaseComponent } from '@app/base-component/base.component';
+import { generalActions } from '@app/store/actions';
+import { IAppState } from '@app/store/reducers/app.state';
+import { Store } from '@ngrx/store';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -10,7 +14,7 @@ import { ButtonModule } from 'primeng/button';
   templateUrl: './top-nav.component.html',
   styleUrl: './top-nav.component.scss',
 })
-export class TopNavComponent {
+export class TopNavComponent extends BaseComponent {
   public navActions = [
     { name: 'Home', icon: 'pi pi-home', route: '/' },
     { name: 'Training', icon: 'pi pi-graduation-cap' },
@@ -18,4 +22,26 @@ export class TopNavComponent {
     { name: 'Community', icon: 'pi pi-globe' },
     { name: 'Login', icon: 'pi pi-user' },
   ];
+
+  constructor(private router: Router, private store: Store<IAppState>) {
+    super()
+  }
+
+  public onNavSelect(nav: string, route: string): void {
+    switch (nav) {
+      case 'Home':
+        this.router.navigateByUrl(route)
+        break;
+      case 'Login':
+        this.store.dispatch(generalActions.toggleSigninModalState({ open: true }))
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  public override ngOnDestroy(): void {
+    super.ngOnDestroy()
+  }
 }

@@ -45,6 +45,10 @@ export class ModuleMainContentComponent extends BaseComponent {
     })
   }
 
+  public likeArticle(): void {
+    this.store.dispatch(generalActions.togglePreSignupModalState({ open: true }))
+  }
+
   public override ngOnDestroy(): void {
     super.ngOnDestroy();
   }

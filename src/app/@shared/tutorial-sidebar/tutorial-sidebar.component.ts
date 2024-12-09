@@ -6,7 +6,7 @@ import { IAppState } from '@app/store/reducers/app.state';
 import { Store, select } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { PanelMenuModule } from 'primeng/panelmenu';
-import { Observable, distinctUntilChanged, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, distinctUntilChanged, expand, takeUntil } from 'rxjs';
 import { isEqual } from 'lodash-es';
 import { selectChangePageNumber } from '@app/store/selectors';
 
@@ -29,6 +29,8 @@ export class TutorialSidebarComponent extends BaseComponent implements OnInit {
     public selectedSubTopicId: number;
     public items: MenuItem[];
 
+    public panelItems$: BehaviorSubject<Array<MenuItem>> = new BehaviorSubject<Array<MenuItem> | null>(null);
+
     private changeNumber$: Observable<number>;
 
     constructor(private cdr: ChangeDetectorRef, private store: Store<IAppState>) {
@@ -48,11 +50,13 @@ export class TutorialSidebarComponent extends BaseComponent implements OnInit {
                     id: content?.id,
                     label: content?.name,
                     icon: 'pi pi-plus',
+                    expanded: false,
                     items: content?.topics?.map(t => {
                         return {
                             id: t?.id,
                             label: t?.name,
                             icon: 'pi pi-plus',
+                            expanded: false,
                             command: () => {
                                 this.selectedTopicId = content?.id;
                                 this.selectedSubTopicId = t?.id;
@@ -62,7 +66,8 @@ export class TutorialSidebarComponent extends BaseComponent implements OnInit {
                         }
                     })
                 }
-            })
+            });
+            this.panelItems$.next(this.items);
         }
 
         if ('subTopics' in changes) {
@@ -86,7 +91,10 @@ export class TutorialSidebarComponent extends BaseComponent implements OnInit {
             setTimeout(() => {
                 this.cdr.detectChanges();
             }, 100)
+            this.items[topicIndex].expanded = true;
+            this.panelItems$.next(this.items);
         }
+
     };
 
     public ngOnInit(): void {
@@ -103,6 +111,14 @@ export class TutorialSidebarComponent extends BaseComponent implements OnInit {
             currentPage: index
         }))
         this.selectedTitleEmitter.emit(title)
+    }
+
+    public openPanelItems(index?): void {
+        console.log("items ==>", this.items);
+        this.items[0].expanded = true;
+        this.items[0].items[0].expanded = true;
+        this.panelItems$.next(this.items);
+        this.cdr.detectChanges();
     }
 
     public override ngOnDestroy(): void {

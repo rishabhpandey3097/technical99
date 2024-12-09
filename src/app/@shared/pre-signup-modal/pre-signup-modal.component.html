@@ -1,0 +1,43 @@
+<p-dialog [(visible)]="visible" [closable]="true" [modal]="true" [style]="{ width: '450px' }" [draggable]="false"
+    (onHide)="onHideModal()">
+    <ng-template pTemplate="header">
+        <div class="flex align-items-center justify-content-center gap-2">
+            <span class="font-bold text-lg white-space-nowrap">
+                Signup
+            </span>
+        </div>
+    </ng-template>
+    <div class="p-fluid">
+        <!-- Input Field -->
+        <div class="mb-3">
+            <label for="emailId" class="block mb-2">Email</label>
+            <input pInputText id="emailId" type="text" [formControl]="emailControl" placeholder="Enter email address" />
+            <ng-container *ngIf="emailControl?.touched && !emailControl?.valid">
+                <small *ngIf="emailControl?.errors?.required" class="text-red-600">
+                    Please enter email Id.
+                </small>
+                <small *ngIf="emailControl?.errors?.email" class="text-red-600">
+                    Please enter valid email Id.
+                </small>
+            </ng-container>
+        </div>
+
+        <!-- Continue Button -->
+        <button [disabled]="emailControl?.invalid" pButton (click)="continue()" label="Continue" class="w-full mb-3"
+            [style]="{ 'background-color': '#f47b20', color: 'white' }"></button>
+
+        <!-- Social Login Buttons -->
+        <div class="flex justify-content-between mb-3">
+            <button pButton icon="pi pi-google" class="p-button-rounded text-xs p-button-text" label="Google"></button>
+            <button pButton icon="pi pi-facebook" class="p-button-rounded text-xs p-button-text"
+                label="Facebook"></button>
+            <button pButton icon="pi pi-github" class="p-button-rounded text-xs p-button-text" label="GitHub"></button>
+        </div>
+
+        <!-- Terms and Conditions -->
+        <p class="text-xs text-center">
+            By continuing and signing in, you agree to our
+            <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>.
+        </p>
+    </div>
+</p-dialog>

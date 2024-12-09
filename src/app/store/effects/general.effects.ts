@@ -9,11 +9,13 @@ import { Store, select } from '@ngrx/store';
 import { IAppState } from '../reducers/app.state';
 import { selectCategoriesByRoute } from '../selectors';
 import { isEqual } from 'lodash-es';
+import { GlobalService } from '@app/services/global.service';
 
 @Injectable()
 export class GeneralEffects extends BaseComponent {
   private actions$ = inject(Actions);
   private homeService = inject(HomeService);
+  private globalService = inject(GlobalService);
   private categoriesByRoute$: Observable<any>;
 
   constructor(private store: Store<IAppState>) {
@@ -108,6 +110,77 @@ export class GeneralEffects extends BaseComponent {
             }),
             catchError((error) => {
               return of(generalActions.getInterviewQuestionsComplete({ interviewQuestions: null }));
+            })
+          );
+      })
+    )
+  );
+
+  preSignup$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(generalActions.preSignupAction),
+      switchMap((p) => {
+        return this.globalService
+          .preSignup(p)
+          .pipe(
+            mergeMap((res) => {
+              if (res && +res?.status === 200) {
+                return [generalActions.preSignupSecretCodeAction({ secret: res?.data?.secretKey })];
+              } else {
+                return [generalActions.preSignupSecretCodeAction({ secret: null })];
+              }
+            }),
+            catchError((error) => {
+              return of(generalActions.preSignupSecretCodeAction({ secret: null }));
+            })
+          );
+      })
+    )
+  );
+
+  signup$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(generalActions.signupAction),
+      switchMap((p) => {
+        return this.globalService
+          .signup(p?.payload)
+          .pipe(
+            mergeMap((res) => {
+              if (res && +res?.status === 200) {
+                return [
+                  generalActions.signupActionComplete({ success: true }),
+                  generalActions.preSignupSecretCodeAction({ secret: null })
+                ];
+              } else {
+                return [generalActions.signupActionComplete({ success: false })];
+              }
+            }),
+            catchError((error) => {
+              return of(generalActions.signupActionComplete({ success: false }));
+            })
+          );
+      })
+    )
+  );
+
+  signin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(generalActions.signinAction),
+      switchMap((p) => {
+        return this.globalService
+          .login(p?.payload)
+          .pipe(
+            mergeMap((res) => {
+              if (res && +res?.status === 200) {
+                return [
+                  generalActions.userLoggedInAction({ isLoggedIn: true })
+                ];
+              } else {
+                return [generalActions.userLoggedInAction({ isLoggedIn: false })];
+              }
+            }),
+            catchError((error) => {
+              return of(generalActions.userLoggedInAction({ isLoggedIn: false }));
             })
           );
       })

@@ -25,6 +25,7 @@ import { HomeComponentStore } from './home.component.store';
 import { MenuItem } from 'primeng/api';
 import { PRODUCT_SOLUTIONS, STATIC_CARD_CONTENT } from '@app/constants/solutions.constant';
 import { SwitchTechnologyComponent } from '@app/@shared/switch-technology/switch-technology.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -41,7 +42,8 @@ import { SwitchTechnologyComponent } from '@app/@shared/switch-technology/switch
     GalleriaModule,
     TagModule,
     RatingModule,
-    SwitchTechnologyComponent
+    SwitchTechnologyComponent,
+    RouterModule
   ],
   providers: [PhotoService, ProductService, HomeComponentStore],
   templateUrl: './home.component.html',
@@ -51,7 +53,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   images: any[] | undefined;
   products: Product[] | undefined;
   responsiveOptions: any[] | undefined;
-  value!: number;
+  value: number = 4;
   public solutions = PRODUCT_SOLUTIONS;
   public staticCardContent = STATIC_CARD_CONTENT;
 

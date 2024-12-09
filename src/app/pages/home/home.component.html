@@ -41,7 +41,9 @@
                                     <p>View all</p>
                                 </div>
                                 <div class="flex overflow-x-scroll lg:overflow-x-hidden no-scrollbar">
-                                    <div *ngFor="let lang of tab?.languages" class="col-4 md:col-2 text-center">
+                                    <div *ngFor="let lang of tab?.languages"
+                                        class="col-4 md:col-2 text-center cursor-pointer"
+                                        [routerLink]="'/layout/tutorial/'+lang?.name">
                                         <img width="40" height="40" src="assets/images/language/{{lang?.icon}}.svg"
                                             [alt]="lang?.icon" />
                                         <p class="white-space-nowrap">{{lang?.name}}</p>
@@ -165,12 +167,10 @@
                             </div>
                         </div>
                         <div class="p-3">
-                            <div class="mb-3 font-medium">
-                                {{ blog?.title }}
+                            <div [innerHtml]="blog?.title" class="mb-3 font-medium">
                             </div>
-                            <div class="mb-3 text-sm text-color-secondary">
-                                {{ blog?.summary }}
-                            </div>
+                            <div [innerHtml]="blog?.summary"
+                                class="mb-3 text-sm text-color-secondary elipsis-para elipsis-2"></div>
                             <div class="flex text-sm text-color-secondary">
                                 <p>{{blog?.createdBy}} | {{blog?.updatedDate | date : 'short'}}</p>
                             </div>
@@ -212,21 +212,21 @@
             <div class="grid">
                 <div class="col-11 card my-4 shadow-1 p-4 m-2">
                     <div class="flex align-items-center">
-                        <img class="profile-pic" src="../../../assets/images/team/ajaj.jpg" alt="" />
+                        <img class="profile-pic" [src]="'/assets/live-images/images/user/'+review?.userInfo?.image"
+                            alt="user-pic" />
                         <div>
                             <h6 class="m-0">{{review?.userInfo?.firstName}} {{review?.userInfo?.lastName}}</h6>
                             <p class="my-1 text-color-secondary">
                                 {{review?.userInfo?.username}}
                             </p>
-                            <!-- <img src="../../../assets/images/icons/linkedin.png" alt="" class="linked-in" /> -->
                         </div>
                     </div>
                     <div>
-                        <p class="review-para text-color-secondary mb-6">
+                        <p class="review-para elipsis-para text-ellipsis text-color-secondary mb-6">
                             {{review?.review}}
                         </p>
                     </div>
-                    <p-rating [(ngModel)]="value" [cancel]="false" />
+                    <p-rating [readonly]="true" [(ngModel)]="value" [cancel]="false" />
                 </div>
             </div>
         </ng-template>

@@ -1,0 +1,79 @@
+<p-dialog [(visible)]="visible" [closable]="true" [modal]="true" [header]="'Sign Up'" [style]="{ width: '450px' }"
+    [draggable]="false" (onHide)="closeModal()">
+    <ng-template pTemplate="header">
+        <div class="flex align-items-center justify-content-center gap-2">
+            <i (click)="openPreSignupModal()" class="pi text-lg pi-angle-left cursor-pointer"></i>
+            <span class="font-bold text-lg white-space-nowrap">
+                Signup
+            </span>
+        </div>
+    </ng-template>
+    <div class="p-fluid">
+        <!-- Input Field -->
+        <div class="my-1 mb-3 flex">
+            <div [formGroup]="signupForm" class="grid">
+                <div class="col-6">
+                    <input formControlName="firstName" pInputText id="firstName" type="text" placeholder="First Name" />
+                </div>
+                <div class="col-6">
+                    <input formControlName="lastName" pInputText id="lastName" type="text" placeholder="Last Name" />
+                </div>
+                <div class="col-12">
+                    <input formControlName="email" pInputText id="email" type="text" placeholder="Email" />
+                </div>
+                <div class="col-12">
+                    <input formControlName="mobile" pInputText id="mobile" type="text" placeholder="Mobile" />
+                </div>
+                <div class="col-12">
+                    <input formControlName="secretCode" pInputText id="secretCode" type="text"
+                        placeholder="Secret Code" />
+                </div>
+                <div class="col-12">
+                    <input formControlName="password" pInputText id="password" type="text" placeholder="Password" />
+                </div>
+                <div class="col-12">
+                    <div class="flex justify-content-between flex-wrap gap-3">
+                        <div class="flex align-items-center">
+                            <p-radioButton formControlName="profession" value="1" inputId="student" />
+                            <label for="student" class="ml-2 text-sm">
+                                Student
+                            </label>
+                        </div>
+
+                        <div class="flex align-items-center">
+                            <p-radioButton formControlName="profession" value="2" inputId="working" />
+                            <label for="working" class="ml-2 text-sm">
+                                Working
+                            </label>
+                        </div>
+
+                        <div class="flex align-items-center">
+                            <p-radioButton formControlName="profession" value="3" inputId="jobSeeker" />
+                            <label for="jobSeeker" class="ml-2 text-sm">
+                                Job Seeker
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Continue Button -->
+        <button [disabled]="!signupForm?.valid" (click)="onSignup()" pButton label="Continue" class="w-full mb-3"
+            [style]="{ 'background-color': '#f47b20', color: 'white' }"></button>
+
+        <!-- Social Login Buttons -->
+        <div class="flex justify-content-between mb-3">
+            <button pButton icon="pi pi-google" class="p-button-rounded text-xs p-button-text" label="Google"></button>
+            <button pButton icon="pi pi-facebook" class="p-button-rounded text-xs p-button-text"
+                label="Facebook"></button>
+            <button pButton icon="pi pi-github" class="p-button-rounded text-xs p-button-text" label="GitHub"></button>
+        </div>
+
+        <!-- Terms and Conditions -->
+        <p class="text-xs text-center">
+            By continuing and signing in, you agree to our
+            <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>.
+        </p>
+    </div>
+</p-dialog>

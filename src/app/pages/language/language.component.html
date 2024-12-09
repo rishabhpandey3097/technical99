@@ -51,8 +51,7 @@
             <div class="card flex justify-content-center">
                 <p-accordion [activeIndex]="0">
                     <p-accordionTab *ngFor="let f of (faqContent$| async)" [header]="f?.[0]">
-                        <p>
-                            {{f?.[1]}}
+                        <p [innerHtml]="f?.[1]">
                         </p>
                     </p-accordionTab>
                 </p-accordion>

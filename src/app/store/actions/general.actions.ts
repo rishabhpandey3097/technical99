@@ -49,4 +49,18 @@ export const setCurrentPage = createAction('[Sidebar] Set Current Page Number', 
 
 export const setChangePageNumber = createAction('[Sidebar] Set New Page Number', props<{ pageNumber: number }>());
 
+export const togglePreSignupModalState = createAction('[App] Open/Close State Of Pre Signup Modal', props<{ open: boolean }>());
 
+export const toggleSignupModalState = createAction('[App] Open/Close State Of Signup Modal', props<{ open: boolean }>());
+
+export const toggleSigninModalState = createAction('[App] Open/Close State Of Signin Modal', props<{ open: boolean }>());
+
+export const preSignupAction = createAction('[App] Pre Signup Of User', props<{ email: string }>());
+
+export const preSignupSecretCodeAction = createAction('[App] Set Pre Signup Secret Code', props<{ secret: string }>());
+
+export const signupAction = createAction('[App] Signup User', props<{ payload: any }>());
+
+export const signupActionComplete = createAction('[App] Signup User Complete', props<{ success: boolean }>());
+
+export const signinAction = createAction('[App] Signin User', props<{ payload: any }>());
