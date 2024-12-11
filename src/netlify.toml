@@ -1,0 +1,9 @@
+[build]
+command = "ng build"
+functions = "netlify/functions"
+publish = "dist/technical99/browser"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
