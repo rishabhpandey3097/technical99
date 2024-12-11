@@ -31,7 +31,10 @@ export class LayoutComponent extends BaseComponent {
   public ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        window.scrollTo(0, 0);
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       }
     });
 

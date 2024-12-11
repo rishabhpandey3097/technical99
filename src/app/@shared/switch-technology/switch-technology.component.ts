@@ -6,10 +6,13 @@ import { Store, select } from '@ngrx/store';
 import { CardModule } from 'primeng/card';
 import { Observable, distinctUntilChanged, takeUntil } from 'rxjs';
 import { isEqual } from "lodash-es";
+import { Router, RouterModule } from '@angular/router';
+import { IAppState } from '@app/store/reducers/app.state';
+import { generalActions } from '@app/store/actions';
 @Component({
   selector: 'app-switch-technology',
   standalone: true,
-  imports: [CommonModule, CardModule],
+  imports: [CommonModule, CardModule, RouterModule],
   templateUrl: './switch-technology.component.html',
   styleUrl: './switch-technology.component.scss'
 })
@@ -21,7 +24,8 @@ export class SwitchTechnologyComponent extends BaseComponent {
   public currentMenu;
   public categories$: Observable<any>;
   public selectedLanguage$: Observable<string>;
-  constructor(private store: Store) {
+
+  constructor(private store: Store<IAppState>, private router: Router) {
     super()
     this.categories$ = this.store.pipe(
       select(selectCategories),
@@ -49,11 +53,17 @@ export class SwitchTechnologyComponent extends BaseComponent {
     })
   }
 
-
-
   public changeMenuItems(index) {
     this.selectedIndex = index;
     this.currentMenu = this.menus[index]
+  }
+
+  public goToSelectedRoute(route: string): void {
+    if (!route) return;
+    this.store.dispatch(generalActions.setSelectedLanguage({ language: route }));
+    setTimeout(() => {
+      this.router.navigateByUrl(`/language/${route}`)
+    }, 100);
   }
 
   public override ngOnDestroy(): void {

@@ -33,3 +33,9 @@ h2 {
 .switch-technology {
     background-color: #e1ebf6;
 }
+
+.switch-container:hover {
+    background-color: #ccc;
+    border: 1px soild #ccc;
+    border-radius: 4px;
+}

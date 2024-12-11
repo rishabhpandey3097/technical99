@@ -10,7 +10,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { CommonModule } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { SwitchTechnologyComponent } from '@app/@shared/switch-technology/switch-technology.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from '@app/store/reducers/app.state';
 import { generalActions } from '@app/store/actions';
@@ -44,7 +44,7 @@ export class LanguageComponent extends BaseComponent {
     'coding': 'csCount',
     'blog': 'blogCount'
   }
-  constructor(private store: Store<IAppState>, private route: ActivatedRoute, private componentStore: LanguageComponentStore) {
+  constructor(private store: Store<IAppState>, private route: ActivatedRoute, private componentStore: LanguageComponentStore, private router: Router) {
     super()
     this.categories$ = this.store.pipe(
       select(selectCategoriesByRoute),
@@ -54,6 +54,15 @@ export class LanguageComponent extends BaseComponent {
   }
 
   public ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+    });
+
     this.route.params.subscribe(res => {
       if (res?.['lang']) {
         this.currentLang = res?.['lang']

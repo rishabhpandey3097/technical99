@@ -28,7 +28,7 @@ export class GlobalService {
   }
 
   public login(payload): Observable<any> {
-    return this.http.post<any>(`${environment.baseUrl}/${GLOBAL_URLS.login}`, payload, {
+    return this.http.post<any>(`${environment.baseUrl}${GLOBAL_URLS.login}`, payload, {
       headers: {
         'Accept': '*/*',
         'X-Secret-Key': 'Oct2024',

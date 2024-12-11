@@ -42,10 +42,10 @@
                 </ng-container>
             </p-tabView>
         </div>
-        <!-- <p class="tutorial-data text-base">{{(faqs$ | async)?.about}}</p>
-          -->
+
         <app-template-generator [languageDetails]="(faqs$ | async)?.about">
         </app-template-generator>
+
         <div>
             <h4 class="mt-6 mb-4">Frequently Asked Questions</h4>
             <div class="card flex justify-content-center">

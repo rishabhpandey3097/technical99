@@ -14,8 +14,10 @@
 
             <!-- Right Section:: START -->
             <div class="col-7 md:col-9 grid align-content-start blue-light p-2 m-0">
-                <div *ngFor="let menu of currentMenu?.menuItems" class="col-6 md:col-4">
-                    <p-card [styleClass]="'shadow-none cursor-pointer border-round-sm'">
+                <div (click)="goToSelectedRoute(menu?.icon)" *ngFor="let menu of currentMenu?.menuItems"
+                    class="col-6 md:col-4">
+                    <p-card
+                        [styleClass]="'shadow-none cursor-pointer border-round-sm hover:bg-blue-200 hover:font-bold'">
                         <ng-template pTemplate="content">
                             <div class="flex p-2 align-items-center flex-column md:flex-row">
                                 <div class="md:mr-2 mb-2 md:mb-0 flex align-items-center justify-content-center">
@@ -37,8 +39,8 @@
     <div class="flex flex-column">
         <div class="px-3 py-2 bg-gray-200">Switch</div>
         <div class="grid grid-nogutter">
-            <span class="cursor-pointer" *ngFor="let lang of switchBoxlanguages"
-                class="col-3 py-2 flex cursor-pointer flex-column justify-content-center align-items-center gap-2 bg-gray-50">
+            <span (click)="goToSelectedRoute(lang?.icon)" *ngFor="let lang of switchBoxlanguages"
+                class="col-3 py-2 flex cursor-pointer flex-column justify-content-center align-items-center gap-2 bg-gray-50 hover:bg-gray-300 hover:border-round-md my-2">
                 <img width="30" height="30" src="assets/images/language/{{lang?.icon}}.svg" alt="python">
                 <span class="text-xs">{{lang?.name}}</span>
             </span>
