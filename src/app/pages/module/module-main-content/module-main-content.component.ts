@@ -9,6 +9,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, distinctUntilChanged, take, takeUntil } from 'rxjs';
 import { isEqual } from 'lodash-es';
 import { generalActions } from '@app/store/actions';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-module-main-content',
@@ -19,7 +20,7 @@ export class ModuleMainContentComponent extends BaseComponent {
   public topicContent$: Observable<any> = this.layoutComponentStore.topicContent$;
 
   public currentPageNumber$: Observable<number>;
-  constructor(private route: ActivatedRoute, private layoutComponentStore: LayoutComponentStore, private store: Store<IAppState>) {
+  constructor(private route: ActivatedRoute, private layoutComponentStore: LayoutComponentStore, private store: Store<IAppState>, private title: Title, private metaService: Meta) {
     super()
 
     this.currentPageNumber$ = this.store.pipe(
@@ -33,6 +34,12 @@ export class ModuleMainContentComponent extends BaseComponent {
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe(res => {
       if (res?.['topic']) {
         this.layoutComponentStore.getTopicContent(res?.['topic'])
+      }
+    })
+
+    this.topicContent$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      if (res) {
+        this.store.dispatch(generalActions.updateMetaTagsAction({ tags: res?.metadata }));
       }
     })
   }

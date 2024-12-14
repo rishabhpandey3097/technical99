@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { generalActions } from '../actions';
-import { catchError, concatMap, distinctUntilChanged, EMPTY, exhaustMap, filter, map, mergeMap, Observable, switchMap, takeUntil } from 'rxjs';
+import { catchError, concatMap, distinctUntilChanged, EMPTY, exhaustMap, filter, map, mergeMap, Observable, switchMap, takeUntil, tap } from 'rxjs';
 import { of } from 'rxjs';
 import { HomeService } from '../../services/home.service';
 import { BaseComponent } from '@app/base-component/base.component';
@@ -10,6 +10,7 @@ import { IAppState } from '../reducers/app.state';
 import { selectCategoriesByRoute } from '../selectors';
 import { isEqual } from 'lodash-es';
 import { GlobalService } from '@app/services/global.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Injectable()
 export class GeneralEffects extends BaseComponent {
@@ -18,7 +19,7 @@ export class GeneralEffects extends BaseComponent {
   private globalService = inject(GlobalService);
   private categoriesByRoute$: Observable<any>;
 
-  constructor(private store: Store<IAppState>) {
+  constructor(private store: Store<IAppState>, private title: Title, private metaService: Meta) {
     super()
     this.categoriesByRoute$ = this.store.pipe(
       select(selectCategoriesByRoute),
@@ -185,5 +186,26 @@ export class GeneralEffects extends BaseComponent {
           );
       })
     )
+  );
+
+
+  updateMetaTags$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(generalActions.updateMetaTagsAction),
+        tap((action) => {
+          const metaData = JSON.parse(action.tags);
+          if (metaData?.title) {
+            this.title.setTitle(metaData?.title);
+            for (const key in metaData) {
+              this.metaService.updateTag({
+                name: key,
+                content: metaData[key]
+              })
+            }
+          }
+        })
+      ),
+    { dispatch: false }
   );
 }

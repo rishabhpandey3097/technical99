@@ -64,3 +64,7 @@ export const signupAction = createAction('[App] Signup User', props<{ payload: a
 export const signupActionComplete = createAction('[App] Signup User Complete', props<{ success: boolean }>());
 
 export const signinAction = createAction('[App] Signin User', props<{ payload: any }>());
+
+export const updateMetaTagsAction = createAction('[App] Update Page Meta Tags', props<{
+    tags: any
+}>())
