@@ -1,0 +1,80 @@
+<div class="flex flex-column h-full">
+    <div class="flex align-items-center justify-content-between header-tree">
+        <div class="flex align-items-center p-2 flex-1 cursor-pointer">
+            <i (click)="sidebarVisible = true" class="sm:hidden pi pi-bars text-lg cursor-pointer mr-3"></i>
+            <img class="mr-2" width="25" height="25" src="assets/images/language/java.svg" alt="java">
+            <p class="m-0 text-base">{{ selectedLanguage | titlecase }}</p>
+        </div>
+        <i (click)="expandAllMenuItems()" class="hidden sm:block pi cursor-pointer mr-3 expand-all" [ngClass]="!expandAll ? 'pi-arrow-up-right-and-arrow-down-left-from-center': 'pi-arrow-down-left-and-arrow-up-right-to-center'"></i>
+    </div>
+    <div class="hidden sm:block panel-menu h-full">
+        <ul class="my-2">
+            <ng-container *ngFor="let menu of menuData">
+                <li>
+                    <div class="menu-item" (click)="toggleExpand(menu)" [ngClass]="{ 'font-bold': menu?.expanded }">
+                        <span *ngIf="menu.topics">
+                            <i class="pi text-xs font-semibold opacity-60" [ngClass]="menu?.expanded ? 'pi-minus' : 'pi-plus'"></i>
+                        </span> {{ menu?.name }}
+                    </div>
+                    <ul style="list-style-type: none" class="sub-topic-items" *ngIf="menu.expanded && menu.topics">
+                        <ng-container *ngFor="let child of menu.topics">
+                            <li>
+                                <div class="cursor-pointer text-sm on-hover" (click)="toggleExpandChild(child)">
+                                    <i class="pi text-xs font-semibold opacity-60" [ngClass]="child.expanded ? 'pi-minus' : 'pi-plus'"></i> {{ child.name }}
+                                </div>
+                                <ul class="child-items" *ngIf="child.expanded && child.topics">
+                                    <ng-container *ngFor="let subChild of child.topics; let i = index">
+                                        <li (click)="openContent(subChild?.shortTitle, i)" class="cursor-pointer child-items-text on-hover">
+                                            {{ subChild?.shortTitle | customTitlecase }}
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>
+
+<p-sidebar [(visible)]="sidebarVisible">
+    <ng-template pTemplate="header">
+        <div class="flex align-items-center justify-content-between">
+            <div class="flex align-items-center p-2 flex-1 cursor-pointer">
+                <img class="mr-2" width="30" height="30" src="assets/images/language/java.svg" alt="java">
+                <p class="m-0 text-base">{{ selectedLanguage | titlecase }}</p>
+            </div>
+            <i (click)="expandAllMenuItems()" class="hidden sm:block pi cursor-pointer mr-3 expand-all" [ngClass]="!expandAll ? 'pi-arrow-up-right-and-arrow-down-left-from-center': 'pi-arrow-down-left-and-arrow-up-right-to-center'"></i>
+        </div>
+    </ng-template>
+    <div class="panel-menu h-full">
+        <ul>
+            <ng-container *ngFor="let menu of menuData">
+                <li>
+                    <div class="menu-item" (click)="toggleExpand(menu)">
+                        <span *ngIf="menu.topics">
+                            <i class="pi text-xs font-semibold" [ngClass]="menu?.expanded ? 'pi-minus' : 'pi-plus'"></i>
+                        </span> {{ menu?.name }}
+                    </div>
+                    <ul style="list-style-type: none" class="sub-topic-items" *ngIf="menu.expanded && menu.topics">
+                        <ng-container *ngFor="let child of menu.topics">
+                            <li>
+                                <div class="cursor-pointer text-sm on-hover" (click)="toggleExpandChild(child)">
+                                    <i class="pi text-xs font-semibold" [ngClass]="child.expanded ? 'pi-minus' : 'pi-plus'"></i> {{ child.name }}
+                                </div>
+                                <ul class="child-items" *ngIf="child.expanded && child.topics">
+                                    <ng-container *ngFor="let subChild of child.topics; let i = index">
+                                        <li (click)="openContent(subChild?.shortTitle, i)" class="cursor-pointer text-sm on-hover">
+                                            {{ subChild?.shortTitle | customTitlecase }}
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</p-sidebar>

@@ -6,7 +6,7 @@
 </div>
 <div class="course-list">
     <h2 class="md:pl-4">{{selectedLanguage?.replace('-', ' ') | titlecase}}</h2>
-    <div class="flex gap-4 flex-wrap">
+    <div class="flex gap-3 flex-wrap">
         <div *ngFor="let topic of sideBarContent$ | async" class="tech-img text-center">
             <img src="../../../assets/images/tech/{{topic?.name?.replace(' ', '') | lowercase}}.svg" alt="">
             <p class="text-sm my-2">{{topic?.name}}</p>

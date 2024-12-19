@@ -1,0 +1,70 @@
+.panel-menu {
+    width: 100%;
+    background-color: #fbfbfb;
+    .on-hover:hover {
+        font-weight: bold;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        li {
+            margin-bottom: 5px;
+            .menu-item {
+                font-size: 15px;
+                cursor: pointer;
+                padding: 0 10px;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                i {
+                    margin-right: 10px;
+                    transition: transform 0.3s ease;
+                }
+                &.icon-expanded {
+                    transform: rotate(90deg);
+                }
+            }
+            .menu-item:hover,
+            .menu-item:active {
+                font-weight: 700;
+            }
+            ul {
+                .child-items {
+                    list-style-type: disc;
+                    margin-left: 15px;
+                    li::marker {
+                        font-size: 1.2em;
+                        color: black;
+                    }
+                }
+                margin-left: 10px;
+                padding-left: 10px;
+            }
+        }
+    }
+}
+
+.expand-all:hover {
+    font-weight: 700;
+}
+
+:host::ng-deep {
+    .p-sidebar {
+        .p-sidebar-header {
+            padding: 0;
+            background-color: #F2F2F2;
+        }
+        .p-sidebar-content {
+            background-color: #fbfbfb;
+        }
+    }
+}
+
+.header-tree {
+    background-color: #F2F2F2 !important;
+}
+
+.child-items-text {
+    font-size: 13px;
+    font-weight: 400;
+}

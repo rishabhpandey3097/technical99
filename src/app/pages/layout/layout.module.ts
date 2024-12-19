@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout.component';
 import { LayoutRoutingModule } from './layout.routing.module';
+import { LeftPanelComponent } from '@app/@shared/left-panel/left-panel.component';
 
 @NgModule({
     declarations: [LayoutComponent],
@@ -28,7 +29,8 @@ import { LayoutRoutingModule } from './layout.routing.module';
         TutorialSidebarComponent,
         BlogsSidebarComponent,
         TemplateGeneratorComponent,
-        LayoutRoutingModule
+        LayoutRoutingModule,
+        LeftPanelComponent
     ],
     providers: [ConfirmationService],
 })
