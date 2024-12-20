@@ -11,11 +11,12 @@ import { takeUntil } from 'rxjs';
 import { PreSignUpModalComponent } from './@shared/pre-signup-modal/pre-signup-modal.component';
 import { SignupModalComponent } from './@shared/signup-modal/signup-modal.component';
 import { SigninModalComponent } from './@shared/signin-modal/signin-modal.component';
+import { MobMenuComponent } from './header/mob-menu/mob-menu.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopNavComponent, SubTopNavComponent, FooterComponent, PreSignUpModalComponent, SignupModalComponent, SigninModalComponent],
+  imports: [RouterOutlet, TopNavComponent, SubTopNavComponent, FooterComponent, PreSignUpModalComponent, SignupModalComponent, SigninModalComponent, MobMenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
