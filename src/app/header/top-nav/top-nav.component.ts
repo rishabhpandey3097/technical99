@@ -16,11 +16,13 @@ import { Observable, distinctUntilChanged, take, takeUntil } from 'rxjs';
 import { isEqual } from 'lodash-es';
 import { selectCategories, selectIsHomePage, selectedLanguage } from '@app/store/selectors';
 import { CardModule } from 'primeng/card';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { SidebarModule } from 'primeng/sidebar';
 
 @Component({
   selector: 'app-top-nav',
   standalone: true,
-  imports: [CommonModule, ButtonModule, RouterModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ChipsModule, SwitchTechnologyComponent, CardModule],
+  imports: [CommonModule, ButtonModule, RouterModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ChipsModule, SwitchTechnologyComponent, CardModule, PanelMenuModule, SidebarModule],
   templateUrl: './top-nav.component.html',
   styleUrl: './top-nav.component.scss',
 })
@@ -41,6 +43,8 @@ export class TopNavComponent extends BaseComponent {
   public isHomePage$: Observable<boolean>;
 
   public showOverlay: boolean = false;
+  public categorySideMenu: boolean = false;
+  public categoryPanelMenu: any;
 
   constructor(private router: Router, private store: Store<IAppState>, private route: ActivatedRoute) {
     super()
@@ -64,6 +68,7 @@ export class TopNavComponent extends BaseComponent {
   public ngOnInit(): void {
     this.categories$.pipe(takeUntil(this.destroy$)).subscribe(res => {
       if (res) {
+        console.log(res);
         this.menus = res?.map(item => {
           return {
             name: item?.name,
@@ -71,6 +76,19 @@ export class TopNavComponent extends BaseComponent {
           }
         })
         this.currentMenu = this.menus?.[0];
+
+        this.categoryPanelMenu = this.menus?.map(item => {
+          return {
+            label: item?.name,
+            items: item?.menuItems?.map(menuItem => {
+              return {
+                label: menuItem?.name,
+              }
+            })
+          }
+        })
+
+        console.log(this.categoryPanelMenu);
       }
     })
 
@@ -79,6 +97,10 @@ export class TopNavComponent extends BaseComponent {
         this.showOverlay = false;
       }
     })
+  }
+
+  public openLoginModal(): void {
+    this.store.dispatch(generalActions.toggleSigninModalState({ open: true }))
   }
 
   public changeMenuItems(index) {
