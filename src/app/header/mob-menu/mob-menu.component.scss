@@ -1,31 +1,32 @@
 .mob-menu {
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    z-index: 9999;
     background: #ddd;
-    width: 100% !important;
-    overflow: hidden;
+}
+
+.mob-menu span:hover {
+    p {
+        border-bottom: 2px solid;
+    }
 }
 
 :host ::ng-deep {
-    .mob-menu .p-menuitem-text,
-    .mob-menu .p-menuitem-icon {
-        color: #000;
+    .more-btn .pi {
+        font-size: 1.5rem;
     }
-    // .mob-menu .p-menuitem-text:active {
-    //     border-bottom: 2px solid !important;
-    // }
-    .mob-menu .p-menuitem-icon {
-        margin: 0px 0px 8px 0px;
-        font-weight: 500;
-        font-size: 25px;
-        width: 25px;
+    .more-btn .p-menu-overlay {
+        min-width: 112px;
+        max-width: 280px;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: calc(100vh - 48px);
+        border-radius: 4px;
+        outline: 0;
+        min-height: 64px;
+        right: 0px;
+        bottom: 58px;
+        top: auto !important;
+        left: auto !important;
     }
-    .mob-menu .p-menuitem-link {
-        flex-direction: column;
-    }
-    angledownicon {
-        display: none;
+    .more-btn .p-menu .p-submenu-header {
+        padding: 0;
     }
 }
