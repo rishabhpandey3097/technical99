@@ -1,4 +1,5 @@
-<p-dialog [(visible)]="visible" [closable]="true" [modal]="true" [style]="{ width: '450px' }" [draggable]="false" (onHide)="onHideModal($event)">
+<p-dialog [(visible)]="visible" [closable]="true" [modal]="true" [style]="{ width: '450px' }"
+    [breakpoints]="{ '1199px': '450px', '575px': '90vw' }" [draggable]="false" (onHide)="onHideModal($event)">
     <ng-template pTemplate="header">
         <div class="flex align-items-center justify-content-center gap-2">
             <i class="pi pi-user" style="font-size: 1.5rem"></i>
@@ -21,7 +22,8 @@
                     </ng-container>
                 </div>
                 <div class="col-12">
-                    <input formControlName="password" autocomplete="off" pInputText id="password" type="text" placeholder="Enter password" />
+                    <input formControlName="password" autocomplete="off" pInputText id="password" type="text"
+                        placeholder="Enter password" />
                     <ng-container *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.invalid">
                         <small *ngIf="signinForm.get('password')?.errors?.required" class="text-red-500">password is
                             required!</small>
@@ -31,7 +33,9 @@
         </div>
 
         <!-- Continue Button -->
-        <button [disabled]="signinForm?.invalid" (click)="onLogin()" pButton label="Continue" class="w-full mb-3 opacity-100" [style]="{ 'background-color': '#EB7C34', color: 'white', 'border': '1px solid #EB7C34', 'border-radius': '4px'}"></button>
+        <button [disabled]="signinForm?.invalid" (click)="onLogin()" pButton label="Continue"
+            class="w-full mb-3 opacity-100"
+            [style]="{ 'background-color': '#EB7C34', color: 'white', 'border': '1px solid #EB7C34', 'border-radius': '4px'}"></button>
 
         <!-- Social Login Buttons -->
         <div class="flex justify-content-between mb-3">
@@ -42,13 +46,15 @@
 
         <!-- Signup Link -->
         <p class="text-center">
-            Don’t have an account? <a class="cursor-pointer" [style]="{'color': '#0d6efd'}" (click)="openSignupModal()">Signup</a>
+            Don’t have an account? <a class="cursor-pointer" [style]="{'color': '#0d6efd'}"
+                (click)="openSignupModal()">Signup</a>
         </p>
 
         <!-- Terms and Conditions -->
         <p class="text-xs text-center col-8 m-auto">
             By continuing and signing in, you agree to our
-            <a href="#" class="no-underline" [style]="{'color': '#0d6efd'}">Terms & Conditions</a> and <a href="#" class="no-underline" [style]="{'color': '#0d6efd'}">Privacy Policy</a>.
+            <a href="#" class="no-underline" [style]="{'color': '#0d6efd'}">Terms & Conditions</a> and <a href="#"
+                class="no-underline" [style]="{'color': '#0d6efd'}">Privacy Policy</a>.
         </p>
     </div>
 </p-dialog>

@@ -10,6 +10,10 @@
             color: #fff;
             font-weight: 500;
             font-size: 0.875rem;
+
+            @media screen and (max-width: 426px) {
+                color: black;
+            }
         }
         .p-menuitem-content:hover,
         .p-menuitem-content:active,
@@ -45,7 +49,7 @@
     }
     @media only screen and (max-width: 960px) {
         .p-menubar .p-menubar-root-list {
-            background: #d5793e;
+            // background: #d5793e;
         }
     }
 }

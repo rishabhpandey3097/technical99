@@ -94,10 +94,10 @@
                     <span class="ml-2 text-sm">
                         {{ item?.label }}
                     </span>
-                    <!-- <span *ngIf="item?.menuItems" class="ml-auto border-1 surface-border 
-                        border-round surface-100 text-xs p-1">
-                        {{ item?.name }}
-                    </span> -->
+                    <span *ngIf="item?.items" class="ml-auto surface-border 
+                        border-round text-xs p-1">
+                        <i class="pi pi-angle-down"></i>
+                    </span>
                 </a>
             </ng-template>
         </p-panelMenu>

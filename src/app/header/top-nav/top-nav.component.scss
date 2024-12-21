@@ -51,7 +51,24 @@
             background-color: #DBDBDB;
             font-size: 1.1rem;
             font-weight: 500;
-            color: #4d4c4c;
+            color: #000;
+        }
+
+        .p-sidebar-content {
+            padding: 0;
+        }
+    }
+
+    .p-panelmenu {
+        .p-panelmenu-panel {
+            margin-bottom: 0;
+        }
+
+        .p-panelmenu-header {
+            .p-panelmenu-header-content {
+                background-color: #FFFFFF;
+                color: #000;
+            }
         }
     }
 }

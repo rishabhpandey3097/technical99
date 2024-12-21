@@ -1,4 +1,5 @@
-<p-dialog [(visible)]="visible" [closable]="true" [modal]="true" [style]="{ width: '450px' }" [draggable]="false" (onHide)="onHideModal()">
+<p-dialog [(visible)]="visible" [closable]="true" [modal]="true" [style]="{ width: '450px' }"
+    [breakpoints]="{ '1199px': '450px', '575px': '90vw' }" [draggable]="false" (onHide)="onHideModal()">
     <ng-template pTemplate="header">
         <div class="flex align-items-center justify-content-center gap-2">
             <i class="pi pi-user" style="font-size: 1.5rem"></i>
@@ -23,7 +24,8 @@
         </div>
 
         <!-- Continue Button -->
-        <button [disabled]="emailControl?.invalid" pButton (click)="continue()" label="Continue" class="w-full mb-3" styleClass="border-none" [style]="{ 'background-color': '#f47b20', color: 'white' }"></button>
+        <button [disabled]="emailControl?.invalid" pButton (click)="continue()" label="Continue" class="w-full mb-3"
+            styleClass="border-none" [style]="{ 'background-color': '#f47b20', color: 'white' }"></button>
 
         <!-- Social Login Buttons -->
         <div class="flex justify-content-between mb-3">
@@ -35,7 +37,8 @@
         <!-- Terms and Conditions -->
         <p class="text-xs text-center col-8 m-auto">
             By continuing and signing in, you agree to our
-            <a href="#" class="no-underline" [style]="{'color': '#0d6efd'}">Terms & Conditions</a> and <a href="#" class="no-underline" [style]="{'color': '#0d6efd'}">Privacy Policy</a>.
+            <a href="#" class="no-underline" [style]="{'color': '#0d6efd'}">Terms & Conditions</a> and <a href="#"
+                class="no-underline" [style]="{'color': '#0d6efd'}">Privacy Policy</a>.
         </p>
     </div>
 </p-dialog>
