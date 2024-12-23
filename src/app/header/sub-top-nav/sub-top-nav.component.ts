@@ -10,11 +10,13 @@ import { Observable, distinctUntilChanged, takeUntil } from 'rxjs';
 import { isEqual } from 'lodash-es';
 import { Router } from '@angular/router';
 import { generalActions } from '@app/store/actions';
+import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
 
 @Component({
   selector: 'app-sub-top-nav',
   standalone: true,
-  imports: [CommonModule, MenubarModule],
+  imports: [CommonModule, MenubarModule, ButtonModule, MenuModule],
   templateUrl: './sub-top-nav.component.html',
   styleUrl: './sub-top-nav.component.scss',
 })
@@ -87,6 +89,19 @@ export class SubTopNavComponent extends BaseComponent implements OnInit {
       }
     })
   }
+
+  public navigateTo(r: string): void {
+    let route = r?.toLowerCase()?.replace(' ', '-')
+    this.store.dispatch(generalActions.setSelectedLanguage({ language: route }))
+    this.router.navigateByUrl(`/language/${route}`)
+  }
+
+  public navigateToCategory(r: string): any {
+    let route = r?.toLowerCase()?.replace(' ', '-')
+    const selectedLanguage = this.getValueFromObservable(this.selectedLanguage$);
+    return route === 'home' ? this.router.navigateByUrl(`/language/${selectedLanguage}`) : this.router.navigateByUrl(`/layout/${route}/${selectedLanguage}`);
+  }
+
 
   public override ngOnDestroy(): void {
     super.ngOnDestroy();

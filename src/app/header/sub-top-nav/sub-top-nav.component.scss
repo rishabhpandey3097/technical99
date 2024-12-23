@@ -53,3 +53,114 @@
         }
     }
 }
+
+
+/* Mobile menubar:: START */
+/* Navbar Container */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0078d4; /* Blue background */
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    padding: 0 10px;
+  }
+  
+  /* Logo */
+  .logo {
+    height: 40px;
+    margin-right: 20px;
+  }
+  
+  /* Navbar Menu */
+  .navbar-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu-item {
+    position: relative;
+    padding: 5px 0;
+  }
+  
+  .menu-item > a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+  
+  .menu-item:hover {
+    background-color: #ff7f50;
+  }
+  
+  /* Submenu */
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    list-style: none;
+    padding: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 170px;
+    z-index: 100;
+  }
+  
+  .submenu li {
+    margin: 0;
+  }
+  
+  .submenu a {
+    display: block;
+    color: #000000; /* Black for dropdown items */
+    text-decoration: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #e3e3e3;
+  }
+  
+  .submenu a:hover {
+    background-color: #ff7f50; /* Coral hover for dropdown items */
+    color: #ffffff;
+  }
+  
+  /* Show Submenu on Hover */
+  .menu-item:hover .submenu {
+    display: block;
+  }
+  
+  /* Navbar Right Section */
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 20px;
+  }
+  
+  .navbar-right .pi {
+    color: #ffffff;
+    cursor: pointer;
+  }
+  
+  .navbar-right .pi:hover {
+    color: #f0a500; /* Orange on hover */
+  }
+  
+  /* Mobile Adjustments */
+  @media (max-width: 768px) {
+    .navbar-menu {
+      flex-wrap: nowrap;
+      justify-content: center;
+    }
+  
+    .navbar-right {
+      font-size: 18px;
+    }
+  }
+  
+/* Mobile menubar:: END */

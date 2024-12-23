@@ -1,6 +1,39 @@
-<div class="w-full">
+<div class="w-full hidden lg:block">
     <p-menubar *ngIf="isHomePage$ | async" [model]="subMenuItems"
         styleClass="border-none font-semibold border-noround" />
     <p-menubar *ngIf="!(isHomePage$ | async)" [model]="subCategoriesItems"
         styleClass="border-none font-semibold border-noround" />
+</div>
+
+<div class="w-full lg:hidden">
+    <nav *ngIf="isHomePage$ | async" class="navbar">
+        <ul class="navbar-menu">
+            <ng-container *ngFor="let menu of subMenuItems; let i = index">
+                <li *ngIf="i < 4; else hamburger" class="menu-item cursor-pointer">
+                    <a class="white-space-nowrap">{{menu?.label}}</a>
+                    <ng-container *ngIf="menu?.items?.length">
+                        <ul class="submenu">
+                            <li *ngFor="let item of menu?.items" class="w-full">
+                                <a (click)="navigateTo(item?.label)">{{item?.label}}</a>
+                            </li>
+                        </ul>
+                    </ng-container>
+                </li>
+            </ng-container>
+            <ng-template #hamburger>
+                <li class="cursor-pointer menu-item">
+                    <p-menu #menu [model]="subMenuItems?.splice(-4)" [popup]="true" />
+                    <i class="pi pi-bars ml-3" (click)="menu.toggle($event)"></i>
+                </li>
+            </ng-template>
+        </ul>
+    </nav>
+
+    <nav *ngIf="!(isHomePage$ | async)" class="navbar">
+        <ul class="navbar-menu">
+            <li *ngFor="let menu of subCategoriesItems" class="menu-item cursor-pointer">
+                <a (click)="navigateToCategory(menu?.label)" class="white-space-nowrap">{{menu?.label}}</a>
+            </li>
+        </ul>
+    </nav>
 </div>

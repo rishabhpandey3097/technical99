@@ -68,7 +68,6 @@ export class TopNavComponent extends BaseComponent {
   public ngOnInit(): void {
     this.categories$.pipe(takeUntil(this.destroy$)).subscribe(res => {
       if (res) {
-        console.log(res);
         this.menus = res?.map(item => {
           return {
             name: item?.name,
@@ -87,8 +86,6 @@ export class TopNavComponent extends BaseComponent {
             })
           }
         })
-
-        console.log(this.categoryPanelMenu);
       }
     })
 
