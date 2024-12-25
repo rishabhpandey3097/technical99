@@ -16,7 +16,7 @@ import { generalActions } from '@app/store/actions';
   providers: [LayoutComponentStore, LanguageComponentStore]
 })
 export class LayoutComponent extends BaseComponent {
-  public sideBarContent$: Observable<Array<any>> = this.languageComponentStore.moduleTabContent$;
+  public sideBarContent$: Observable<any> = this.languageComponentStore.moduleTabContent$;
   public topicTitles$: Observable<Array<any>> = this.layoutComponentStore.topicTitles$;
   public topicContent$: Observable<any> = this.layoutComponentStore.topicContent$;
   public languages$: Observable<any> = this.layoutComponentStore.languages$;
@@ -50,6 +50,12 @@ export class LayoutComponent extends BaseComponent {
       }
     })
 
+    this.sideBarContent$.pipe(takeUntil(this.destroy$)).subscribe(content => {
+      if (content?.['metadata']) {
+        this.store.dispatch(generalActions.updateMetaTagsAction({ tags: content?.metadata }));
+      }
+    })
+
     this.topicContent$.pipe(takeUntil(this.destroy$)).pipe(map(res => {
       return {
         ...res,
@@ -69,7 +75,7 @@ export class LayoutComponent extends BaseComponent {
   }
 
   public selectedTitle(event): void {
-    this.router.navigateByUrl(`/layout/${this.moduleName}/${this.selectedLanguage}/${event}`);
+    this.router.navigateByUrl(`/${this.selectedLanguage}/${this.moduleName}/${event}`);
   }
 
   public override ngOnDestroy(): void {

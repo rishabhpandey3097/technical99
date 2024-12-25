@@ -5,6 +5,6 @@ import { LayoutComponent } from './pages/layout/layout.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', component: HomeComponent },
-    { path: 'language/:lang', pathMatch: 'full', component: LanguageComponent },
-    { path: 'layout', loadChildren: () => import('./pages/layout/layout.module').then(m => m.LayoutModule) },
+    { path: ':lang', pathMatch: 'full', component: LanguageComponent },
+    { path: ':lang/:moduleName', loadChildren: () => import('./pages/layout/layout.module').then(m => m.LayoutModule) },
 ];

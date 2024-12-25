@@ -65,16 +65,23 @@ export class LanguageComponent extends BaseComponent {
 
     this.route.params.subscribe(res => {
       if (res?.['lang']) {
-        this.currentLang = res?.['lang']
+        this.currentLang = res?.['lang'];
         this.componentStore.getTabContent({ lang: this.currentLang, module: 'tutorial' });
         this.componentStore.getFaqs({ lang: this.currentLang });
         this.componentStore.getLanguageBasedBlogs({ lang: this.currentLang, size: 4 });
         this.store.dispatch(generalActions.getCategoriesByLanguage({ lang: res?.['lang'] }));
+        this.store.dispatch(generalActions.setSelectedLanguage({ language: this.currentLang }));
       }
     })
     this.categories$.pipe(takeUntil(this.destroy$)).subscribe(res => {
       if (res?.length) {
         this.selectedModule = this.categories$[1];
+      }
+    })
+
+    this.faqs$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      if (res) {
+        this.store.dispatch(generalActions.updateMetaTagsAction({ tags: res?.metadata }));
       }
     })
   }

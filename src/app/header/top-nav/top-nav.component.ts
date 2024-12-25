@@ -68,7 +68,6 @@ export class TopNavComponent extends BaseComponent {
   public ngOnInit(): void {
     this.categories$.pipe(takeUntil(this.destroy$)).subscribe(res => {
       if (res) {
-        console.log(res);
         this.menus = res?.map(item => {
           return {
             name: item?.name,
@@ -83,6 +82,12 @@ export class TopNavComponent extends BaseComponent {
             items: item?.menuItems?.map(menuItem => {
               return {
                 label: menuItem?.name,
+                command: () => {
+                  let route = menuItem?.name?.toLowerCase()?.replace(' ', '-')
+                  this.store.dispatch(generalActions.setSelectedLanguage({ language: route }));
+                  this.categorySideMenu = false;
+                  return this.router.navigateByUrl(`/${route}`)
+                }
               }
             })
           }
@@ -111,7 +116,7 @@ export class TopNavComponent extends BaseComponent {
     this.store.dispatch(generalActions.setSelectedLanguage({ language: route }));
     setTimeout(() => {
       this.showOverlay = false;
-      this.router.navigateByUrl(`/language/${route}`)
+      this.router.navigateByUrl(`/${route}`)
     }, 100);
   }
 

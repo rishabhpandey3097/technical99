@@ -1,15 +1,23 @@
 <div class="w-full hidden lg:block">
     <p-menubar *ngIf="isHomePage$ | async" [model]="subMenuItems"
         styleClass="border-none font-semibold border-noround" />
+
     <p-menubar *ngIf="!(isHomePage$ | async)" [model]="subCategoriesItems"
-        styleClass="border-none font-semibold border-noround" />
+        styleClass="border-none font-semibold border-noround">
+        <ng-template pTemplate="item" let-item>
+            <a pripple (click)="setActiveItem(item)" [ngClass]="{'active-menu-button': item === activeItem}" class="flex
+        align-items-center justify-content-center p-menuitem-link">
+                <span class="p-menuitem-text">{{ item?.label }}</span>
+            </a>
+        </ng-template>
+    </p-menubar>
 </div>
 
 <div class="w-full lg:hidden">
     <nav *ngIf="isHomePage$ | async" class="navbar">
         <ul class="navbar-menu">
-            <ng-container *ngFor="let menu of subMenuItems; let i = index">
-                <li *ngIf="i < 4; else hamburger" class="menu-item cursor-pointer">
+            <ng-container *ngFor="let menu of firstLevelMenus">
+                <li class="menu-item cursor-pointer">
                     <a class="white-space-nowrap">{{menu?.label}}</a>
                     <ng-container *ngIf="menu?.items?.length">
                         <ul class="submenu">
@@ -20,19 +28,17 @@
                     </ng-container>
                 </li>
             </ng-container>
-            <ng-template #hamburger>
-                <li class="cursor-pointer menu-item">
-                    <p-menu #menu [model]="subMenuItems?.splice(-4)" [popup]="true" />
-                    <i class="pi pi-bars ml-3" (click)="menu.toggle($event)"></i>
-                </li>
-            </ng-template>
         </ul>
+        <p-menu #menu [model]="secondLevelMenus" [popup]="true" />
+        <i class="pi pi-bars ml-3" (click)="menu.toggle($event)"></i>
     </nav>
 
     <nav *ngIf="!(isHomePage$ | async)" class="navbar">
         <ul class="navbar-menu">
-            <li *ngFor="let menu of subCategoriesItems" class="menu-item cursor-pointer">
-                <a (click)="navigateToCategory(menu?.label)" class="white-space-nowrap">{{menu?.label}}</a>
+            <li *ngFor="let menu of subCategoriesItems" [ngClass]="{'active-menu-button': menu === activeItem}"
+                class="menu-item cursor-pointer">
+                <a (click)="setActiveItem(menu); navigateToCategory(menu?.label)"
+                    class="white-space-nowrap">{{menu?.label}}</a>
             </li>
         </ul>
     </nav>

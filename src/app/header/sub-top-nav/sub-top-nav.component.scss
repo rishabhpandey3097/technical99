@@ -52,6 +52,16 @@
             // background: #d5793e;
         }
     }
+
+    .p-menubar .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
+      color: white;
+      background-color: #db823c;
+    }
+}
+
+.active-menu-button {
+  color: white;
+  background-color: #db823c;
 }
 
 

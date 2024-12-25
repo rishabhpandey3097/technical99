@@ -35,6 +35,8 @@ export class LeftPanelComponent extends BaseComponent {
   private selectedTopicId: any;
   private selectedSubTopicId: any;
 
+  public activeTitle: string;
+
   constructor(private store: Store<IAppState>) {
     super()
     this.changeNumber$ = this.store.pipe(
@@ -55,7 +57,7 @@ export class LeftPanelComponent extends BaseComponent {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if ("sideBarContent" in changes) {
-      this.menuData = this.sideBarContent.map(item => {
+      this.menuData = this.sideBarContent?.techs?.map(item => {
         return {
           ...item,
           expanded: false
@@ -117,6 +119,7 @@ export class LeftPanelComponent extends BaseComponent {
       currentPage: index
     }))
     this.selectedTitleEmitter.emit(titile);
+    this.activeTitle = titile;
     this.sidebarVisible = false;
   }
 
