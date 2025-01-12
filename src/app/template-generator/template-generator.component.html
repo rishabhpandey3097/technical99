@@ -2,19 +2,16 @@
     <div *ngIf="para.pva">
         <div class="row"
             [ngClass]="para.align ? para.align === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
-            <p class="mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}"
-                [innerHTML]="para.pva"></p>
+            <p class="p mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}" [innerHTML]="para.pva"></p>
             <div *ngIf="videoId; else gads"
                 class="h-100 mb-2 pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
                 <div class="videoWrapper">
-                    <iframe style="width: 100%; height: 110%" [src]="videoId.hindi | video" allowfullscreen
-                        frameborder="0"></iframe>
+                    <iframe style="width: 100%; height: 110%" [src]="videoId.hindi | video" allowfullscreen frameborder="0"></iframe>
                 </div>
             </div>
             <ng-template #gads>
                 <div class="h-100 mb-2 pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
-                    <!-- <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584"
-                        data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense> -->
+                    <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584" data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense>
                 </div>
             </ng-template>
         </div>
@@ -23,8 +20,7 @@
     <div *ngIf="para.pimg">
         <div class="row"
             [ngClass]="para.align ? para.align === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
-            <p class="mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}"
-                [innerHTML]="para.pimg"></p>
+            <p class="p mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}" [innerHTML]="para.pimg"></p>
             <div class="h-100 mb-3 pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
                 <img [style.width]="'100%'" height="auto" [src]="articleUrl + para.img" alt="">
             </div>
@@ -33,9 +29,7 @@
     <div *ngIf="para.para">
         <div class="row"
             [ngClass]="para.align ? para.align === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
-            <p *ngIf="para.para"
-                class="mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}"
-                [innerHTML]="para.para"></p>
+            <p *ngIf="para.para" class="p mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}" [innerHTML]="para.para"></p>
         </div>
     </div>
 
@@ -48,8 +42,7 @@
             [ngClass]="para.position ? para.position === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
             <img [style.width]="para.dw ? para.dw+'%' : '100%'" height="auto" [src]="articleUrl+para?.imgad" alt="">
             <div class="pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
-                <!-- <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584"
-                    data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense> -->
+                <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584" data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense>
             </div>
         </div>
     </div>
@@ -68,11 +61,9 @@
     <div *ngIf="para.pad">
         <div class="row"
             [ngClass]="para.align ? para.align === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
-            <p class="mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}"
-                [innerHTML]="para.pad"></p>
+            <p class="p mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}" [innerHTML]="para.pad"></p>
             <div class="h-100 mb-2 pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
-                <!-- <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584"
-                    data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense> -->
+                <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584" data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense>
             </div>
         </div>
     </div>
@@ -134,23 +125,23 @@
     <!-- -------------------------------   Note block  ---------------------------------- -->
     <div *ngIf="para.note" class="note flex align-items-start py-2 my-4">
         <img style="width: 30px; padding-top: 5px;" src="../assets/icons/note.png" alt="">
-        <p class="m-0 txt-note tutorial-data" [innerHTML]="para.note"></p>
+        <p class="p m-0 txt-note tutorial-data" [innerHTML]="para.note"></p>
     </div>
     <!-- -------------------------------   Attention block  ---------------------------------- -->
     <div *ngIf="para.attention" class="attention flex align-items-start py-2 my-4">
         <img style="width: 30px; padding-top: 5px;" src="../assets/icons/attention.png" alt="">
         <!-- <p class="m-0 px-2" style="white-space: nowrap;">Attention:</p> -->
-        <p class="m-0 txt-attention tutorial-data" [innerHTML]="para.attention"></p>
+        <p class="p m-0 txt-attention tutorial-data" [innerHTML]="para.attention"></p>
     </div>
     <!-- -------------------------------   Link block  ---------------------------------- -->
     <div *ngIf="para.link" class="flex align-items-start my-3">
         <img style="width: 25px; margin-top: -3px;" src="../assets/icons/link.png" alt="">
-        <p class="m-0 txt-link link-data" [innerHTML]="para.link"></p>
+        <p class="p m-0 txt-link link-data" [innerHTML]="para.link"></p>
     </div>
     <!-- -------------------------------   Download block  ---------------------------------- -->
     <div *ngIf="para.download" class="flex align-items-start py-2 my-2">
         <img style="width: 30px; margin-right: 10px; margin-top:-2px;" src="../assets/icons/download.png" alt="">
-        <p class="m-0 txt-dwn tutorial-data" [innerHTML]="para.download"></p>
+        <p class="p m-0 txt-dwn tutorial-data" [innerHTML]="para.download"></p>
     </div>
 
     <div *ngIf="para.type == 'table'" class="table-outer {{para.class}} mt-0">

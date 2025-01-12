@@ -6,8 +6,10 @@
                 <div class="col-12 blog-list">
                     <div *ngFor="let blog of blogs" class="flex gap-2 blog-container my-2 px-3 cursor-pointer">
                         <!-- <img width="70" height="45" class="blog-image-container" src="assets/images/common/blog-1.png" class="border-round-sm" alt="blog"> -->
-                        <img class="card-img-top" [src]="blogImageUrl+blog?.image">
-                        <p class="m-0 text-sm text-blue-400">{{blog?.title}}</p>
+                        <div class="card-img-top" style="display: inline-flex;">
+                            <img [src]="blogImageUrl+blog?.image">
+                            <p [innerHTML]="blog?.title"></p>
+                        </div>
                     </div>
                 </div>
             </div>

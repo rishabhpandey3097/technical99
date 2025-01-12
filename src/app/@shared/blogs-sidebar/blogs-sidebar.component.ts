@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { BaseComponent } from '@app/base-component/base.component';
+import { environment } from '@env/environment';
 import { ButtonModule } from 'primeng/button';
 import { DataViewModule } from 'primeng/dataview';
 import { TagModule } from 'primeng/tag';
@@ -14,7 +15,7 @@ import { TagModule } from 'primeng/tag';
 })
 export class BlogsSidebarComponent extends BaseComponent {
   @Input() blogs: any;
-
+  blogImageUrl = environment.blogImageUrl;
   constructor() {
     super()
   }
