@@ -22,7 +22,7 @@
             [ngClass]="para.align ? para.align === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
             <p class="p mb-2 col-lg-{{(((para.dw || 100)/100)*12).toFixed(0)}}" [innerHTML]="para.pimg"></p>
             <div class="h-100 mb-3 pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
-                <img [style.width]="'100%'" height="auto" [src]="articleUrl + para.img" alt="">
+                <img [style.width]="'100%'" height="auto" [src]="mediaUrl + para.img" alt="">
             </div>
         </div>
     </div>
@@ -34,13 +34,13 @@
     </div>
 
     <div *ngIf="para.img && !para.align" [class]="'py-4 text-'+ para.position">
-        <img [style.width]="para.dw ? para.dw+'%' : '100%'" height="auto" [src]="articleUrl+para?.img" alt="">
+        <img [style.width]="para.dw ? para.dw+'%' : '100%'" height="auto" [src]="mediaUrl+para?.img" alt="">
     </div>
 
     <div *ngIf="para.imgad && !para.align">
         <div class="row"
             [ngClass]="para.position ? para.position === 'left' ? 'flex flex-row' : 'flex flex-row-reverse' : ''">
-            <img [style.width]="para.dw ? para.dw+'%' : '100%'" height="auto" [src]="articleUrl+para?.imgad" alt="">
+            <img [style.width]="para.dw ? para.dw+'%' : '100%'" height="auto" [src]="mediaUrl+para?.imgad" alt="">
             <div class="pl-1 col-lg-{{(12 - (((para.dw || 100)/100)*12)).toFixed(0)}}">
                 <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584" data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense>
             </div>
