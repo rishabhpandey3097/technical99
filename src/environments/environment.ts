@@ -1,5 +1,7 @@
 export const environment = {
     production: false,
     baseUrl: 'https://api.technical99.com/',
-    blogImageUrl: 'https://technical99.com/images/blog/'
+    mediaUrl: 'https://technical99.com/images/',
+    blogImageUrl: 'https://technical99.com/images/blog/',
+    adsUrl: 'https://technical99.com/ads/'
   };

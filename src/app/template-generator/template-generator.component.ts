@@ -15,11 +15,8 @@ export class TemplateGeneratorComponent implements OnInit {
   @Input() videoId?: any;
 
   constructor() { }
-  // articleUrl = environment.articleUrl;
-  // adsUrl = environment.adsUrl;
-  articleUrl = environment.baseUrl;
-  adsUrl = '';
-
+  mediaUrl = environment.mediaUrl;
+  adsUrl = environment.adsUrl;
   public ngOnInit(): void {
 
   }
