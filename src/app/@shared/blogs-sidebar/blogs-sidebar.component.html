@@ -2,15 +2,12 @@
     <p-dataView #dv [value]="blogs?.content" [rows]="5" [paginator]="true" [pageLinks]="2" [showPageLinks]="false" (onPage)="onPageChange($event)" [paginatorStyleClass]="'bg-gray-50 border-noround'">
         <ng-template pTemplate="list" let-blogs>
             <div class="grid grid-nogutter">
-                <div class="col-12 blog-header px-3 py-2">
-                    Blogs
-                </div>
+                <div class="col-12 blog-header px-3 py-2">Blogs</div>
                 <div class="col-12 blog-list">
                     <div *ngFor="let blog of blogs" class="flex gap-2 blog-container my-2 px-3 cursor-pointer">
-                        <img width="70" height="45" class="blog-image-container" src="assets/images/common/blog-1.png" class="border-round-sm" alt="blog">
-                        <p class="m-0 text-sm text-blue-400">
-                            {{blog?.shortTitle}}
-                        </p>
+                        <!-- <img width="70" height="45" class="blog-image-container" src="assets/images/common/blog-1.png" class="border-round-sm" alt="blog"> -->
+                        <img class="card-img-top" [src]="blogImageUrl+blog?.image">
+                        <p class="m-0 text-sm text-blue-400">{{blog?.title}}</p>
                     </div>
                 </div>
             </div>
