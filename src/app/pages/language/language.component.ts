@@ -20,12 +20,12 @@ import { selectCategoriesByRoute } from '@app/store/selectors';
 import { isEqual } from 'lodash-es';
 import { LanguageComponentStore } from './language.component.store';
 import { TemplateGeneratorComponent } from '@app/template-generator/template-generator.component';
-import { AdsenseModule } from 'ng2-adsense';
+import { AdTextBannerComponent } from '@app/ads/banner/ad-text-banner/ad-text-banner.component';
 
 @Component({
   selector: 'app-language',
   standalone: true,
-  imports: [LanguageSubTopNavComponent, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule, AccordionModule, TabViewModule, CommonModule, CardModule, SwitchTechnologyComponent, TemplateGeneratorComponent],
+  imports: [LanguageSubTopNavComponent, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonModule, AccordionModule, TabViewModule, CommonModule, CardModule, SwitchTechnologyComponent, TemplateGeneratorComponent, AdTextBannerComponent],
   templateUrl: './language.component.html',
   styleUrl: './language.component.scss',
   providers: [LanguageComponentStore]

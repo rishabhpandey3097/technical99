@@ -41,13 +41,12 @@
                 </ng-container>
             </p-tabView>
         </div>
-        <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fc+5g+70-cl-1m" data-ad-client="ca-pub-4361293916080487" data-ad-slot="4005912392"></ins>
-        <!-- <ng-adsense [adClient]="'ca-pub-8535817066678874'" [adSlot]="2827221584" data-full-width-responsive="true" style="display:block" data-ad-format="auto"></ng-adsense> -->
-        <!-- <ng-adsense class="adsbygoogle my-3" style="display:block;" data-ad-format="auto" data-ad-client="ca-pub-8535817066678874" data-ad-slot="5988138287" data-full-width-responsive="true"></ng-adsense> -->
         <app-template-generator [languageDetails]="(faqs$ | async)?.about"> </app-template-generator>
+        <app-ad-text-banner></app-ad-text-banner>
+        <!-- <ng-adsense class="adsbygoogle my-3" style="display:block;" data-ad-format="auto" data-ad-client="ca-pub-4361293916080487" data-ad-slot="4005912392" data-full-width-responsive="true"></ng-adsense> -->
         <div>
             <h4 class="mt-6 mb-4">Frequently Asked Questions</h4>
-            <div class="card flex justify-content-center">s
+            <div class="card flex justify-content-center">
                 <p-accordion [activeIndex]="0">
                     <p-accordionTab *ngFor="let f of (faqContent$| async)" [header]="f?.[0]">
                         <p [innerHtml]="f?.[1]"></p>
