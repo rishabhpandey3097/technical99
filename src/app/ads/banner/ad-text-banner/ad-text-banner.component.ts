@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './ad-text-banner.component.scss',
   template: `
     <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-8535817066678874"
-         data-ad-slot="5988138287"
-         data-ad-format="auto"
-         data-full-width-responsive="true">
+      style="display:block"
+      data-ad-format="fluid"
+      data-ad-layout-key="-fc+5g+70-cl-1m"
+      data-ad-client="ca-pub-4361293916080487"
+      data-ad-slot="4005912392">
     </ins>`,
   imports: [],
   styles: []
