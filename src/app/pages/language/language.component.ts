@@ -20,6 +20,7 @@ import { selectCategoriesByRoute } from '@app/store/selectors';
 import { isEqual } from 'lodash-es';
 import { LanguageComponentStore } from './language.component.store';
 import { TemplateGeneratorComponent } from '@app/template-generator/template-generator.component';
+import { AdsenseModule } from 'ng2-adsense';
 
 @Component({
   selector: 'app-language',
