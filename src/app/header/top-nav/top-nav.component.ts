@@ -18,11 +18,12 @@ import { selectCategories, selectIsHomePage, selectedLanguage } from '@app/store
 import { CardModule } from 'primeng/card';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { SidebarModule } from 'primeng/sidebar';
+import { CloseOnClickOutsideDirective } from '@app/directives/close-on-click-outside.directive';
 
 @Component({
   selector: 'app-top-nav',
   standalone: true,
-  imports: [CommonModule, ButtonModule, RouterModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ChipsModule, SwitchTechnologyComponent, CardModule, PanelMenuModule, SidebarModule],
+  imports: [CommonModule, ButtonModule, RouterModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ChipsModule, CardModule, PanelMenuModule, SidebarModule, CloseOnClickOutsideDirective],
   templateUrl: './top-nav.component.html',
   styleUrl: './top-nav.component.scss',
 })

@@ -11,9 +11,9 @@
         <p class="font-semibold text-base m-0" style="align-content:center">Tutorial</p>
     </div>
     <div class="flex justify-content-center">
-        <p-button (click)="changePage(-1)" styleClass="mr-2 p-2" label="Prev" icon="pi pi-angle-left" iconPos="left"
+        <p-button (click)="changePage(-1)" styleClass="mr-2 p-2 border-round-sm w-5rem" label="Prev" icon="pi pi-angle-left" iconPos="left"
             [outlined]="true" severity="secondary" />
-        <p-button (click)="changePage(1)" label="Next" styleClass="p-2" icon="pi pi-angle-right" [outlined]="true"
+        <p-button (click)="changePage(1)" label="Next" styleClass="p-2 border-round-sm w-5rem" icon="pi pi-angle-right" [outlined]="true"
             iconPos="right" severity="secondary" />
     </div>
 </div>
@@ -22,18 +22,33 @@
     [videoId]="(topicContent$ | async)?.videoId">
 </app-template-generator>
 
+
+<div class="flex justify-content-between align-items-center">
+    <div class="flex">
+        bye
+    </div>
+    <div class="flex justify-content-between gap-3 align-items-center">
+        <i class="pi pi-share-alt text-xl"></i>
+        <p (click)="op.toggle($event)" class="font-semibold text-blue-400 cursor-pointer">Report Error</p>
+    </div>
+
+    <p-overlayPanel #op>
+        hello
+    </p-overlayPanel>
+</div>
+
 <div class="flex align-items-center justify-content-between my-3">
     <div class="flex align-items-center justify-content-center">
         <p class="text-lg m-0 mr-2">Article helpful?</p>
-        <p-button (click)="likeArticle()" styleClass="mr-2 p-2" label="Yes" iconPos="left" [outlined]="true"
+        <p-button (click)="likeArticle()" styleClass="mr-2 p-2 w-5rem font-normal border-round-sm" label="Yes" iconPos="left" [outlined]="true"
             severity="success" />
-        <p-button (click)="likeArticle()" label="No" styleClass="p-2" [outlined]="true" iconPos="right"
+        <p-button (click)="likeArticle()" label="No" styleClass="p-2 w-5rem font-normal border-round-sm" [outlined]="true" iconPos="right"
             severity="danger" />
     </div>
-    <div class="flex justify-content-center">
-        <p-button (click)="changePage(-1)" styleClass="mr-2 p-2" label="Prev" icon="pi pi-angle-left" iconPos="left"
+    <div class="flex justify-content-center"> 
+        <p-button (click)="changePage(-1)" styleClass="mr-2 p-2 border-round-sm w-5rem" label="Prev" icon="pi pi-angle-left" iconPos="left"
             [outlined]="true" severity="secondary" />
-        <p-button (click)="changePage(1)" label="Next" styleClass="p-2" icon="pi pi-angle-right" [outlined]="true"
+        <p-button (click)="changePage(1)" label="Next" styleClass="p-2 border-round-sm w-5rem" icon="pi pi-angle-right" [outlined]="true"
             iconPos="right" severity="secondary" />
     </div>
 </div>

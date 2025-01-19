@@ -8,6 +8,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { ModuleMainContentComponent } from './module-main-content/module-main-content.component';
 import { TemplateGeneratorComponent } from '@app/template-generator/template-generator.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [ModuleContentComponent, ModuleMainContentComponent],
@@ -18,7 +19,8 @@ import { TemplateGeneratorComponent } from '@app/template-generator/template-gen
     InputGroupModule,
     InputGroupAddonModule,
     InputTextModule,
-    TemplateGeneratorComponent
+    TemplateGeneratorComponent,
+    OverlayPanelModule
   ]
 })
 export class ModuleModule { }
