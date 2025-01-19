@@ -18,7 +18,6 @@ export class PhotoService {
         alt: 'Description for Image 2',
         title: 'Title 2',
       },
-      // Add more images here...
     ];
   }
 }

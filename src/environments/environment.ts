@@ -3,5 +3,6 @@ export const environment = {
     baseUrl: 'https://api.technical99.com/',
     mediaUrl: 'https://technical99.com/images/',
     blogImageUrl: 'https://technical99.com/images/blog/',
-    adsUrl: 'https://technical99.com/ads/'
+    adsUrl: 'https://technical99.com/ads/',
+    secretKey: 'Oct2024'
   };

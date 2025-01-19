@@ -11,7 +11,6 @@ import { PhotoService } from '../../services/photo.service';
 import { GalleriaModule } from 'primeng/galleria';
 import { TagModule } from 'primeng/tag';
 import { Product } from '../../models/product.model';
-import { ProductService } from '../../services/product.service';
 import { RatingModule } from 'primeng/rating';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from '../../store/reducers/app.state';
@@ -20,12 +19,11 @@ import { BaseComponent } from '../../base-component/base.component';
 import { selectCategories, selectInterview, selectModules } from '../../store/selectors';
 import { isEqual } from 'lodash-es';
 import { generalActions } from '../../store/actions';
-import { HomeService } from '@app/services/home.service';
 import { HomeComponentStore } from './home.component.store';
 import { MenuItem } from 'primeng/api';
 import { PRODUCT_SOLUTIONS, STATIC_CARD_CONTENT } from '@app/constants/solutions.constant';
-import { SwitchTechnologyComponent } from '@app/@shared/switch-technology/switch-technology.component';
 import { RouterModule } from '@angular/router';
+import { CloseOnClickOutsideDirective } from '@app/directives/close-on-click-outside.directive';
 
 @Component({
   selector: 'app-home',
@@ -42,16 +40,14 @@ import { RouterModule } from '@angular/router';
     GalleriaModule,
     TagModule,
     RatingModule,
-    SwitchTechnologyComponent,
     RouterModule
   ],
-  providers: [PhotoService, ProductService, HomeComponentStore],
+  providers: [PhotoService, HomeComponentStore],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent extends BaseComponent implements OnInit {
   images: any[] | undefined;
-  products: Product[] | undefined;
   responsiveOptions: any[] | undefined;
   value: number = 4;
   public solutions = PRODUCT_SOLUTIONS;
@@ -67,7 +63,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   constructor(
     private photoService: PhotoService,
-    private productService: ProductService,
     private componentStore: HomeComponentStore,
     private store: Store<IAppState>
   ) {
@@ -91,7 +86,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.images = this.photoService.getImages();
-    this.products = this.productService.getProductsSmall();
     this.componentStore.getTabContent({ id: 1 })
     this.store.dispatch(generalActions.getCategories());
     this.componentStore.getTrendingBlogs();
