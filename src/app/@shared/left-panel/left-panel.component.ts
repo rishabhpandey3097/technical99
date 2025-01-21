@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChanges, inject } from '@angular/core';
 import { BaseComponent } from '@app/base-component/base.component';
 import { CustomTitlecasePipe } from '@app/pipes/custom-titlecase.pipe';
 import { generalActions } from '@app/store/actions';
@@ -9,6 +9,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, distinctUntilChanged, takeUntil } from 'rxjs';
 import { SidebarModule } from 'primeng/sidebar';
 import { isEqual } from 'lodash-es';
+import { SsrCookieService } from 'ngx-cookie-service-ssr';
 
 
 @Component({
@@ -37,6 +38,8 @@ export class LeftPanelComponent extends BaseComponent {
 
   public activeTitle: string;
 
+  private cookieService = inject(SsrCookieService);
+  private cdr = inject(ChangeDetectorRef);
   constructor(private store: Store<IAppState>) {
     super()
     this.changeNumber$ = this.store.pipe(
@@ -48,14 +51,23 @@ export class LeftPanelComponent extends BaseComponent {
 
   public ngOnInit(): void {
     this.changeNumber$.pipe(takeUntil(this.destroy$)).subscribe(res => {
-      if (res >= 0) {
+      if (res && res >= 0) {
         const topic = this.subTopics.at(res);
-        this.openContent(topic?.shortTitle, res);
+        this.openContent(topic?.shortTitle, res, false);
       }
     })
   }
 
+  public ngAfterViewInit(): void {
+    const cookies = this.cookieService.getAll();
+    if(cookies?.['topic']) {
+      console.log(JSON.parse(cookies['topic']))
+      this.toggleExpand(JSON.parse(cookies['topic']), false)
+    }
+  }
+
   public ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes ==>", changes);
     if ("sideBarContent" in changes) {
       this.menuData = this.sideBarContent?.techs?.map(item => {
         return {
@@ -79,14 +91,22 @@ export class LeftPanelComponent extends BaseComponent {
     }
   }
 
-  public toggleExpand(menuItem: any): void {
+  public toggleExpand(menuItem: any, setCookie: boolean): void {
+    if(setCookie) {
+      this.cookieService.set('topic', JSON.stringify(menuItem))
+    }
     this.selectedTopicId = menuItem?.id;
     if (menuItem.topics) {
       menuItem.expanded = !menuItem.expanded;
     }
+
+    console.log("menuData ==>", this.menuData);
   }
 
-  public toggleExpandChild(child): void {
+  public toggleExpandChild(child, setCookie = true): void {
+    if(setCookie) {
+      this.cookieService.set('subTopic', JSON.stringify(child))
+    }
     this.selectedSubTopicId = child?.id;
 
     if (!child?.expanded && !child?.topics?.length) {
@@ -114,12 +134,17 @@ export class LeftPanelComponent extends BaseComponent {
     }))
   }
 
-  public openContent(titile, index): void {
+  public openContent(title, index, setCookie = true, titleId?): void {
+    // console.log("title ==>", title);
+    // console.log("index ==>", index);
+    if(setCookie) {
+      this.cookieService.set('title', JSON.stringify({title, index}))
+    }
     this.store.dispatch(generalActions.setCurrentPage({
       currentPage: index
     }))
-    this.selectedTitleEmitter.emit(titile);
-    this.activeTitle = titile;
+    this.selectedTitleEmitter.emit(title);
+    this.activeTitle = title;
     this.sidebarVisible = false;
   }
 

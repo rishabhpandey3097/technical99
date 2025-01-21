@@ -12,7 +12,7 @@
         <ul class="my-2">
             <ng-container *ngFor="let menu of menuData">
                 <li>
-                    <div class="menu-item" (click)="toggleExpand(menu)" [ngClass]="{ 'font-bold': menu?.expanded }">
+                    <div class="menu-item" (click)="toggleExpand(menu, true)" [ngClass]="{ 'font-bold': menu?.expanded }">
                         <span *ngIf="menu.topics">
                             <i class="pi text-xs font-semibold opacity-60"
                                 [ngClass]="menu?.expanded ? 'pi-minus' : 'pi-plus'"></i>
@@ -28,7 +28,7 @@
                                 <ul class="child-items" *ngIf="child.expanded && child.topics">
                                     <ng-container *ngFor="let subChild of child.topics; let i = index">
                                         <li [ngClass]="{'active-title': activeTitle === subChild?.shortTitle}"
-                                            (click)="openContent(subChild?.shortTitle, i)"
+                                            (click)="openContent(subChild?.shortTitle, i, true, subChild?.id)"
                                             class="cursor-pointer child-items-text on-hover">
                                             {{ subChild?.shortTitle | customTitlecase }}
                                         </li>
